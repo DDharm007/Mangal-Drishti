@@ -198,6 +198,7 @@ def get_system_status() -> Dict[str, Any]:
     reports = _scan_reports()
     latest_ts = reports[0]["generated_at_utc"] if reports else None
     latest_id = reports[0]["report_id"] if reports else None
+    latest_latency = reports[0].get("inference_latency_ms") if reports else None
 
     return {
         "status": "online",
@@ -213,6 +214,7 @@ def get_system_status() -> Dict[str, Any]:
         "stored_reports_count": len(reports),
         "latest_analysis_id": latest_id,
         "latest_analysis_timestamp_utc": latest_ts,
+        "latest_inference_latency_ms": latest_latency,
         "report_storage_dir": "experiments/intelligence",
     }
 
@@ -249,6 +251,7 @@ def _scan_reports() -> List[Dict[str, Any]]:
                 "mission": _resolve_mission(report_id, rep),
                 "model": rep.get("model", "unknown"),
                 "device": rep.get("device", "unknown"),
+                "inference_latency_ms": rep.get("image_metadata", {}).get("inference_latency_ms"),
                 "generated_at_utc": rep.get("generated_at_utc")
                 or datetime.fromtimestamp(rep_file.stat().st_mtime, tz=timezone.utc).isoformat(),
                 "dominant_terrain": td.get("dominant_terrain"),

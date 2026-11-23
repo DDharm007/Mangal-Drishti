@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { MarkdownRenderer, extractHeadings } from "../components/research/MarkdownRenderer";
 import { Icon } from "../components/ui/Icon";
 import { fetchResearch } from "../services/api";
 import type { ResearchResponse } from "../types/api";
@@ -27,6 +28,12 @@ export const DatasetResearchPage: React.FC = () => {
     };
   }, []);
 
+  const activeDoc = data?.documentation?.[selectedDocIdx] ?? null;
+  const headings = useMemo(
+    () => (activeDoc ? extractHeadings(activeDoc.content).filter((h) => h.level <= 2) : []),
+    [activeDoc]
+  );
+
   if (loading) {
     return (
       <div className="mission-panel p-10 text-center font-mono-tech text-[13px] text-[#9B9E98]">
@@ -44,18 +51,17 @@ export const DatasetResearchPage: React.FC = () => {
 
   const counts = data.split_summary?.counts ?? {};
   const leakage = data.split_summary?.leakage_checks ?? {};
-  const activeDoc = data.documentation?.[selectedDocIdx];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {/* Dataset Source & Split Integrity Summary */}
-      <section className="mission-panel p-5 space-y-4">
+      <section className="mission-panel p-4 space-y-3.5">
         <div className="flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-[#303431]">
           <div>
             <div className="text-[10px] font-mono-tech uppercase tracking-widest text-[#C87951]">
               Primary Corpus · Official NASA / JPL Annotation Taxonomy
             </div>
-            <h2 className="text-[18px] font-semibold text-[#EAE9E4] mt-0.5">
+            <h2 className="text-[17px] font-semibold text-[#EAE9E4] mt-0.5">
               {data.class_mapping.dataset} — NAV 4-Class Split &amp; Engineering Provenance
             </h2>
           </div>
@@ -70,42 +76,42 @@ export const DatasetResearchPage: React.FC = () => {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 font-mono-tech text-[12px]">
-          <div className="p-3 bg-[#121414] border border-[#303431]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 font-mono-tech text-[12px]">
+          <div className="p-2.5 bg-[#121414] border border-[#303431]">
             <div className="text-[10px] text-[#696E68]">RAW / VALID PAIRS</div>
-            <div className="text-[#EAE9E4] font-semibold mt-1">
+            <div className="text-[#EAE9E4] font-semibold mt-0.5">
               {counts.raw_total_pairs ?? "—"} / {counts.valid_total_pairs ?? "—"}
             </div>
           </div>
-          <div className="p-3 bg-[#121414] border border-[#303431]">
+          <div className="p-2.5 bg-[#121414] border border-[#303431]">
             <div className="text-[10px] text-[#696E68]">TRAIN (MSL SCLK)</div>
-            <div className="text-[#EAE9E4] font-semibold mt-1">{counts.train ?? "—"}</div>
+            <div className="text-[#EAE9E4] font-semibold mt-0.5">{counts.train ?? "—"}</div>
           </div>
-          <div className="p-3 bg-[#121414] border border-[#303431]">
+          <div className="p-2.5 bg-[#121414] border border-[#303431]">
             <div className="text-[10px] text-[#696E68]">VALIDATION (MSL SCLK)</div>
-            <div className="text-[#EAE9E4] font-semibold mt-1">{counts.val ?? "—"}</div>
+            <div className="text-[#EAE9E4] font-semibold mt-0.5">{counts.val ?? "—"}</div>
           </div>
-          <div className="p-3 bg-[#121414] border border-[#303431]">
+          <div className="p-2.5 bg-[#121414] border border-[#303431]">
             <div className="text-[10px] text-[#696E68]">EXPERT TEST (MSL+MER)</div>
-            <div className="text-[#EAE9E4] font-semibold mt-1">{counts.test ?? "—"}</div>
+            <div className="text-[#EAE9E4] font-semibold mt-0.5">{counts.test ?? "—"}</div>
           </div>
-          <div className="p-3 bg-[#121414] border border-[#303431]">
+          <div className="p-2.5 bg-[#121414] border border-[#303431]">
             <div className="text-[10px] text-[#696E68]">REJECTED ALL-255</div>
-            <div className="text-[#EAE9E4] font-semibold mt-1">{counts.rejected_pairs ?? "—"}</div>
+            <div className="text-[#EAE9E4] font-semibold mt-0.5">{counts.rejected_pairs ?? "—"}</div>
           </div>
-          <div className="p-3 bg-[#121414] border border-[#303431]">
+          <div className="p-2.5 bg-[#121414] border border-[#303431]">
             <div className="text-[10px] text-[#696E68]">SPLIT LEAKAGE</div>
-            <div className="text-[#829B79] font-semibold mt-1">
+            <div className="text-[#829B79] font-semibold mt-0.5">
               {leakage.train_val_sclk_cluster_overlap ?? 0} overlaps
             </div>
           </div>
         </div>
       </section>
 
-      {/* Class Mapping, Colors & Training Imbalance */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      {/* Class Mapping, Colors & Architecture Summary */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         <section className="lg:col-span-6 mission-panel p-4 space-y-3">
-          <h3 className="text-[13px] font-semibold uppercase text-[#EAE9E4] pb-2 border-b border-[#303431]">
+          <h3 className="text-[12.5px] font-mono-tech font-semibold uppercase text-[#EAE9E4] pb-2 border-b border-[#303431]">
             Verified Class Encoding &amp; Ignore Index {data.class_mapping.ignore_index}
           </h3>
           <div className="table-wrapper" tabIndex={0} role="region" aria-label="Terrain Class Mapping">
@@ -148,14 +154,14 @@ export const DatasetResearchPage: React.FC = () => {
             </table>
           </div>
           <p className="text-[12px] text-[#9B9E98] leading-relaxed">
-            <strong>Mask Integrity Rule:</strong> {data.class_mapping.mask_interpolation_rule}. Pixels matching{" "}
-            <code className="font-mono-tech text-[#EAE9E4]">255</code> encode rover hardware masks (MXY), &gt;30 m stereo
-            range masks (RNG-30M), and unlabeled background, strictly excluded from loss and metrics.
+            <strong className="text-[#EAE9E4]">Mask Integrity Rule:</strong> {data.class_mapping.mask_interpolation_rule}.
+            Pixels matching <code className="font-mono-tech text-[#EAE9E4]">255</code> encode rover hardware masks (MXY),
+            &gt;30 m stereo range masks (RNG-30M), and unlabeled regions, excluded from loss and metrics.
           </p>
         </section>
 
-        <section className="lg:col-span-6 mission-panel p-4 space-y-3 text-[12px] text-[#9B9E98] leading-relaxed">
-          <h3 className="text-[13px] font-semibold uppercase text-[#EAE9E4] pb-2 border-b border-[#303431]">
+        <section className="lg:col-span-6 mission-panel p-4 space-y-3 text-[12.5px] text-[#9B9E98] leading-relaxed">
+          <h3 className="text-[12.5px] font-mono-tech font-semibold uppercase text-[#EAE9E4] pb-2 border-b border-[#303431]">
             Architecture, MSL vs. MER Distinction &amp; Scientific Boundaries
           </h3>
           <ul className="space-y-2 list-disc pl-5">
@@ -181,34 +187,57 @@ export const DatasetResearchPage: React.FC = () => {
         </section>
       </div>
 
-      {/* Repository Markdown Documentation Reader */}
+      {/* Rendered Research Documentation Workspace (TOC Nav + Formatted Markdown Reader) */}
       {data.documentation.length > 0 && (
-        <section className="mission-panel overflow-hidden">
-          <div className="px-4 py-2.5 bg-[#121414] border-b border-[#303431] flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap gap-1.5">
-              {data.documentation.map((doc, i) => (
-                <button
-                  key={doc.filename}
-                  type="button"
-                  onClick={() => setSelectedDocIdx(i)}
-                  className={`px-3 py-1 text-[11px] font-mono-tech rounded-[2px] border ${
-                    selectedDocIdx === i
-                      ? "bg-[#202321] border-[#C87951] text-[#EAE9E4]"
-                      : "border-transparent text-[#9B9E98] hover:text-[#EAE9E4]"
-                  }`}
-                >
-                  {doc.path}
-                </button>
-              ))}
+        <section className="mission-panel grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+          <aside className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-[#303431] bg-[#121414] p-3.5 space-y-4">
+            <div>
+              <div className="text-[10px] font-mono-tech uppercase tracking-wider text-[#696E68] mb-2">
+                Repository Documents
+              </div>
+              <div className="space-y-1">
+                {data.documentation.map((doc, i) => (
+                  <button
+                    key={doc.filename}
+                    type="button"
+                    onClick={() => setSelectedDocIdx(i)}
+                    className={`w-full text-left px-2.5 py-2 rounded-[2px] border text-[11.5px] transition-colors ${
+                      selectedDocIdx === i
+                        ? "bg-[#202321] border-[#C87951] text-[#EAE9E4]"
+                        : "border-transparent text-[#9B9E98] hover:text-[#EAE9E4] hover:bg-[#181A19]"
+                    }`}
+                  >
+                    <div className="font-medium truncate">{doc.title}</div>
+                    <div className="text-[10px] font-mono-tech text-[#696E68] truncate">{doc.path}</div>
+                  </button>
+                ))}
+              </div>
             </div>
-            <span className="text-[11px] font-mono-tech text-[#696E68]">Repository Source Document</span>
-          </div>
 
-          {activeDoc && (
-            <pre className="p-4 max-h-[460px] overflow-auto text-[12px] font-mono-tech text-[#EAE9E4] bg-[#0D0E0E] whitespace-pre-wrap leading-relaxed">
-              {activeDoc.content}
-            </pre>
-          )}
+            {headings.length > 0 && (
+              <div className="pt-3 border-t border-[#303431]">
+                <div className="text-[10px] font-mono-tech uppercase tracking-wider text-[#696E68] mb-2">
+                  Section Outline
+                </div>
+                <ul className="space-y-1 text-[11px] max-h-[300px] overflow-y-auto pr-1">
+                  {headings.map((h) => (
+                    <li key={h.id}>
+                      <a
+                        href={`#${h.id}`}
+                        className="block py-1 text-[#9B9E98] hover:text-[#C87951] truncate transition-colors"
+                      >
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </aside>
+
+          <div className="lg:col-span-9 p-5 sm:p-6 bg-[#0D0E0E] max-h-[700px] overflow-y-auto">
+            {activeDoc && <MarkdownRenderer content={activeDoc.content} />}
+          </div>
         </section>
       )}
     </div>

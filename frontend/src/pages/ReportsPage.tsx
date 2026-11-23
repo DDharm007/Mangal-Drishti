@@ -10,6 +10,14 @@ import {
 import type { ReportDetailResponse, ReportSummary } from "../types/api";
 import { TERRAIN_CLASSES, formatConcernLabel, formatUtcTimestamp } from "../utils/terrain";
 
+const CONCERN_FILTERS = [
+  { id: "all", label: "All Concern Levels" },
+  { id: "lower_visual_concern", label: "Lower Visual Concern" },
+  { id: "moderate_visual_concern", label: "Moderate Visual Concern" },
+  { id: "higher_visual_concern", label: "Higher Visual Concern" },
+  { id: "insufficient_visual_evidence", label: "Insufficient Visual Evidence" },
+];
+
 export const ReportsPage: React.FC = () => {
   const [reports, setReports] = useState<ReportSummary[]>([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +26,9 @@ export const ReportsPage: React.FC = () => {
   const [query, setQuery] = useState("");
   const [modelFilter, setModelFilter] = useState("all");
   const [missionFilter, setMissionFilter] = useState("all");
+  const [concernFilter, setConcernFilter] = useState("all");
   const [sortBy, setSortBy] = useState<"date_desc" | "date_asc" | "concern_desc">("date_desc");
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const [jsonModalDetail, setJsonModalDetail] = useState<ReportDetailResponse | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
@@ -59,6 +69,7 @@ export const ReportsPage: React.FC = () => {
       if (modelFilter !== "all" && r.model !== modelFilter) return false;
       const mLabel = r.mission ?? "Uncatalogued";
       if (missionFilter !== "all" && mLabel !== missionFilter) return false;
+      if (concernFilter !== "all" && r.traversability_assessment !== concernFilter) return false;
       return true;
     });
 
@@ -71,7 +82,17 @@ export const ReportsPage: React.FC = () => {
       return sortBy === "date_asc" ? ta.localeCompare(tb) : tb.localeCompare(ta);
     });
     return list;
-  }, [reports, query, modelFilter, missionFilter, sortBy]);
+  }, [reports, query, modelFilter, missionFilter, concernFilter, sortBy]);
+
+  const handleCopyId = async (reportId: string) => {
+    try {
+      await navigator.clipboard.writeText(reportId);
+      setCopiedId(reportId);
+      window.setTimeout(() => setCopiedId((prev) => (prev === reportId ? null : prev)), 1500);
+    } catch {
+      // Clipboard API unavailable in restricted contexts
+    }
+  };
 
   const openJsonInspector = async (reportId: string) => {
     try {
@@ -84,20 +105,20 @@ export const ReportsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-5">
-      {/* Filter & Search Toolbar */}
-      <section className="mission-panel p-4 grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
-        <div className="md:col-span-5">
+    <div className="space-y-4">
+      {/* Dense Search & Filtering Header */}
+      <section className="mission-panel p-3.5 grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+        <div className="md:col-span-4">
           <label className="block text-[10px] font-mono-tech uppercase text-[#9B9E98] mb-1">
             Search Report or Image ID
           </label>
           <div className="relative">
-            <Icon name="magnifying-glass" className="absolute left-3 top-2.5 text-[#696E68] text-[12px]" />
+            <Icon name="magnifying-glass" className="absolute left-3 top-2.5 text-[#696E68] text-[11px]" />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="e.g. NLB_421449585 or 1n14533..."
+              placeholder="Filter by ID..."
               className="w-full pl-8 pr-3 py-1.5 bg-[#121414] border border-[#303431] text-[12px] font-mono-tech text-[#EAE9E4] rounded-[2px] focus:border-[#C87951] focus:outline-none"
             />
           </div>
@@ -108,7 +129,7 @@ export const ReportsPage: React.FC = () => {
           <select
             value={modelFilter}
             onChange={(e) => setModelFilter(e.target.value)}
-            className="w-full px-2.5 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px]"
+            className="w-full pl-2.5 pr-8 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px] truncate"
           >
             <option value="all">All Models</option>
             {modelsAvailable.map((m) => (
@@ -119,12 +140,12 @@ export const ReportsPage: React.FC = () => {
           </select>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="md:col-span-2">
           <label className="block text-[10px] font-mono-tech uppercase text-[#9B9E98] mb-1">Mission</label>
           <select
             value={missionFilter}
             onChange={(e) => setMissionFilter(e.target.value)}
-            className="w-full px-2.5 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px]"
+            className="w-full pl-2.5 pr-8 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px] truncate"
           >
             <option value="all">All Missions</option>
             {missionsAvailable.map((m) => (
@@ -136,15 +157,30 @@ export const ReportsPage: React.FC = () => {
         </div>
 
         <div className="md:col-span-2">
+          <label className="block text-[10px] font-mono-tech uppercase text-[#9B9E98] mb-1">Visual Concern</label>
+          <select
+            value={concernFilter}
+            onChange={(e) => setConcernFilter(e.target.value)}
+            className="w-full pl-2.5 pr-8 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px] truncate"
+          >
+            {CONCERN_FILTERS.map((cf) => (
+              <option key={cf.id} value={cf.id}>
+                {cf.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="md:col-span-2">
           <label className="block text-[10px] font-mono-tech uppercase text-[#9B9E98] mb-1">Sort Order</label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as "date_desc" | "date_asc" | "concern_desc")}
-            className="w-full px-2.5 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px]"
+            className="w-full pl-2.5 pr-8 py-1.5 bg-[#121414] border border-[#303431] text-[12px] text-[#EAE9E4] rounded-[2px]"
           >
             <option value="date_desc">Newest First</option>
             <option value="date_asc">Oldest First</option>
-            <option value="concern_desc">Concern Index (High)</option>
+            <option value="concern_desc">Concern Index</option>
           </select>
         </div>
       </section>
@@ -155,30 +191,42 @@ export const ReportsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Report List */}
+      {/* Dense Operational Report Grid */}
       {loading ? (
         <div className="mission-panel p-10 text-center font-mono-tech text-[13px] text-[#9B9E98]">
           Loading reports from experiments/intelligence/...
         </div>
       ) : filtered.length === 0 ? (
         <div className="mission-panel p-10 text-center text-[13px] text-[#9B9E98]">
-          No intelligence reports match the active search/filter criteria.
+          No intelligence reports match the active search or filter criteria.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3.5">
           {filtered.map((r) => {
             const thumb =
               resolveArtifactUrl(r.artifact_urls.terrain_overlay) ??
               resolveArtifactUrl(r.artifact_urls.original_image);
             const concern = formatConcernLabel(r.traversability_assessment);
+            const copied = copiedId === r.report_id;
             return (
-              <article key={r.report_id} className="mission-panel flex flex-col overflow-hidden">
-                <div className="p-3.5 border-b border-[#303431] flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <div className="text-[12px] font-mono-tech font-semibold text-[#EAE9E4] truncate" title={r.report_id}>
-                      {r.report_id}
+              <article key={r.report_id} className="mission-panel flex flex-col overflow-hidden hover:border-[#414642] transition-colors">
+                <div className="px-3.5 py-2.5 border-b border-[#303431] flex items-start justify-between gap-2 bg-[#121414]">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[12px] font-mono-tech font-semibold text-[#EAE9E4] truncate" title={r.report_id}>
+                        {r.report_id}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => void handleCopyId(r.report_id)}
+                        className="p-1 text-[#696E68] hover:text-[#EAE9E4] shrink-0"
+                        title="Copy report identifier"
+                        aria-label={`Copy report ID ${r.report_id}`}
+                      >
+                        <Icon name={copied ? "check" : "copy"} className={`text-[10px] ${copied ? "text-[#829B79]" : ""}`} />
+                      </button>
                     </div>
-                    <div className="text-[11px] text-[#9B9E98] mt-0.5">
+                    <div className="text-[11px] text-[#9B9E98]">
                       {r.mission ?? "External / Uncatalogued"} · <span className="font-mono-tech">{r.model}</span>
                     </div>
                   </div>
@@ -189,13 +237,13 @@ export const ReportsPage: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-12 gap-3 p-3.5 flex-1">
+                <div className="grid grid-cols-12 gap-3 p-3.5 flex-1 items-start">
                   <div className="col-span-4 bg-[#0D0E0E] border border-[#303431] aspect-square flex items-center justify-center overflow-hidden">
                     {thumb ? (
                       <img src={thumb} alt={r.report_id} className="w-full h-full object-cover block" />
                     ) : (
                       <span className="text-[10px] font-mono-tech text-[#696E68] px-2 text-center">
-                        Overlay unavailable
+                        Unavailable
                       </span>
                     )}
                   </div>
@@ -226,7 +274,6 @@ export const ReportsPage: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Mini stacked terrain composition bar */}
                     <div>
                       <div className="h-1.5 w-full flex bg-[#121414] overflow-hidden rounded-[1px]">
                         {TERRAIN_CLASSES.map((c) => (
@@ -247,12 +294,12 @@ export const ReportsPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="px-3.5 py-2.5 bg-[#121414] border-t border-[#303431] flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono-tech">
+                <div className="px-3.5 py-2 bg-[#121414] border-t border-[#303431] flex items-center justify-between gap-2 text-[11px] font-mono-tech">
                   <Link
                     to={`/analyze?report=${encodeURIComponent(r.report_id)}`}
-                    className="inline-flex items-center gap-1.5 text-[#C87951] hover:text-[#EAE9E4]"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#202321] hover:bg-[#303431] border border-[#414642] text-[#EAE9E4] rounded-[2px]"
                   >
-                    <Icon name="eye" className="text-[11px]" />
+                    <Icon name="eye" className="text-[10px] text-[#C87951]" />
                     <span>Open Report</span>
                   </Link>
 
@@ -262,15 +309,15 @@ export const ReportsPage: React.FC = () => {
                       onClick={() => void openJsonInspector(r.report_id)}
                       className="inline-flex items-center gap-1 text-[#9B9E98] hover:text-[#EAE9E4]"
                     >
-                      <Icon name="code" className="text-[11px]" />
+                      <Icon name="code" className="text-[10px]" />
                       <span>Inspect JSON</span>
                     </button>
                     <a
                       href={getDownloadReportUrl(r.report_id)}
                       className="inline-flex items-center gap-1 text-[#9B9E98] hover:text-[#EAE9E4]"
                     >
-                      <Icon name="download" className="text-[11px]" />
-                      <span>JSON</span>
+                      <Icon name="download" className="text-[10px]" />
+                      <span>Download JSON</span>
                     </a>
                   </div>
                 </div>
@@ -280,8 +327,8 @@ export const ReportsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Native accessible modal dialog for inspecting raw unmodified report JSON */}
-      <dialog ref={dialogRef} aria-labelledby="json-modal-title" closedby="any">
+      {/* Native accessible modal dialog */}
+      <dialog ref={dialogRef} aria-labelledby="json-modal-title" {...({ closedby: "any" } as Record<string, string>)}>
         {jsonModalDetail && (
           <div className="flex flex-col max-h-[88vh]">
             <div className="px-4 py-3 border-b border-[#303431] bg-[#121414] flex items-center justify-between gap-3">

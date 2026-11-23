@@ -37,7 +37,16 @@ export function App(): React.ReactElement {
         activeModel={activeModel}
       >
         <Routes>
-          <Route path="/" element={<OverviewPage systemStatus={systemStatus} statusError={statusError} />} />
+          <Route
+            path="/"
+            element={
+              <OverviewPage
+                systemStatus={systemStatus}
+                statusError={statusError}
+                onRefreshStatus={() => void refreshStatus()}
+              />
+            }
+          />
           <Route
             path="/analyze"
             element={

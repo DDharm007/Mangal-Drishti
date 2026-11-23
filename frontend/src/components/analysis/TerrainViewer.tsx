@@ -114,6 +114,7 @@ export const TerrainViewer: React.FC<TerrainViewerProps> = ({
         bbox: selectedCandidate.bbox,
         centroid: selectedCandidate.centroid,
         label: `${selectedCandidate.candidate_id} (2D Candidate)`,
+        meta: `Area ${selectedCandidate.pixel_area} px · Conf ${selectedCandidate.confidence.toFixed(3)} · BBox [${selectedCandidate.bbox.join(", ")}] · Pos ${selectedCandidate.relative_position}`,
         color: "#E41A1C",
       }
     : selectedRegion
@@ -121,7 +122,8 @@ export const TerrainViewer: React.FC<TerrainViewerProps> = ({
           id: selectedRegion.region_id,
           bbox: selectedRegion.bbox,
           centroid: selectedRegion.centroid,
-          label: `${selectedRegion.region_id} · ${selectedRegion.terrain_class}`,
+          label: `${selectedRegion.region_id} · ${selectedRegion.terrain_class.replace("_", " ")}`,
+          meta: `Area ${selectedRegion.pixel_area.toLocaleString()} px · Conf ${selectedRegion.mean_confidence.toFixed(3)} · Centroid (${selectedRegion.centroid[0].toFixed(0)}, ${selectedRegion.centroid[1].toFixed(0)}) · BBox [${selectedRegion.bbox.join(", ")}] · Pos ${selectedRegion.relative_position}`,
           color: "#C87951",
         }
       : null;
@@ -190,9 +192,9 @@ export const TerrainViewer: React.FC<TerrainViewerProps> = ({
             type="button"
             onClick={fitToScreen}
             className="px-2 py-1 bg-[#121414] border border-[#303431] hover:border-[#414642] text-[#9B9E98] hover:text-[#EAE9E4] rounded-[2px]"
-            title="Fit view"
+            title="Reset zoom and pan to 100%"
           >
-            Fit
+            Reset / Fit
           </button>
           <button
             type="button"
@@ -237,14 +239,15 @@ export const TerrainViewer: React.FC<TerrainViewerProps> = ({
             </label>
           )}
           {highlightBox && (
-            <div className="inline-flex items-center gap-2 text-[#EAE9E4]">
+            <div className="inline-flex flex-wrap items-center gap-2 text-[#EAE9E4]">
               <Icon name="bullseye" className="text-[#C87951]" />
-              <span>Focused: {highlightBox.label}</span>
+              <span className="font-semibold">{highlightBox.label}</span>
+              <span className="text-[#9B9E98]">{highlightBox.meta}</span>
               {onClearSelection && (
                 <button
                   type="button"
                   onClick={onClearSelection}
-                  className="text-[#9B9E98] hover:text-[#EAE9E4] underline ml-1"
+                  className="text-[#C87951] hover:text-[#EAE9E4] underline ml-1"
                 >
                   Clear
                 </button>

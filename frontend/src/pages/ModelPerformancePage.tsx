@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FadeContent } from "../components/motion/FadeContent";
+import { ConfusionMatrixHeatmap } from "../components/performance/ConfusionMatrixHeatmap";
 import { Icon } from "../components/ui/Icon";
-import { fetchModelsPerformance, resolveArtifactUrl } from "../services/api";
+import { fetchModelsPerformance } from "../services/api";
 import type { ModelMetricsBlock, ModelsPerformanceResponse } from "../types/api";
 import { TERRAIN_CLASSES } from "../utils/terrain";
 
@@ -108,7 +109,7 @@ export const ModelPerformancePage: React.FC = () => {
       case "test_msl":
         return {
           title: "Expert Test — MSL (Curiosity) Subset (322 Images)",
-          subtitle: "In-domain Curiosity test scenes; demonstrates controlled CE+Dice optimization gains.",
+          subtitle: "In-domain Curiosity test scenes; isolates performance without MER domain shift.",
           rows: [
             {
               label: "DeepLabV3+ (Baseline)",
@@ -237,18 +238,107 @@ export const ModelPerformancePage: React.FC = () => {
     }
   };
 
-  const cmUrl = resolveArtifactUrl(data.artifacts.confusion_matrices_url);
   const splitData = getRowsForSplit(activeTab);
 
-  // Domain shift delta values computed directly from observed JSON
+  // Determine confusion matrices matching the active test split
+  const heatmapMatrices: Array<{ title: string; subtitle: string; m: ModelMetricsBlock }> = [];
+  if (activeTab === "test_combined" || activeTab === "validation" || activeTab === "benchmarks") {
+    if (data.splits.test_combined.deeplabv3plus.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "DeepLabV3+ Baseline — Combined Expert Test (526)",
+        subtitle: `mIoU ${data.splits.test_combined.deeplabv3plus.mIoU.toFixed(4)}`,
+        m: data.splits.test_combined.deeplabv3plus,
+      });
+    }
+    if (data.splits.test_combined.unet.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "U-Net Baseline — Combined Expert Test (526)",
+        subtitle: `mIoU ${data.splits.test_combined.unet.mIoU.toFixed(4)}`,
+        m: data.splits.test_combined.unet,
+      });
+    }
+    if (dlOpt?.optimized_test_combined.confusion_matrix && activeTab === "test_combined") {
+      heatmapMatrices.push({
+        title: "DeepLabV3+ Optimized — Combined Expert Test (526)",
+        subtitle: `mIoU ${dlOpt.optimized_test_combined.mIoU.toFixed(4)}`,
+        m: dlOpt.optimized_test_combined,
+      });
+    }
+    if (unetOpt?.optimized_test_combined.confusion_matrix && activeTab === "test_combined") {
+      heatmapMatrices.push({
+        title: "U-Net Optimized — Combined Expert Test (526)",
+        subtitle: `mIoU ${unetOpt.optimized_test_combined.mIoU.toFixed(4)}`,
+        m: unetOpt.optimized_test_combined,
+      });
+    }
+  } else if (activeTab === "test_msl") {
+    if (data.splits.test_msl.deeplabv3plus.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "DeepLabV3+ Baseline — MSL Test (322)",
+        subtitle: `mIoU ${data.splits.test_msl.deeplabv3plus.mIoU.toFixed(4)}`,
+        m: data.splits.test_msl.deeplabv3plus,
+      });
+    }
+    if (data.splits.test_msl.unet.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "U-Net Baseline — MSL Test (322)",
+        subtitle: `mIoU ${data.splits.test_msl.unet.mIoU.toFixed(4)}`,
+        m: data.splits.test_msl.unet,
+      });
+    }
+    if (dlOpt?.optimized_test_msl.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "DeepLabV3+ Optimized — MSL Test (322)",
+        subtitle: `mIoU ${dlOpt.optimized_test_msl.mIoU.toFixed(4)}`,
+        m: dlOpt.optimized_test_msl,
+      });
+    }
+    if (unetOpt?.optimized_test_msl.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "U-Net Optimized — MSL Test (322)",
+        subtitle: `mIoU ${unetOpt.optimized_test_msl.mIoU.toFixed(4)}`,
+        m: unetOpt.optimized_test_msl,
+      });
+    }
+  } else if (activeTab === "test_mer") {
+    if (data.splits.test_mer.deeplabv3plus.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "DeepLabV3+ Baseline — MER Test (204)",
+        subtitle: `mIoU ${data.splits.test_mer.deeplabv3plus.mIoU.toFixed(4)}`,
+        m: data.splits.test_mer.deeplabv3plus,
+      });
+    }
+    if (data.splits.test_mer.unet.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "U-Net Baseline — MER Test (204)",
+        subtitle: `mIoU ${data.splits.test_mer.unet.mIoU.toFixed(4)}`,
+        m: data.splits.test_mer.unet,
+      });
+    }
+    if (dlOpt?.optimized_test_mer.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "DeepLabV3+ Optimized — MER Test (204)",
+        subtitle: `mIoU ${dlOpt.optimized_test_mer.mIoU.toFixed(4)}`,
+        m: dlOpt.optimized_test_mer,
+      });
+    }
+    if (unetOpt?.optimized_test_mer.confusion_matrix) {
+      heatmapMatrices.push({
+        title: "U-Net Optimized — MER Test (204)",
+        subtitle: `mIoU ${unetOpt.optimized_test_mer.mIoU.toFixed(4)}`,
+        m: unetOpt.optimized_test_mer,
+      });
+    }
+  }
+
   const dlMslMiou = data.splits.test_msl.deeplabv3plus.mIoU;
   const dlMerMiou = data.splits.test_mer.deeplabv3plus.mIoU;
   const unetMslMiou = data.splits.test_msl.unet.mIoU;
   const unetMerMiou = data.splits.test_mer.unet.mIoU;
 
   return (
-    <div className="space-y-5">
-      {/* Split selector tabs — never mixes splits */}
+    <div className="space-y-4">
+      {/* Split selector tabs — strictly one split active at a time */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#303431] pb-3">
         <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Evaluation Splits">
           {[
@@ -280,14 +370,14 @@ export const ModelPerformancePage: React.FC = () => {
         </div>
       </div>
 
-      {/* MSL vs MER Domain-Shift Notice Banner */}
+      {/* MSL vs MER Domain-Shift Notice */}
       <section className="mission-panel p-4 border-l-2 border-l-[#C87951] grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-8">
           <div className="text-[10px] font-mono-tech uppercase tracking-widest text-[#C87951]">
-            Verified Domain-Shift Finding (MSL Curiosity → MER Opportunity / Spirit)
+            MSL-to-MER Domain-Shift &amp; Model Trade-Off Summary
           </div>
-          <p className="text-[13px] text-[#EAE9E4] mt-1 leading-relaxed">
-            Models trained exclusively on MSL imagery drop{" "}
+          <p className="text-[12.5px] text-[#EAE9E4] mt-1 leading-relaxed">
+            Because training used MSL Curiosity frames exclusively, zero-shot MER evaluation drops{" "}
             <span className="font-mono-tech font-semibold text-[#D0A064]">
               {((dlMslMiou - dlMerMiou) * 100).toFixed(2)} mIoU pts
             </span>{" "}
@@ -295,21 +385,21 @@ export const ModelPerformancePage: React.FC = () => {
             <span className="font-mono-tech font-semibold text-[#D0A064]">
               {((unetMslMiou - unetMerMiou) * 100).toFixed(2)} mIoU pts
             </span>{" "}
-            (U-Net) on MER test frames. Baseline DeepLabV3+ remains the default checkpoint to preserve zero-shot MER
-            Big Rock recall while offering Optimized checkpoints for in-domain MSL precision.
+            (U-Net). Controlled CE+Dice optimization substantially improves in-domain MSL Big Rock IoU (+14.4 to +17.7 pts),
+            whereas the Baseline DeepLabV3+ checkpoint retains higher MER out-of-distribution recall. Choose based on mission domain.
           </p>
         </div>
 
-        <div className="lg:col-span-5 grid grid-cols-2 gap-3 font-mono-tech text-[11px]">
+        <div className="lg:col-span-4 grid grid-cols-2 gap-2.5 font-mono-tech text-[11px]">
           <div className="p-2.5 bg-[#121414] border border-[#303431]">
-            <div className="text-[#696E68]">DEEPLABV3+ MSL → MER</div>
-            <div className="text-[15px] text-[#EAE9E4] mt-0.5">
+            <div className="text-[#696E68] text-[10px]">DEEPLABV3+ MSL→MER</div>
+            <div className="text-[14px] text-[#EAE9E4] mt-0.5">
               {dlMslMiou.toFixed(4)} → {dlMerMiou.toFixed(4)}
             </div>
           </div>
           <div className="p-2.5 bg-[#121414] border border-[#303431]">
-            <div className="text-[#696E68]">U-NET MSL → MER</div>
-            <div className="text-[15px] text-[#EAE9E4] mt-0.5">
+            <div className="text-[#696E68] text-[10px]">U-NET MSL→MER</div>
+            <div className="text-[14px] text-[#EAE9E4] mt-0.5">
               {unetMslMiou.toFixed(4)} → {unetMerMiou.toFixed(4)}
             </div>
           </div>
@@ -318,7 +408,7 @@ export const ModelPerformancePage: React.FC = () => {
 
       {activeTab === "benchmarks" ? (
         <FadeContent>
-          <section className="mission-panel p-5 space-y-5">
+          <section className="mission-panel p-4 space-y-4">
             <div>
               <h2 className="text-[15px] font-semibold text-[#EAE9E4]">
                 Hardware &amp; Inference Latency Benchmarks (512×512 RGB)
@@ -380,35 +470,36 @@ export const ModelPerformancePage: React.FC = () => {
         </FadeContent>
       ) : (
         <FadeContent key={activeTab}>
-          <section className="mission-panel p-5 space-y-5">
+          <section className="mission-panel p-4 space-y-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h2 className="text-[16px] font-semibold text-[#EAE9E4]">{splitData.title}</h2>
+                <h2 className="text-[15px] font-semibold text-[#EAE9E4]">{splitData.title}</h2>
                 <p className="text-[12px] text-[#9B9E98] mt-0.5">{splitData.subtitle}</p>
               </div>
               <div className="text-[11px] font-mono-tech text-[#696E68]">
-                Single-split view only · {splitData.rows[0]?.splitNote}
+                Single-split view · {splitData.rows[0]?.splitNote}
               </div>
             </div>
 
-            {/* Restrained SVG Comparison Chart */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* 4-Model Per-Class IoU Structured Panels */}
+            <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-3">
               {splitData.rows.map((row) => (
-                <div key={row.label} className="p-3.5 bg-[#121414] border border-[#303431] rounded-[2px] space-y-2.5">
-                  <div className="flex items-center justify-between gap-2">
-                    <div>
-                      <div className="text-[13px] font-semibold text-[#EAE9E4]">{row.label}</div>
+                <div key={row.label} className="p-3 bg-[#121414] border border-[#303431] rounded-[2px] space-y-2.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="text-[12.5px] font-semibold text-[#EAE9E4] truncate" title={row.label}>
+                        {row.label}
+                      </div>
                       <div className="text-[10px] font-mono-tech text-[#9B9E98]">
-                        {row.checkpointType} Checkpoint · {row.paramsM} params
+                        {row.checkpointType} · {row.paramsM} params
                       </div>
                     </div>
-                    <div className="text-right font-mono-tech">
-                      <div className="text-[16px] font-semibold text-[#EAE9E4]">{row.metrics.mIoU.toFixed(4)}</div>
-                      <div className="text-[10px] text-[#696E68]">mIoU</div>
+                    <div className="text-right font-mono-tech shrink-0">
+                      <div className="text-[15px] font-semibold text-[#EAE9E4]">{row.metrics.mIoU.toFixed(4)}</div>
+                      <div className="text-[9.5px] text-[#696E68]">mIoU</div>
                     </div>
                   </div>
 
-                  {/* Per-class IoU horizontal bars */}
                   <div className="space-y-1.5 text-[11px]">
                     {[
                       { label: "Soil", iou: row.metrics.per_class_iou.soil, hex: TERRAIN_CLASSES[0].hex },
@@ -417,12 +508,12 @@ export const ModelPerformancePage: React.FC = () => {
                       { label: "Big Rock", iou: row.metrics.per_class_iou["big rock"], hex: TERRAIN_CLASSES[3].hex },
                     ].map((cls) => (
                       <div key={cls.label} className="flex items-center gap-2">
-                        <span className="w-16 text-[#9B9E98]">{cls.label}</span>
+                        <span className="w-14 text-[#9B9E98]">{cls.label}</span>
                         <div className="flex-1 h-1.5 bg-[#181A19]">
                           <div className="h-full" style={{ width: `${cls.iou * 100}%`, backgroundColor: cls.hex }} />
                         </div>
-                        <span className="w-14 text-right font-mono-tech text-[#EAE9E4]">
-                          {(cls.iou * 100).toFixed(2)}%
+                        <span className="w-12 text-right font-mono-tech text-[#EAE9E4]">
+                          {(cls.iou * 100).toFixed(1)}%
                         </span>
                       </div>
                     ))}
@@ -431,38 +522,38 @@ export const ModelPerformancePage: React.FC = () => {
               ))}
             </div>
 
-            {/* Detailed Precision / Recall / IoU Metrics Table */}
+            {/* Full Quantitative Table */}
             <div className="table-wrapper" tabIndex={0} role="region" aria-label="Per-Model Metrics Comparison Table">
               <table className="w-full text-left text-[12px] border-collapse">
                 <thead>
                   <tr className="border-b border-[#303431] bg-[#121414] text-[10px] font-mono-tech uppercase text-[#9B9E98]">
-                    <th className="py-2.5 px-3">Model</th>
-                    <th className="py-2.5 px-2.5">Type</th>
-                    <th className="py-2.5 px-2.5">mIoU</th>
-                    <th className="py-2.5 px-2.5">Mean Dice</th>
-                    <th className="py-2.5 px-2.5">Pixel Acc</th>
-                    <th className="py-2.5 px-2.5">Soil IoU</th>
-                    <th className="py-2.5 px-2.5">Bedrock IoU</th>
-                    <th className="py-2.5 px-2.5">Sand IoU</th>
-                    <th className="py-2.5 px-2.5">Big Rock IoU</th>
-                    <th className="py-2.5 px-2.5">Big Rock Prec / Rec</th>
+                    <th className="py-2 px-3">Model</th>
+                    <th className="py-2 px-2.5">Type</th>
+                    <th className="py-2 px-2.5">mIoU</th>
+                    <th className="py-2 px-2.5">Mean Dice</th>
+                    <th className="py-2 px-2.5">Pixel Acc</th>
+                    <th className="py-2 px-2.5">Soil IoU</th>
+                    <th className="py-2 px-2.5">Bedrock IoU</th>
+                    <th className="py-2 px-2.5">Sand IoU</th>
+                    <th className="py-2 px-2.5">Big Rock IoU</th>
+                    <th className="py-2 px-2.5">Big Rock Prec / Rec</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#303431] font-mono-tech text-[11px]">
                   {splitData.rows.map((row) => (
                     <tr key={row.label} className="hover:bg-[#202321]/60">
-                      <td className="py-2.5 px-3 font-sans font-medium text-[#EAE9E4]">{row.label}</td>
-                      <td className="py-2.5 px-2.5 text-[#9B9E98]">{row.checkpointType}</td>
-                      <td className="py-2.5 px-2.5 font-semibold text-[#EAE9E4]">{row.metrics.mIoU.toFixed(4)}</td>
-                      <td className="py-2.5 px-2.5">{row.metrics.mean_dice.toFixed(4)}</td>
-                      <td className="py-2.5 px-2.5">{row.metrics.pixel_accuracy.toFixed(4)}</td>
-                      <td className="py-2.5 px-2.5">{row.metrics.per_class_iou.soil.toFixed(4)}</td>
-                      <td className="py-2.5 px-2.5">{row.metrics.per_class_iou.bedrock.toFixed(4)}</td>
-                      <td className="py-2.5 px-2.5">{row.metrics.per_class_iou.sand.toFixed(4)}</td>
-                      <td className="py-2.5 px-2.5 font-semibold text-[#EAE9E4]">
+                      <td className="py-2 px-3 font-sans font-medium text-[#EAE9E4]">{row.label}</td>
+                      <td className="py-2 px-2.5 text-[#9B9E98]">{row.checkpointType}</td>
+                      <td className="py-2 px-2.5 font-semibold text-[#EAE9E4]">{row.metrics.mIoU.toFixed(4)}</td>
+                      <td className="py-2 px-2.5">{row.metrics.mean_dice.toFixed(4)}</td>
+                      <td className="py-2 px-2.5">{row.metrics.pixel_accuracy.toFixed(4)}</td>
+                      <td className="py-2 px-2.5">{row.metrics.per_class_iou.soil.toFixed(4)}</td>
+                      <td className="py-2 px-2.5">{row.metrics.per_class_iou.bedrock.toFixed(4)}</td>
+                      <td className="py-2 px-2.5">{row.metrics.per_class_iou.sand.toFixed(4)}</td>
+                      <td className="py-2 px-2.5 font-semibold text-[#EAE9E4]">
                         {row.metrics.per_class_iou["big rock"].toFixed(4)}
                       </td>
-                      <td className="py-2.5 px-2.5">
+                      <td className="py-2 px-2.5">
                         {row.metrics.per_class_precision["big rock"].toFixed(3)} /{" "}
                         {row.metrics.per_class_recall["big rock"].toFixed(3)}
                       </td>
@@ -472,16 +563,15 @@ export const ModelPerformancePage: React.FC = () => {
               </table>
             </div>
 
-            {/* MER Sub-mission breakdown if on MER tab */}
             {activeTab === "test_mer" && data.splits.test_mer.mer_submissions && (
               <div className="pt-2 border-t border-[#303431]">
-                <h3 className="text-[12px] font-mono-tech uppercase text-[#9B9E98] mb-3">
+                <h3 className="text-[11px] font-mono-tech uppercase text-[#9B9E98] mb-2.5">
                   MER Sub-Mission Breakdown (Baseline Models)
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono-tech text-[11px]">
                   {Object.entries(data.splits.test_mer.mer_submissions).map(([subName, subData]) => (
-                    <div key={subName} className="p-3 bg-[#121414] border border-[#303431] space-y-1.5">
-                      <div className="font-sans font-semibold text-[13px] text-[#EAE9E4]">
+                    <div key={subName} className="p-3 bg-[#121414] border border-[#303431] space-y-1">
+                      <div className="font-sans font-semibold text-[12.5px] text-[#EAE9E4]">
                         {subName} ({subData.num_images} images)
                       </div>
                       <div className="flex justify-between text-[#9B9E98]">
@@ -505,21 +595,35 @@ export const ModelPerformancePage: React.FC = () => {
         </FadeContent>
       )}
 
-      {/* Confusion Matrices Reference Artifact */}
-      {cmUrl && (
-        <section className="mission-panel p-4">
-          <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#303431]">
-            <h2 className="text-[13px] font-semibold uppercase text-[#EAE9E4] flex items-center gap-2">
-              <Icon name="table-cells-large" className="text-[#C87951] text-[12px]" />
-              <span>Expert Test Row-Normalized Confusion Matrices (Baseline Models)</span>
+      {/* Interactive Dark-Theme Confusion Matrix Heatmaps (replaces disconnected white PNG) */}
+      {heatmapMatrices.length > 0 && (
+        <section className="mission-panel p-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#303431] pb-2.5">
+            <h2 className="text-[12.5px] font-mono-tech font-semibold uppercase text-[#EAE9E4] flex items-center gap-2">
+              <Icon name="table-cells-large" className="text-[#C87951] text-[11px]" />
+              <span>Interactive Row-Normalized Confusion Matrices</span>
             </h2>
-            <span className="text-[11px] font-mono-tech text-[#696E68]">Combined / MSL / MER</span>
+            <span className="text-[10.5px] font-mono-tech text-[#696E68]">
+              Generated directly from expert test pixel confusion matrices
+            </span>
           </div>
-          <img
-            src={cmUrl}
-            alt="Expert Test Row-Normalized Confusion Matrices"
-            className="w-full max-w-[1150px] mx-auto block border border-[#303431]"
-          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
+            {heatmapMatrices.map(
+              (hm) =>
+                hm.m.confusion_matrix &&
+                hm.m.confusion_matrix_row_normalized && (
+                  <ConfusionMatrixHeatmap
+                    key={hm.title}
+                    title={hm.title}
+                    subtitle={hm.subtitle}
+                    matrix={hm.m.confusion_matrix}
+                    rowNormalized={hm.m.confusion_matrix_row_normalized}
+                    labels={hm.m.confusion_matrix_labels}
+                  />
+                )
+            )}
+          </div>
         </section>
       )}
     </div>

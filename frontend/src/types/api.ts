@@ -177,6 +177,7 @@ export interface ReportSummary {
   obstacle_candidates_count: number;
   mean_confidence: number;
   mean_entropy: number;
+  inference_latency_ms?: number | null;
   traversability_assessment: TraversabilityAssessment;
   experimental_visual_concern_index: number;
   physical_safety_verified: boolean;
@@ -213,6 +214,7 @@ export interface SystemStatusResponse {
   stored_reports_count: number;
   latest_analysis_id: string | null;
   latest_analysis_timestamp_utc: string | null;
+  latest_inference_latency_ms: number | null;
   report_storage_dir: string;
 }
 

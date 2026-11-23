@@ -314,8 +314,8 @@ export const TerrainAnalysisPage: React.FC<TerrainAnalysisPageProps> = ({
         </div>
       ) : detail ? (
         <FadeContent>
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
-            <div className="xl:col-span-7 xl:sticky xl:top-20">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
+            <div className="xl:col-span-7 xl:sticky xl:top-14">
               <TerrainViewer
                 imageId={detail.report.image_metadata.image_id}
                 imageWidth={detail.report.image_metadata.width}
@@ -330,7 +330,7 @@ export const TerrainAnalysisPage: React.FC<TerrainAnalysisPageProps> = ({
               />
             </div>
 
-            <div className="xl:col-span-5">
+            <div className="xl:col-span-5 xl:sticky xl:top-14 xl:max-h-[calc(100vh-4rem)] xl:overflow-y-auto xl:pr-1">
               <IntelligencePanel
                 report={detail.report}
                 mission={detail.mission}
