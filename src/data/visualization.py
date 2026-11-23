@@ -17,8 +17,12 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
+
+if __package__ is None or __package__ == "":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import matplotlib
 matplotlib.use("Agg")
@@ -512,6 +516,283 @@ def generate_terrain_distribution_chart(
     return out_path
 
 
+def _select_diverse_preprocessing_samples(
+    split_manifest: Dict[str, object], num_samples: int = 12
+) -> List[Dict[str, object]]:
+    """Select diverse representative samples across splits, missions, and terrain classes."""
+    train_recs = list(split_manifest["splits"]["train"])
+    val_recs = list(split_manifest["splits"]["val"])
+    test_recs = list(split_manifest["splits"]["test"])
+
+    def score_class(rec: Dict[str, object], cid: str) -> float:
+        pc = rec.get("pixel_counts", {})
+        tot = max(sum(pc.get(str(k), 0) for k in range(4)), 1)
+        return pc.get(cid, 0) / tot
+
+    def diversity_score(rec: Dict[str, object]) -> Tuple[int, float]:
+        pc = rec.get("pixel_counts", {})
+        n_cls = sum(1 for k in ("0", "1", "2", "3") if pc.get(k, 0) > 400)
+        return (n_cls, float(rec.get("labeled_pixels_raw", 0)))
+
+    chosen: List[Dict[str, object]] = []
+    seen_ids: set[str] = set()
+
+    def add_pick(candidates: List[Dict[str, object]], key_fn) -> None:
+        filtered = [c for c in candidates if c["id"] not in seen_ids]
+        if not filtered:
+            return
+        best = max(filtered, key=key_fn)
+        seen_ids.add(best["id"])
+        chosen.append(best)
+
+    # Curate rich diverse examples across train, val, and official expert test sets
+    add_pick(train_recs, diversity_score)
+    add_pick(train_recs, lambda r: (score_class(r, "3"), r.get("labeled_pixels_raw", 0)))
+    add_pick(train_recs, lambda r: (score_class(r, "2"), r.get("labeled_pixels_raw", 0)))
+    add_pick(train_recs, lambda r: (score_class(r, "1"), r.get("labeled_pixels_raw", 0)))
+    add_pick(train_recs, lambda r: (score_class(r, "0"), r.get("labeled_pixels_raw", 0)))
+    add_pick(train_recs, lambda r: (score_class(r, "3") * 3 + score_class(r, "2"), r.get("labeled_pixels_raw", 0)))
+
+    add_pick(val_recs, diversity_score)
+    add_pick(val_recs, lambda r: (score_class(r, "3"), r.get("labeled_pixels_raw", 0)))
+    add_pick(val_recs, lambda r: (score_class(r, "2"), r.get("labeled_pixels_raw", 0)))
+
+    msl_test = [r for r in test_recs if r.get("official_split") == "test_msl"]
+    mer_opp = [r for r in test_recs if "Opportunity" in str(r.get("mission", ""))]
+    mer_spr = [r for r in test_recs if "Spirit" in str(r.get("mission", ""))]
+    add_pick(msl_test, diversity_score)
+    add_pick(mer_opp, diversity_score)
+    add_pick(mer_spr, diversity_score)
+
+    # Top up if fewer than num_samples
+    for rec in train_recs + val_recs + test_recs:
+        if len(chosen) >= num_samples:
+            break
+        if rec["id"] not in seen_ids:
+            seen_ids.add(rec["id"])
+            chosen.append(rec)
+
+    return chosen[:num_samples]
+
+
+def run_preprocessing_visualizations(
+    config_path: Path | str = Path("configs/data_config.yaml"),
+    project_root: Optional[Path] = None,
+) -> List[Path]:
+    """Generate Step 2 visual validation comparisons and class distribution charts."""
+    from src.data.config_utils import get_project_root, load_config, resolve_path
+    from src.data.transforms import SegmentationTransformPipeline
+
+    root = project_root or get_project_root()
+    cfg = load_config(config_path)
+
+    raw_root = resolve_path(cfg["paths"]["raw_ai4mars_dir"], root)
+    processed_dir = resolve_path(cfg["paths"]["processed_dir"], root)
+    out_dir = resolve_path(cfg["paths"]["preprocessing_samples_dir"], root)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    split_manifest = json.loads(
+        resolve_path(cfg["paths"]["split_manifest_file"], root).read_text(encoding="utf-8")
+    )
+    prep_cfg = json.loads(
+        resolve_path(cfg["paths"]["preprocessing_config_file"], root).read_text(encoding="utf-8")
+    )
+    class_weights_data = json.loads(
+        resolve_path(cfg["paths"]["class_weights_file"], root).read_text(encoding="utf-8")
+    )
+
+    num_samples = int(cfg.get("visualization", {}).get("num_samples", 12))
+    alpha = float(cfg.get("visualization", {}).get("alpha_overlay", 0.50))
+    samples = _select_diverse_preprocessing_samples(split_manifest, num_samples=num_samples)
+
+    # Instantiate training-mode pipeline strictly for demonstrating Step 2 augmentation
+    aug_pipeline = SegmentationTransformPipeline(
+        cfg=cfg,
+        split="train",
+        mean=prep_cfg["normalization"]["active_mean"],
+        std=prep_cfg["normalization"]["active_std"],
+        seed=int(cfg["project"]["random_seed"]) + 101,
+    )
+
+    generated: List[Path] = []
+    gallery_rows = []
+
+    for idx, rec in enumerate(samples, start=1):
+        raw_img = load_grayscale_or_rgb(raw_root / str(rec["image_relpath"]))
+        raw_msk = load_mask(raw_root / str(rec["mask_relpath"]))
+        proc_img = load_grayscale_or_rgb(processed_dir / str(rec["processed_image_relpath"]))
+        proc_msk = load_mask(processed_dir / str(rec["processed_mask_relpath"]))
+
+        raw_msk_color = colorize_mask(raw_msk)
+        proc_msk_color = colorize_mask(proc_msk)
+        proc_overlay = overlay_mask_on_image(proc_img, proc_msk, alpha=alpha)
+
+        # Apply deterministic sample-indexed RNG so augmented visual is reproducible
+        sample_rng = np.random.default_rng(int(cfg["project"]["random_seed"]) + idx * 17)
+        aug_img, aug_msk = aug_pipeline.apply_numpy(proc_img, proc_msk, rng=sample_rng)
+        aug_msk_color = colorize_mask(aug_msk)
+
+        if idx <= 6:
+            gallery_rows.append(
+                (rec, raw_img, proc_img, raw_msk_color, proc_msk_color, proc_overlay, aug_img, aug_msk_color)
+            )
+
+        fig, axes = plt.subplots(1, 7, figsize=(24.5, 4.3), dpi=140)
+        panels = [
+            (raw_img, f"1. Original Image\n({raw_img.shape[1]}x{raw_img.shape[0]})"),
+            (proc_img, f"2. Resized Image\n({proc_img.shape[1]}x{proc_img.shape[0]})"),
+            (raw_msk_color, f"3. Original Mask\n({raw_msk.shape[1]}x{raw_msk.shape[0]})"),
+            (proc_msk_color, f"4. Encoded Mask\nIDs: {sorted(int(v) for v in np.unique(proc_msk))}"),
+            (proc_overlay, f"5. Resized Overlay\n({_format_mask_stats(proc_msk)})"),
+            (aug_img, "6. Augmented Image\n(Geom + Photometric)"),
+            (aug_msk_color, f"7. Augmented Mask\nIDs: {sorted(int(v) for v in np.unique(aug_msk))}"),
+        ]
+        for ax, (arr, title) in zip(axes, panels):
+            ax.imshow(arr)
+            ax.set_title(title, fontsize=8.8, fontweight="bold")
+            ax.axis("off")
+
+        fig.suptitle(
+            f"Preprocessing Sample {idx:02d} — {rec['id']} | Split: {rec['split']} | "
+            f"Mission: {rec['mission']} | Consensus: {rec.get('consensus_tier_used', '')}",
+            fontsize=11.5,
+            fontweight="bold",
+            y=1.02,
+        )
+        fig.legend(
+            handles=_legend_handles(include_null=True),
+            loc="lower center",
+            ncol=5,
+            frameon=True,
+            fontsize=9,
+            bbox_to_anchor=(0.5, -0.05),
+        )
+        fig.tight_layout()
+        out_file = out_dir / f"sample_{idx:02d}_{rec['id']}.png"
+        fig.savefig(out_file, bbox_inches="tight")
+        plt.close(fig)
+        generated.append(out_file)
+
+    # Combined 6-row summary gallery for rapid visual inspection
+    fig, axes = plt.subplots(len(gallery_rows), 7, figsize=(23.5, 3.6 * len(gallery_rows)), dpi=140)
+    col_headers = [
+        "1. Original Image",
+        "2. Resized Image",
+        "3. Original Mask",
+        "4. Encoded Mask",
+        "5. Resized Overlay",
+        "6. Augmented Image",
+        "7. Augmented Mask",
+    ]
+    for c_i, ch in enumerate(col_headers):
+        axes[0, c_i].set_title(ch, fontsize=10.5, fontweight="bold", pad=8)
+
+    for r_i, (rec, r_img, p_img, r_mc, p_mc, p_ov, a_img, a_mc) in enumerate(gallery_rows):
+        row_imgs = [r_img, p_img, r_mc, p_mc, p_ov, a_img, a_mc]
+        for c_i, arr in enumerate(row_imgs):
+            axes[r_i, c_i].imshow(arr)
+            axes[r_i, c_i].set_xticks([])
+            axes[r_i, c_i].set_yticks([])
+        axes[r_i, 0].set_ylabel(
+            f"{rec['split'].upper()}\n{rec['id'][:18]}",
+            fontsize=8.5,
+            fontweight="bold",
+        )
+
+    fig.suptitle(
+        "MANGAL DRISHTI Step 2 — Preprocessing, Mask Encoding & Augmentation Visual Validation Gallery",
+        fontsize=13.5,
+        fontweight="bold",
+        y=0.995,
+    )
+    fig.legend(
+        handles=_legend_handles(include_null=True),
+        loc="lower center",
+        ncol=5,
+        frameon=True,
+        fontsize=10,
+        bbox_to_anchor=(0.5, 0.002),
+    )
+    fig.tight_layout(rect=[0.015, 0.025, 1.0, 0.985])
+    gallery_path = out_dir / "preprocessing_gallery.png"
+    fig.savefig(gallery_path, bbox_inches="tight")
+    plt.close(fig)
+    generated.append(gallery_path)
+
+    # Preprocessed Split Class Distribution & Class Weights Chart
+    split_stats = class_weights_data["split_pixel_distributions"]
+    weights_map = class_weights_data["weighting_methods"]
+    fig, axes = plt.subplots(1, 3, figsize=(18.5, 5.8), dpi=160)
+
+    cids = ["0", "1", "2", "3"]
+    cnames = ["Soil (0)", "Bedrock (1)", "Sand (2)", "Big Rock (3)"]
+    x = np.arange(len(cids))
+    w = 0.25
+    for s_i, (sk, slbl, col) in enumerate(
+        zip(["train", "val", "test"], ["Train", "Val", "Test (Expert)"], ["#2b5c8f", "#3d9970", "#e07a5f"])
+    ):
+        vals = [split_stats[sk]["classes"][c]["pct_of_valid_pixels"] for c in cids]
+        bars = axes[0].bar(x + (s_i - 1) * w, vals, w, label=f"{slbl} (n={split_stats[sk]['num_images']})", color=col, edgecolor="black", linewidth=0.5)
+        for b, v in zip(bars, vals):
+            axes[0].text(b.get_x() + b.get_width() / 2.0, v + 0.8, f"{v:.1f}%", ha="center", va="bottom", fontsize=7.5, fontweight="bold")
+    axes[0].set_xticks(x)
+    axes[0].set_xticklabels(cnames)
+    axes[0].set_ylim(0, 62)
+    axes[0].set_ylabel("Share of Valid Pixels (%)")
+    axes[0].set_title("A. Valid Class Balance Across SCLK Splits", fontsize=11, fontweight="bold")
+    axes[0].grid(axis="y", linestyle="--", alpha=0.35)
+    axes[0].legend(fontsize=8.5)
+
+    # Panel B: Valid vs Ignored (255) pixels per processed split
+    s_keys = ["train", "val", "test"]
+    s_lbls = [f"{k.title()}\n(n={split_stats[k]['num_images']})" for k in s_keys]
+    valid_pcts = [split_stats[k]["valid_pct"] for k in s_keys]
+    ign_pcts = [split_stats[k]["ignored_pct"] for k in s_keys]
+    axes[1].bar(s_lbls, valid_pcts, label="Valid Terrain Labels (0–3)", color="#3b82f6", edgecolor="black", linewidth=0.6)
+    axes[1].bar(s_lbls, ign_pcts, bottom=valid_pcts, label="Ignored / NULL (255)", color="#374151", edgecolor="black", linewidth=0.6)
+    for idx_s, (vp, ip) in enumerate(zip(valid_pcts, ign_pcts)):
+        axes[1].text(idx_s, vp / 2.0, f"{vp:.1f}%", ha="center", va="center", color="white", fontweight="bold", fontsize=9.5)
+        axes[1].text(idx_s, vp + ip / 2.0, f"{ip:.1f}%", ha="center", va="center", color="white", fontweight="bold", fontsize=9.5)
+    axes[1].set_ylim(0, 105)
+    axes[1].set_ylabel("Share of All 512x512 Pixels (%)")
+    axes[1].set_title("B. Valid vs. Ignored (255) Pixel Budget", fontsize=11, fontweight="bold")
+    axes[1].legend(loc="upper right", fontsize=8.5)
+
+    # Panel C: Computed Train-Only Class Weights Comparison
+    methods = [
+        ("median_frequency_capped", "Median Freq (Capped)", "#d97706"),
+        ("inverse_frequency_capped", "Inverse Freq (Capped)", "#dc2626"),
+        ("effective_num_samples", "Effective Num Samples", "#059669"),
+        ("swan2021_one_minus_composition", "Swan2021 (1 - comp)", "#6366f1"),
+    ]
+    w_bar = 0.2
+    for m_i, (mk, mlbl, mc) in enumerate(methods):
+        w_vals = [weights_map[mk][c] for c in cids]
+        axes[2].bar(x + (m_i - 1.5) * w_bar, w_vals, w_bar, label=mlbl, color=mc, edgecolor="black", linewidth=0.5)
+    axes[2].set_xticks(x)
+    axes[2].set_xticklabels(cnames)
+    axes[2].set_ylabel("Loss Weight Multiplier")
+    axes[2].set_title("C. Train-Only Loss Weighting Schemes", fontsize=11, fontweight="bold")
+    axes[2].grid(axis="y", linestyle="--", alpha=0.35)
+    axes[2].legend(fontsize=8)
+
+    fig.suptitle(
+        "MANGAL DRISHTI Step 2 — Processed Split Class Distribution & Training Loss Weights",
+        fontsize=13,
+        fontweight="bold",
+        y=1.01,
+    )
+    fig.tight_layout()
+    dist_path = out_dir / "preprocessed_class_distribution.png"
+    fig.savefig(dist_path, bbox_inches="tight")
+    plt.close(fig)
+    generated.append(dist_path)
+
+    for p in generated:
+        LOGGER.info("Generated Step 2 visualization: %s", p)
+    return generated
+
+
 def run_visualizations(project_root: Path) -> List[Path]:
     """Generate all 5 required visualizations from actual acquired data."""
     ai4mars_root = project_root / "datasets" / "raw" / "ai4mars"
@@ -545,11 +826,26 @@ def main() -> None:
         type=Path,
         default=Path(__file__).resolve().parents[2],
     )
+    parser.add_argument(
+        "--mode",
+        choices=["step1", "preprocessing"],
+        default="step1",
+        help="Visualization suite to generate.",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/data_config.yaml"),
+        help="YAML config path used when --mode preprocessing.",
+    )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
 
     configure_logging(args.verbose)
-    run_visualizations(args.project_root)
+    if args.mode == "preprocessing":
+        run_preprocessing_visualizations(args.config, project_root=args.project_root)
+    else:
+        run_visualizations(args.project_root)
 
 
 if __name__ == "__main__":
