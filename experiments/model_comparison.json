@@ -1,0 +1,62 @@
+{
+  "project": "MANGAL DRISHTI",
+  "evaluation_split": "validation",
+  "validation_images": 363,
+  "valid_pixels_evaluated": 48555875,
+  "expert_test_used": false,
+  "models": {
+    "unet": {
+      "architecture": "U-Net + ResNet34",
+      "parameter_count": 24521796,
+      "epochs_completed": 10,
+      "best_epoch": 6,
+      "training_duration_seconds": 1367.81,
+      "best_val_loss": 0.286305,
+      "val_loss_at_best_miou": 0.327826,
+      "val_mIoU": 0.746619,
+      "mean_dice": 0.841009,
+      "pixel_accuracy": 0.939279,
+      "soil_iou": 0.89643,
+      "bedrock_iou": 0.915439,
+      "sand_iou": 0.718016,
+      "big_rock_iou": 0.456591,
+      "sand_recall": 0.898985,
+      "big_rock_recall": 0.77821,
+      "checkpoint_path": "experiments/unet/best_model.pth"
+    },
+    "deeplabv3plus": {
+      "architecture": "DeepLabV3+ + ResNet50",
+      "parameter_count": 40347812,
+      "epochs_completed": 10,
+      "best_epoch": 10,
+      "training_duration_seconds": 1757.69,
+      "best_val_loss": 0.186977,
+      "val_loss_at_best_miou": 0.187573,
+      "val_mIoU": 0.765901,
+      "mean_dice": 0.856757,
+      "pixel_accuracy": 0.94359,
+      "soil_iou": 0.899863,
+      "bedrock_iou": 0.927705,
+      "sand_iou": 0.723744,
+      "big_rock_iou": 0.512293,
+      "sand_recall": 0.962586,
+      "big_rock_recall": 0.884978,
+      "checkpoint_path": "experiments/deeplabv3plus/best_model.pth"
+    }
+  },
+  "comparison_deeplabv3plus_minus_unet": {
+    "val_mIoU_delta": 0.019282,
+    "mean_dice_delta": 0.015748,
+    "pixel_accuracy_delta": 0.004311,
+    "soil_iou_delta": 0.003433,
+    "bedrock_iou_delta": 0.012266,
+    "sand_iou_delta": 0.005728,
+    "big_rock_iou_delta": 0.055702,
+    "sand_recall_delta": 0.063601,
+    "big_rock_recall_delta": 0.106768,
+    "training_duration_seconds_delta": 389.88,
+    "parameter_count_delta": 15826016
+  },
+  "recommended_model": "deeplabv3plus",
+  "recommendation_rationale": "DeepLabV3+ + ResNet50 outperforms U-Net + ResNet34 across every validation segmentation metric (+0.0193 mIoU, +0.0157 mean Dice, +0.0557 Big Rock IoU, +0.1068 Big Rock recall, +0.0636 Sand recall) with a +389.9s training time and +15.83M parameter trade-off."
+}

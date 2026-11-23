@@ -1,0 +1,56 @@
+{
+  "model_name": "deeplabv3plus",
+  "status": "trained",
+  "epochs_completed": 10,
+  "training_duration_seconds": 1757.69,
+  "hardware": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA GeForce RTX 3050 A Laptop GPU",
+    "vram_gb": 4.0,
+    "ram_gb": 15.64,
+    "pytorch_version": "2.11.0+cu128",
+    "amp_enabled": true,
+    "batch_size": 4,
+    "grad_accum_steps": 2,
+    "effective_batch_size": 8,
+    "model_name": "deeplabv3plus"
+  },
+  "best_val_loss": 0.186977,
+  "best_validation_metrics": {
+    "best_epoch": 10,
+    "best_val_loss_at_best_miou": 0.187573,
+    "mIoU": 0.765901,
+    "mean_dice": 0.856757,
+    "pixel_accuracy": 0.94359,
+    "per_class_iou": {
+      "soil": 0.899863,
+      "bedrock": 0.927705,
+      "sand": 0.723744,
+      "big rock": 0.512293
+    },
+    "per_class_dice": {
+      "soil": 0.947292,
+      "bedrock": 0.962497,
+      "sand": 0.839735,
+      "big rock": 0.677505
+    },
+    "per_class_recall": {
+      "soil": 0.914613,
+      "bedrock": 0.970526,
+      "sand": 0.962586,
+      "big rock": 0.884978
+    },
+    "per_class_precision": {
+      "soil": 0.982394,
+      "bedrock": 0.954599,
+      "sand": 0.744692,
+      "big rock": 0.548836
+    },
+    "sand_iou": 0.723744,
+    "sand_recall": 0.962586,
+    "big_rock_iou": 0.512293,
+    "big_rock_recall": 0.884978,
+    "valid_pixels_evaluated": 48555875
+  },
+  "checkpoint_path": "D:\\Personal Projects\\MANGAL DRISHTI\\experiments\\deeplabv3plus\\best_model.pth"
+}

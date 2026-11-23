@@ -44,7 +44,7 @@ CLASS_NAMES: Dict[int, str] = {
 
 def colorize_prediction(pred_mask: np.ndarray) -> np.ndarray:
     h, w = pred_mask.shape
-    rgb = np.zeros((h, w, 3), dtype=np.uint8)
+    rgb = np.full((h, w, 3), 45, dtype=np.uint8)  # Dark gray for ignore (255)
     for cid, col in CLASS_PALETTE.items():
         rgb[pred_mask == cid] = col
     return rgb
@@ -88,6 +88,7 @@ def save_prediction_bundle(
     outputs: Dict[str, np.ndarray],
     output_dir: Path,
     model_name: str,
+    gt_mask: Optional[np.ndarray] = None,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     # Save standalone mask, confidence, and overlay
@@ -97,24 +98,40 @@ def save_prediction_bundle(
     Image.fromarray(conf_heat).save(output_dir / f"{stem}_confidence.png")
     Image.fromarray(outputs["overlay"]).save(output_dir / f"{stem}_overlay.png")
 
-    # Save 4-panel visual inspection figure
+    # Save visual inspection figure (5-panel when GT mask is available, else 4-panel)
     pred = outputs["pred_mask"]
     counts = np.bincount(pred.ravel(), minlength=4)
     total = pred.size
     dist_str = " | ".join(f"{CLASS_NAMES[i].split()[0]}: {counts[i]/total*100:.1f}%" for i in range(4))
 
-    fig, axes = plt.subplots(1, 4, figsize=(18, 4.8), dpi=140)
-    axes[0].imshow(outputs["rgb"])
-    axes[0].set_title("Input Rover Image (512x512)", fontsize=10, fontweight="bold")
-    axes[1].imshow(outputs["color_mask"])
-    axes[1].set_title(f"Predicted Mask\n({dist_str})", fontsize=9, fontweight="bold")
-    im_c = axes[2].imshow(outputs["confidence"], cmap="viridis", vmin=0.25, vmax=1.0)
-    axes[2].set_title(
+    has_gt = gt_mask is not None
+    ncols = 5 if has_gt else 4
+    fig, axes = plt.subplots(1, ncols, figsize=(22 if has_gt else 18, 4.8), dpi=140)
+    idx = 0
+    axes[idx].imshow(outputs["rgb"])
+    axes[idx].set_title("Input Rover Image (512x512)", fontsize=10, fontweight="bold")
+    idx += 1
+
+    if has_gt:
+        gt_color = colorize_prediction(gt_mask)
+        axes[idx].imshow(gt_color)
+        valid_pct = float((gt_mask != 255).mean() * 100.0)
+        axes[idx].set_title(f"Ground-Truth Mask\n(Labeled: {valid_pct:.1f}%)", fontsize=10, fontweight="bold")
+        idx += 1
+
+    axes[idx].imshow(outputs["color_mask"])
+    axes[idx].set_title(f"Predicted Mask\n({dist_str})", fontsize=9, fontweight="bold")
+    idx += 1
+
+    im_c = axes[idx].imshow(outputs["confidence"], cmap="viridis", vmin=0.25, vmax=1.0)
+    axes[idx].set_title(
         f"Softmax Confidence\n(Mean: {outputs['confidence'].mean():.3f})", fontsize=10, fontweight="bold"
     )
-    plt.colorbar(im_c, ax=axes[2], fraction=0.046, pad=0.04)
-    axes[3].imshow(outputs["overlay"])
-    axes[3].set_title("Prediction Overlay", fontsize=10, fontweight="bold")
+    plt.colorbar(im_c, ax=axes[idx], fraction=0.046, pad=0.04)
+    idx += 1
+
+    axes[idx].imshow(outputs["overlay"])
+    axes[idx].set_title("Prediction Overlay", fontsize=10, fontweight="bold")
     for ax in axes:
         ax.axis("off")
 
@@ -122,8 +139,10 @@ def save_prediction_bundle(
         mpatches.Patch(color=np.array(CLASS_PALETTE[k]) / 255.0, label=CLASS_NAMES[k])
         for k in range(4)
     ]
+    if has_gt:
+        handles.append(mpatches.Patch(color=np.array((45, 45, 45)) / 255.0, label="Ignore (255)"))
     fig.suptitle(f"MANGAL DRISHTI ({model_name.upper()}) Prediction — {stem}", fontsize=12, fontweight="bold")
-    fig.legend(handles=handles, loc="lower center", ncol=4, frameon=True, bbox_to_anchor=(0.5, -0.02))
+    fig.legend(handles=handles, loc="lower center", ncol=len(handles), frameon=True, bbox_to_anchor=(0.5, -0.02))
     fig.tight_layout()
     panel_path = output_dir / f"{stem}_panel.png"
     fig.savefig(panel_path, bbox_inches="tight")
@@ -163,6 +182,7 @@ def run_inference(
     model.eval()
 
     image_paths: List[Path] = []
+    mask_paths: List[Optional[Path]] = []
     if input_path is not None:
         if input_path.is_file():
             image_paths = [input_path]
@@ -170,17 +190,20 @@ def run_inference(
             image_paths = sorted(
                 p for p in input_path.iterdir() if p.suffix.lower() in {".png", ".jpg", ".jpeg"}
             )[:num_samples]
+        mask_paths = [None] * len(image_paths)
     else:
         ds = MangalDrishtiDataset(split=split, config_path=config_path, project_root=root)
         # Pick evenly spaced indices from the split
         indices = np.linspace(0, len(ds) - 1, min(num_samples, len(ds)), dtype=int)
         proc_dir = resolve_path(cfg["paths"]["processed_dir"], root)
         image_paths = [proc_dir / ds.records[int(i)]["processed_image_relpath"] for i in indices]
+        mask_paths = [proc_dir / ds.records[int(i)]["processed_mask_relpath"] for i in indices]
 
     saved: List[Path] = []
-    for p in image_paths:
+    for p, mp in zip(image_paths, mask_paths):
         res = predict_single_image(model, p, pipeline, cfg, device)
-        panel = save_prediction_bundle(p.stem, res, output_dir, model_name)
+        gt_mask = np.array(Image.open(mp), dtype=np.uint8) if (mp is not None and mp.exists()) else None
+        panel = save_prediction_bundle(p.stem, res, output_dir, model_name, gt_mask=gt_mask)
         saved.append(panel)
         LOGGER.info("Saved prediction panel: %s", panel)
     return saved
