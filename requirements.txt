@@ -1,4 +1,8 @@
-# MANGAL DRISHTI — Step 01 Core Dependencies
+# MANGAL DRISHTI — Core Dependencies
+torch>=2.5.0
+torchvision>=0.20.0
+psutil>=5.9.0
+PyYAML>=6.0.0
 numpy>=1.26.0
 pandas>=2.2.0
 Pillow>=10.0.0

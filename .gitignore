@@ -38,6 +38,14 @@ datasets/processed/
 !datasets/metadata/*.json
 !datasets/metadata/*.csv
 
+# Model checkpoints excluded; experiment metrics & prediction visualizations allowed
+experiments/**/*.pth
+experiments/**/*.pt
+!experiments/**/predictions/*.png
+!experiments/**/metrics.json
+!experiments/**/training_history.csv
+!experiments/**/model_config.yaml
+
 # OS & IDE files
 .DS_Store
 Thumbs.db
