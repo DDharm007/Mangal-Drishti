@@ -1,0 +1,56 @@
+{
+  "model_name": "unet",
+  "status": "trained",
+  "epochs_completed": 10,
+  "training_duration_seconds": 1367.81,
+  "hardware": {
+    "device": "cuda",
+    "gpu_name": "NVIDIA GeForce RTX 3050 A Laptop GPU",
+    "vram_gb": 4.0,
+    "ram_gb": 15.64,
+    "pytorch_version": "2.11.0+cu128",
+    "amp_enabled": true,
+    "batch_size": 4,
+    "grad_accum_steps": 2,
+    "effective_batch_size": 8,
+    "model_name": "unet"
+  },
+  "best_val_loss": 0.286305,
+  "best_validation_metrics": {
+    "best_epoch": 6,
+    "best_val_loss_at_best_miou": 0.327826,
+    "mIoU": 0.746619,
+    "mean_dice": 0.841009,
+    "pixel_accuracy": 0.939279,
+    "per_class_iou": {
+      "soil": 0.89643,
+      "bedrock": 0.915439,
+      "sand": 0.718016,
+      "big rock": 0.456591
+    },
+    "per_class_dice": {
+      "soil": 0.945387,
+      "bedrock": 0.955853,
+      "sand": 0.835867,
+      "big rock": 0.626931
+    },
+    "per_class_recall": {
+      "soil": 0.913334,
+      "bedrock": 0.972813,
+      "sand": 0.898985,
+      "big rock": 0.77821
+    },
+    "per_class_precision": {
+      "soil": 0.979771,
+      "bedrock": 0.939474,
+      "sand": 0.78103,
+      "big rock": 0.524895
+    },
+    "sand_iou": 0.718016,
+    "sand_recall": 0.898985,
+    "big_rock_iou": 0.456591,
+    "big_rock_recall": 0.77821,
+    "valid_pixels_evaluated": 48555875
+  },
+  "checkpoint_path": "D:\\Personal Projects\\MANGAL DRISHTI\\experiments\\unet\\best_model.pth"
+}

@@ -1,0 +1,27 @@
+model_name: unet
+pretrained_requested: true
+pretrained_loaded: true
+num_classes: 4
+ignore_index: 255
+epochs_max: 10
+lr: 0.0001
+weight_decay: 0.0001
+dice_weight: 0.0
+class_weights_method: median_frequency_capped
+class_weights:
+  '0': 0.545153
+  '1': 0.560134
+  '2': 4.657246
+  '3': 12.0
+hardware:
+  device: cuda
+  gpu_name: NVIDIA GeForce RTX 3050 A Laptop GPU
+  vram_gb: 4.0
+  ram_gb: 15.64
+  pytorch_version: 2.11.0+cu128
+  amp_enabled: true
+  batch_size: 4
+  grad_accum_steps: 2
+  effective_batch_size: 8
+  model_name: unet
+data_config_path: configs\data_config.yaml

@@ -69,7 +69,7 @@ def detect_hardware(model_name: str, batch_size_override: Optional[int] = None) 
         "gpu_name": gpu_name,
         "vram_gb": vram_gb,
         "ram_gb": ram_gb,
-        "pytorch_version": torch.__version__,
+        "pytorch_version": str(torch.__version__),
         "amp_enabled": has_cuda,
         "batch_size": bs,
         "grad_accum_steps": accum,
