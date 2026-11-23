@@ -1,0 +1,118 @@
+# MANGAL DRISHTI — Step 02 Centralized Data & Preprocessing Configuration
+
+project:
+  name: "MANGAL DRISHTI"
+  phase: "Step 02 - Data Preprocessing & Engineering"
+  random_seed: 42
+
+paths:
+  raw_ai4mars_dir: "datasets/raw/ai4mars"
+  raw_label_keys: "datasets/raw/ai4mars/label_keys.json"
+  raw_split_manifest: "datasets/raw/ai4mars/split_manifest.json"
+  processed_dir: "datasets/processed"
+  metadata_dir: "datasets/metadata"
+  inspection_dir: "datasets/inspection"
+  preprocessing_samples_dir: "datasets/inspection/preprocessing_samples"
+  class_mapping_file: "datasets/metadata/class_mapping.json"
+  split_manifest_file: "datasets/metadata/split_manifest.json"
+  dataset_manifest_csv: "datasets/metadata/dataset_manifest.csv"
+  preprocessing_config_file: "datasets/metadata/preprocessing_config.json"
+  class_weights_file: "datasets/metadata/class_weights.json"
+  validation_report_file: "datasets/inspection/preprocessing_validation_report.json"
+
+image:
+  # Configurable target size (supports 256, 512, 768)
+  target_size: [512, 512]
+  # "direct_square" for 1024x1024 AI4MARS square frames; "letterbox_pad" for non-square external images
+  aspect_ratio_strategy: "direct_square"
+  interpolation: "bilinear"
+  convert_to_rgb: true
+  image_pad_value: 0
+  save_format: "png"
+
+mask:
+  interpolation: "nearest"
+  ignore_index: 255
+  num_classes: 4
+  valid_class_ids: [0, 1, 2, 3]
+  # Apply official MSL rover hardware (MXY) & >30m stereo range (RNG-30M) binary masks
+  apply_mxy_rover_mask: true
+  apply_rng30m_range_mask: true
+  # Filter out masks with zero labeled pixels (all 255) from train/val pools
+  filter_empty_masks_train_val: true
+  # For official expert test sets, use min3-100agree and fall back to min2/min1 only when min3 is 100% 255
+  test_consensus_strategy: "min3_with_min2_min1_fallback"
+
+normalization:
+  # Supported modes: "dataset_train" (computed strictly from processed train split) or "imagenet"
+  mode: "dataset_train"
+  scale_to_unit: true
+  imagenet_mean: [0.485, 0.456, 0.406]
+  imagenet_std: [0.229, 0.224, 0.225]
+
+splitting:
+  # Group consecutive MSL frames into temporal drive clusters to avoid same-scene leakage
+  sclk_cluster_gap_seconds: 43200
+  # Fraction of non-empty MSL drive pool allocated to validation (~17.6% of 1,770 = ~312 pairs)
+  val_ratio_of_train_pool: 0.1765
+  # Official expert gold-standard test sets (322 MSL + 204 MER) remain strictly held out as test
+  preserve_official_test_sets: true
+
+class_weights:
+  smoothing_epsilon: 1.0e-6
+  inverse_freq_max_cap: 12.0
+  effective_num_beta: 0.999999
+
+augmentation:
+  enabled_for_train: true
+  horizontal_flip:
+    enabled: true
+    p: 0.5
+  rotation:
+    enabled: true
+    limit_degrees: 15
+    p: 0.4
+  scale_crop:
+    enabled: true
+    scale_range: [0.85, 1.15]
+    p: 0.4
+  shift:
+    enabled: true
+    shift_limit: 0.05
+    p: 0.3
+  brightness_contrast:
+    enabled: true
+    brightness_limit: 0.15
+    contrast_limit: 0.15
+    p: 0.5
+  gamma:
+    enabled: true
+    gamma_range: [0.85, 1.15]
+    p: 0.35
+  clahe:
+    enabled: true
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+    p: 0.25
+  gaussian_noise:
+    enabled: true
+    std_range: [0.01, 0.03]
+    p: 0.2
+  gaussian_blur:
+    enabled: true
+    kernel_size: 3
+    p: 0.15
+
+dataloader:
+  batch_size: 8
+  num_workers: 0
+  pin_memory: true
+  persistent_workers: false
+  drop_last_train: false
+  shuffle_train: true
+  shuffle_val: false
+  shuffle_test: false
+
+visualization:
+  num_samples: 12
+  alpha_overlay: 0.50

@@ -5,16 +5,24 @@ __pycache__/
 *.py[cod]
 *$py.class
 .ipynb_checkpoints/
+.pytest_cache/
+*.tmp
+*.bak
 
-# Large datasets, raw imagery, and archives (NEVER commit large datasets)
+# Large datasets, raw imagery, processed image/mask tensors, and archives (NEVER commit large datasets)
 datasets/raw/
 datasets/samples/
+datasets/processed/
 *.zip
 *.tar
 *.tar.gz
 *.tgz
 *.7z
 *.parquet
+*.pt
+*.pth
+*.npy
+*.npz
 
 # Image & binary exclusions
 *.JPG
@@ -23,9 +31,12 @@ datasets/samples/
 *.png
 *.PNG
 
-# Allow lightweight inspection outputs in Git
+# Allow lightweight inspection outputs & metadata manifests in Git
 !datasets/inspection/*.png
 !datasets/inspection/*.json
+!datasets/inspection/preprocessing_samples/*.png
+!datasets/metadata/*.json
+!datasets/metadata/*.csv
 
 # OS & IDE files
 .DS_Store
