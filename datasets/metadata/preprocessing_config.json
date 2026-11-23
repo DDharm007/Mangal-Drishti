@@ -1,0 +1,59 @@
+{
+  "project": "MANGAL DRISHTI",
+  "phase": "Step 02 - Data Preprocessing & Engineering",
+  "config_hash": "2f5479d222aa34577e2e92930a446394f2dacfd3f823fff123172408bd5b9aa6",
+  "random_seed": 42,
+  "image_preprocessing": {
+    "target_size": [
+      512,
+      512
+    ],
+    "aspect_ratio_strategy": "direct_square",
+    "interpolation": "bilinear",
+    "convert_to_rgb": true,
+    "output_format": "png"
+  },
+  "mask_preprocessing": {
+    "interpolation": "nearest",
+    "ignore_index": 255,
+    "num_classes": 4,
+    "apply_mxy_rover_mask": true,
+    "apply_rng30m_range_mask": true,
+    "filter_empty_masks_train_val": true,
+    "test_consensus_strategy": "min3_with_min2_min1_fallback"
+  },
+  "normalization": {
+    "mode": "dataset_train",
+    "statistics_source": "processed_train_split_only",
+    "scale_to_unit": true,
+    "computed_train_mean_rgb": [
+      0.24631,
+      0.24631,
+      0.24631
+    ],
+    "computed_train_std_rgb": [
+      0.113346,
+      0.113346,
+      0.113346
+    ],
+    "active_mean": [
+      0.24631,
+      0.24631,
+      0.24631
+    ],
+    "active_std": [
+      0.113346,
+      0.113346,
+      0.113346
+    ]
+  },
+  "counts": {
+    "processed_train": 1407,
+    "processed_val": 363,
+    "processed_test": 526,
+    "processed_total": 2296,
+    "rejected_empty_masks": 30,
+    "failed_files_count": 0
+  },
+  "failed_files": []
+}

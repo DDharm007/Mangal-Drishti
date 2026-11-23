@@ -1,0 +1,103 @@
+{
+  "dataset": "NASA/JPL AI4MARS v0.6",
+  "source_label_keys": "datasets/raw/ai4mars/label_keys.json",
+  "active_taxonomy": "NAV",
+  "num_trainable_classes": 4,
+  "ignore_index": 255,
+  "mask_interpolation_rule": "NEAREST_NEIGHBOR_ONLY",
+  "classes": [
+    {
+      "original_id": 0,
+      "original_mask_value": 0,
+      "training_id": 0,
+      "class_name": "soil",
+      "trainable": true,
+      "ignored": false,
+      "palette_rgb": [
+        166,
+        97,
+        26
+      ]
+    },
+    {
+      "original_id": 1,
+      "original_mask_value": 1,
+      "training_id": 1,
+      "class_name": "bedrock",
+      "trainable": true,
+      "ignored": false,
+      "palette_rgb": [
+        55,
+        126,
+        184
+      ]
+    },
+    {
+      "original_id": 2,
+      "original_mask_value": 2,
+      "training_id": 2,
+      "class_name": "sand",
+      "trainable": true,
+      "ignored": false,
+      "palette_rgb": [
+        245,
+        194,
+        66
+      ]
+    },
+    {
+      "original_id": 3,
+      "original_mask_value": 3,
+      "training_id": 3,
+      "class_name": "big rock",
+      "trainable": true,
+      "ignored": false,
+      "palette_rgb": [
+        228,
+        26,
+        28
+      ]
+    },
+    {
+      "original_id": 255,
+      "original_mask_value": 255,
+      "training_id": 255,
+      "class_name": "unlabeled_null",
+      "trainable": false,
+      "ignored": true,
+      "palette_rgb": [
+        40,
+        44,
+        52
+      ]
+    }
+  ],
+  "official_auxiliary_taxonomy_reference": {
+    "name": "M2020_GEO (Beta - Perseverance Geology Only, not used in Step 2 NAV training)",
+    "total_entries": 22,
+    "mapping": {
+      "0": "bedrock_massive",
+      "1": "bedrock_layered (angled)",
+      "2": "bedrock_layered (flat)",
+      "3": "bedrock_layered (unsure)",
+      "4": "bedrock_conglomerate",
+      "5": "bedrock_holey",
+      "6": "bedrock_unsure",
+      "10": "float rock(s)_massive",
+      "11": "float rock(s)_layered (angled)",
+      "12": "float rock(s)_layered (flat)",
+      "13": "float rock(s)_layered (unsure)",
+      "14": "float rock(s)_conglomerate",
+      "15": "float rock(s)_holey",
+      "16": "float rock(s)_mixed",
+      "17": "float rock(s)_unsure",
+      "20": "sand_dune",
+      "21": "sand_ripples",
+      "22": "sand_sand",
+      "30": "pebbles",
+      "40": "vein (rare)",
+      "50": "hill/peak",
+      "255": "unlabeled_null"
+    }
+  }
+}

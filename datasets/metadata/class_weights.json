@@ -1,0 +1,179 @@
+{
+  "dataset": "NASA/JPL AI4MARS v0.6 (Preprocessed)",
+  "weight_calculation_split": "train_only",
+  "ignore_index": 255,
+  "class_names": {
+    "0": "soil",
+    "1": "bedrock",
+    "2": "sand",
+    "3": "big rock"
+  },
+  "train_imbalance_ratio_max_to_min": 77.15,
+  "recommended_default_method": "median_frequency_capped",
+  "weighting_methods": {
+    "median_frequency_capped": {
+      "0": 0.545153,
+      "1": 0.560134,
+      "2": 4.657246,
+      "3": 12.0
+    },
+    "inverse_frequency_capped": {
+      "0": 0.045607,
+      "1": 0.04686,
+      "2": 0.389617,
+      "3": 3.517917
+    },
+    "effective_num_samples": {
+      "0": 0.047628,
+      "1": 0.048877,
+      "2": 0.390842,
+      "3": 3.512653
+    },
+    "swan2021_one_minus_composition": {
+      "0": 0.6994,
+      "1": 0.716354,
+      "2": 1.25913,
+      "3": 1.325116
+    }
+  },
+  "split_pixel_distributions": {
+    "train": {
+      "num_images": 1407,
+      "total_pixels": 368836608,
+      "valid_pixels": 198018449,
+      "ignored_pixels": 170818159,
+      "valid_pct": 53.6873,
+      "ignored_pct": 46.3127,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 94147912,
+          "pct_of_all_pixels": 25.5256,
+          "pct_of_valid_pixels": 47.545,
+          "images_with_class": 872,
+          "pct_images_with_class": 61.98
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 91629909,
+          "pct_of_all_pixels": 24.843,
+          "pct_of_valid_pixels": 46.2734,
+          "images_with_class": 820,
+          "pct_images_with_class": 58.28
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 11020283,
+          "pct_of_all_pixels": 2.9878,
+          "pct_of_valid_pixels": 5.5653,
+          "images_with_class": 225,
+          "pct_images_with_class": 15.99
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 1220345,
+          "pct_of_all_pixels": 0.3309,
+          "pct_of_valid_pixels": 0.6163,
+          "images_with_class": 182,
+          "pct_images_with_class": 12.94
+        }
+      }
+    },
+    "val": {
+      "num_images": 363,
+      "total_pixels": 95158272,
+      "valid_pixels": 48555875,
+      "ignored_pixels": 46602397,
+      "valid_pct": 51.0264,
+      "ignored_pct": 48.9736,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 22153068,
+          "pct_of_all_pixels": 23.2802,
+          "pct_of_valid_pixels": 45.6239,
+          "images_with_class": 224,
+          "pct_images_with_class": 61.71
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 23102994,
+          "pct_of_all_pixels": 24.2785,
+          "pct_of_valid_pixels": 47.5802,
+          "images_with_class": 219,
+          "pct_images_with_class": 60.33
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 2744945,
+          "pct_of_all_pixels": 2.8846,
+          "pct_of_valid_pixels": 5.6532,
+          "images_with_class": 67,
+          "pct_images_with_class": 18.46
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 554868,
+          "pct_of_all_pixels": 0.5831,
+          "pct_of_valid_pixels": 1.1427,
+          "images_with_class": 58,
+          "pct_images_with_class": 15.98
+        }
+      }
+    },
+    "test": {
+      "num_images": 526,
+      "total_pixels": 137887744,
+      "valid_pixels": 53104279,
+      "ignored_pixels": 84783465,
+      "valid_pct": 38.5127,
+      "ignored_pct": 61.4873,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 25836654,
+          "pct_of_all_pixels": 18.7375,
+          "pct_of_valid_pixels": 48.6527,
+          "images_with_class": 289,
+          "pct_images_with_class": 54.94
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 12217949,
+          "pct_of_all_pixels": 8.8608,
+          "pct_of_valid_pixels": 23.0075,
+          "images_with_class": 245,
+          "pct_images_with_class": 46.58
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 14844281,
+          "pct_of_all_pixels": 10.7655,
+          "pct_of_valid_pixels": 27.9531,
+          "images_with_class": 193,
+          "pct_images_with_class": 36.69
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 205395,
+          "pct_of_all_pixels": 0.149,
+          "pct_of_valid_pixels": 0.3868,
+          "images_with_class": 19,
+          "pct_images_with_class": 3.61
+        }
+      }
+    }
+  }
+}
