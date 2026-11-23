@@ -1,6 +1,6 @@
 # MANGAL DRISHTI — Dataset Directory Guide
 
-This directory houses the real Mars rover imagery, ground-truth semantic segmentation annotations, curated quick-reference samples, and automated inspection artifacts for **Step 01** of **MANGAL DRISHTI**.
+This directory houses the real Mars rover imagery, ground-truth semantic segmentation annotations, **preprocessed PyTorch-ready datasets**, metadata manifests, and automated inspection artifacts for **Step 01 & Step 02** of **MANGAL DRISHTI**.
 
 ## 1. Directory Organization
 
@@ -11,28 +11,27 @@ datasets/
 │       ├── changelog.md             # Official v0.1–v0.6 release notes
 │       ├── info.md                  # Official dataset documentation
 │       ├── label_keys.json          # Authoritative NAV & M2020_GEO class mappings
-│       ├── split_manifest.json      # Chronological SCLK train/val split + official test splits
-│       ├── official_v0.6_archive_manifest_summary.json
-│       ├── msl/
-│       │   └── ncam/
-│       │       ├── images/
-│       │       │   ├── edr/         # Original MSL (Curiosity) NavCam 1024x1024 grayscale JPGs
-│       │       │   ├── mxy/         # Official rover hardware exclusion masks (PNG)
-│       │       │   └── rng-30m/     # Official >30m stereo distance exclusion masks (PNG)
-│       │       └── labels/
-│       │           ├── train/       # Crowdsourced consensus masks (>=3 labelers, >=2/3 agreement)
-│       │           └── test/
-│       │               ├── masked-gold-min1-100agree/
-│       │               ├── masked-gold-min2-100agree/
-│       │               └── masked-gold-min3-100agree/  # Strictest JPL expert test masks
-│       └── mer/
-│           ├── images/
-│           │   └── test/            # Official MER (Opportunity & Spirit) NavCam test JPGs
-│           └── labels/
-│               └── test/
-│                   ├── masked-gold-min1-100agree/
-│                   ├── masked-gold-min2-100agree/
-│                   └── masked-gold-min3-100agree/
+│       ├── split_manifest.json      # Step 1 raw acquisition manifest
+│       ├── msl/                     # MSL Curiosity NavCam EDR, MXY, RNG-30M, train/test labels
+│       └── mer/                     # MER Opportunity & Spirit test images & gold labels
+│
+├── processed/                       # Step 2 512x512 RGB images & uint8 masks (gitignored)
+│   ├── train/
+│   │   ├── images/                  # 1,407 resized RGB PNGs
+│   │   └── masks/                   # 1,407 encoded uint8 masks {0,1,2,3,255}
+│   ├── val/
+│   │   ├── images/                  # 363 resized RGB PNGs
+│   │   └── masks/                   # 363 encoded uint8 masks {0,1,2,3,255}
+│   └── test/
+│       ├── images/                  # 526 official expert test RGB PNGs (322 MSL + 204 MER)
+│       └── masks/                   # 526 encoded expert test masks {0,1,2,3,255}
+│
+├── metadata/                        # Verified Step 2 manifests & stats (tracked in Git)
+│   ├── class_mapping.json
+│   ├── class_weights.json
+│   ├── dataset_manifest.csv
+│   ├── preprocessing_config.json
+│   └── split_manifest.json
 │
 ├── samples/                         # Curated quick-inspection sample subset (gitignored)
 │   └── external_nasa/               # Unlabeled Perseverance & Curiosity raw images from NASA APIs
@@ -40,11 +39,9 @@ datasets/
 ├── inspection/                      # Verified reports & visualizations (tracked in Git)
 │   ├── dataset_summary.json
 │   ├── validation_report.json
-│   ├── 01_original_rover_image.png
-│   ├── 02_ground_truth_segmentation.png
-│   ├── 03_segmentation_overlay.png
-│   ├── dataset_samples.png
-│   └── terrain_distribution.png
+│   ├── preprocessing_validation_report.json
+│   ├── preprocessing_samples/       # 12 visual 7-panel comparisons + gallery + class chart
+│   └── *.png                        # Step 1 visual exploration outputs
 │
 └── README.md
 ```
@@ -91,6 +88,14 @@ You can adjust `--train-val-limit` and `--train-count` if you wish to download a
    ```
    This produces `01_original_rover_image.png`, `02_ground_truth_segmentation.png`, `03_segmentation_overlay.png`, `dataset_samples.png`, and `terrain_distribution.png` in `datasets/inspection/`.
 
+3. **Run Step 2 preprocessing, validation, and visual verification:**
+   ```powershell
+   .\.venv\Scripts\python.exe -m src.data.preprocessing --config configs/data_config.yaml
+   .\.venv\Scripts\python.exe -m src.data.validation --config configs/data_config.yaml
+   .\.venv\Scripts\python.exe -m src.data.visualization --mode preprocessing --config configs/data_config.yaml
+   .\.venv\Scripts\python.exe -m pytest tests/test_step2_preprocessing.py -v
+   ```
+
 ## 5. Git Exclusion Policy
 
-Large raw datasets, binary archives (`.zip`, `.tar.gz`, `.parquet`), and raw rover image/mask directories (`datasets/raw/`, `datasets/samples/`) are strictly excluded in `.gitignore`. Tracking gigabytes of immutable imagery in Git bloats repository history, slows clones, and degrades developer tooling. Instead, acquisition is reproducible via `src/data/acquire_dataset.py`, while lightweight verified inspection summaries (`*.json`) and exploratory charts (`datasets/inspection/*.png`) are kept trackable.
+Large raw datasets, processed datasets (`datasets/processed/`), binary archives (`.zip`, `.tar.gz`, `.parquet`), and raw rover image/mask directories (`datasets/raw/`, `datasets/samples/`) are strictly excluded in `.gitignore`. Tracking gigabytes of immutable imagery in Git bloats repository history, slows clones, and degrades developer tooling. Instead, acquisition and preprocessing are reproducible via `src/data/acquire_dataset.py` and `src/data/preprocessing.py`, while lightweight verified metadata (`datasets/metadata/*.json`, `*.csv`), validation reports (`datasets/inspection/*.json`), and exploratory charts (`datasets/inspection/*.png`) are tracked in Git.
