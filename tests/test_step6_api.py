@@ -55,6 +55,19 @@ def test_models_research_and_reports_endpoints() -> None:
     assert r_dl.status_code == 200
     assert "application/json" in r_dl.headers["content-type"]
 
+    # Negative cases: missing report 404 & unsafe identifier 400
+    r_missing = client.get("/api/reports/does_not_exist_999")
+    assert r_missing.status_code == 404
+    r_bad_id = client.get("/api/reports/invalid$id")
+    assert r_bad_id.status_code == 400
+    assert len(mdata["catalog"]) == 4
+    assert {m["id"] for m in mdata["catalog"]} == {
+        "deeplabv3plus",
+        "unet",
+        "deeplabv3plus_optimized",
+        "unet_optimized",
+    }
+
 
 def test_analyze_upload_validation_and_real_inference() -> None:
     # Reject invalid extension

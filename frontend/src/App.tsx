@@ -25,6 +25,18 @@ export function App(): React.ReactElement {
     }
   }, []);
 
+  const handleRefreshStatus = useCallback(() => {
+    void refreshStatus();
+  }, [refreshStatus]);
+
+  const handleModelChange = useCallback(
+    (m: string) => {
+      setActiveModel(m);
+      void refreshStatus();
+    },
+    [refreshStatus]
+  );
+
   useEffect(() => {
     void refreshStatus();
   }, [refreshStatus]);
@@ -43,7 +55,7 @@ export function App(): React.ReactElement {
               <OverviewPage
                 systemStatus={systemStatus}
                 statusError={statusError}
-                onRefreshStatus={() => void refreshStatus()}
+                onRefreshStatus={handleRefreshStatus}
               />
             }
           />
@@ -53,11 +65,8 @@ export function App(): React.ReactElement {
               <TerrainAnalysisPage
                 systemStatus={systemStatus}
                 activeModel={activeModel}
-                onModelChange={(m) => {
-                  setActiveModel(m);
-                  void refreshStatus();
-                }}
-                onAnalysisComplete={() => void refreshStatus()}
+                onModelChange={handleModelChange}
+                onAnalysisComplete={handleRefreshStatus}
               />
             }
           />
@@ -70,7 +79,7 @@ export function App(): React.ReactElement {
               <SystemStatusPage
                 systemStatus={systemStatus}
                 statusError={statusError}
-                onRefresh={() => void refreshStatus()}
+                onRefresh={handleRefreshStatus}
               />
             }
           />

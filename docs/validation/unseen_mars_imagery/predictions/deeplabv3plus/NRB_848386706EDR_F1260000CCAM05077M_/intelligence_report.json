@@ -1,0 +1,2068 @@
+{
+  "project": "MANGAL DRISHTI",
+  "schema_version": "1.0.0",
+  "generated_at_utc": "2026-11-23T09:35:12.974669+00:00",
+  "model": "deeplabv3plus",
+  "checkpoint": "experiments/deeplabv3plus/best_model.pth",
+  "device": "cuda",
+  "image_metadata": {
+    "image_id": "NRB_848386706EDR_F1260000CCAM05077M_",
+    "source_path": "docs/validation/unseen_mars_imagery/originals/NRB_848386706EDR_F1260000CCAM05077M_.jpg",
+    "width": 512,
+    "height": 512,
+    "inference_latency_ms": 67.594
+  },
+  "analysis": {
+    "terrain_summary": {
+      "soil": 0.4555,
+      "bedrock": 43.5059,
+      "sand": 40.0204,
+      "big_rock": 16.0183
+    },
+    "terrain_details": {
+      "total_pixels": 262144,
+      "total_valid_pixels": 262144,
+      "ignored_pixels": 0,
+      "valid_pixel_percentage": 100.0,
+      "class_pixel_counts": {
+        "soil": 1194,
+        "bedrock": 114048,
+        "sand": 104911,
+        "big_rock": 41991
+      },
+      "dominant_terrain": "bedrock",
+      "secondary_terrain": "sand",
+      "terrain_diversity_shannon_nats": 1.04651,
+      "terrain_diversity_normalized": 0.754897,
+      "boundary_pixel_count": 8507,
+      "boundary_density_pct": 3.2452
+    },
+    "regions": [
+      {
+        "region_id": "REG_009",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 94034,
+        "bbox": [
+          0,
+          0,
+          512,
+          512
+        ],
+        "centroid": [
+          210.77,
+          202.57
+        ],
+        "contour": {
+          "num_vertices": 1430,
+          "simplified_vertices": [
+            [
+              0,
+              511
+            ],
+            [
+              112,
+              461
+            ],
+            [
+              22,
+              347
+            ],
+            [
+              275,
+              312
+            ],
+            [
+              361,
+              415
+            ],
+            [
+              327,
+              267
+            ],
+            [
+              494,
+              258
+            ],
+            [
+              511,
+              180
+            ],
+            [
+              254,
+              73
+            ],
+            [
+              268,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              105,
+              48
+            ],
+            [
+              0,
+              150
+            ],
+            [
+              238,
+              169
+            ],
+            [
+              302,
+              293
+            ],
+            [
+              0,
+              281
+            ]
+          ],
+          "perimeter_px": 4049.31
+        },
+        "relative_position": "middle_center",
+        "mean_confidence": 0.838306,
+        "image_coverage_pct": 35.8711
+      },
+      {
+        "region_id": "REG_005",
+        "class_id": 1,
+        "terrain_class": "bedrock",
+        "pixel_area": 77561,
+        "bbox": [
+          18,
+          237,
+          494,
+          275
+        ],
+        "centroid": [
+          311.31,
+          386.6
+        ],
+        "contour": {
+          "num_vertices": 760,
+          "simplified_vertices": [
+            [
+              511,
+              241
+            ],
+            [
+              330,
+              264
+            ],
+            [
+              302,
+              334
+            ],
+            [
+              361,
+              416
+            ],
+            [
+              275,
+              313
+            ],
+            [
+              257,
+              355
+            ],
+            [
+              18,
+              359
+            ],
+            [
+              114,
+              405
+            ],
+            [
+              140,
+              511
+            ],
+            [
+              235,
+              511
+            ],
+            [
+              281,
+              434
+            ],
+            [
+              310,
+              511
+            ],
+            [
+              463,
+              511
+            ],
+            [
+              461,
+              450
+            ],
+            [
+              511,
+              456
+            ]
+          ],
+          "perimeter_px": 2192.81
+        },
+        "relative_position": "bottom_center",
+        "mean_confidence": 0.764064,
+        "image_coverage_pct": 29.5872
+      },
+      {
+        "region_id": "REG_004",
+        "class_id": 1,
+        "terrain_class": "bedrock",
+        "pixel_area": 35108,
+        "bbox": [
+          0,
+          148,
+          302,
+          156
+        ],
+        "centroid": [
+          136.4,
+          227.99
+        ],
+        "contour": {
+          "num_vertices": 430,
+          "simplified_vertices": [
+            [
+              0,
+              151
+            ],
+            [
+              0,
+              280
+            ],
+            [
+              143,
+              303
+            ],
+            [
+              301,
+              294
+            ],
+            [
+              260,
+              270
+            ],
+            [
+              299,
+              217
+            ],
+            [
+              238,
+              170
+            ],
+            [
+              191,
+              173
+            ],
+            [
+              216,
+              191
+            ],
+            [
+              189,
+              208
+            ],
+            [
+              172,
+              172
+            ]
+          ],
+          "perimeter_px": 1072.32
+        },
+        "relative_position": "middle_left",
+        "mean_confidence": 0.738789,
+        "image_coverage_pct": 13.3926
+      },
+      {
+        "region_id": "REG_018",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 30254,
+        "bbox": [
+          212,
+          0,
+          300,
+          182
+        ],
+        "centroid": [
+          401.42,
+          69.3
+        ],
+        "contour": {
+          "num_vertices": 324,
+          "simplified_vertices": [
+            [
+              213,
+              26
+            ],
+            [
+              272,
+              82
+            ],
+            [
+              319,
+              62
+            ],
+            [
+              304,
+              105
+            ],
+            [
+              398,
+              97
+            ],
+            [
+              443,
+              171
+            ],
+            [
+              511,
+              179
+            ],
+            [
+              509,
+              0
+            ],
+            [
+              399,
+              0
+            ],
+            [
+              360,
+              40
+            ],
+            [
+              332,
+              0
+            ]
+          ],
+          "perimeter_px": 1058.38
+        },
+        "relative_position": "top_right",
+        "mean_confidence": 0.879758,
+        "image_coverage_pct": 11.541
+      },
+      {
+        "region_id": "REG_019",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 5178,
+        "bbox": [
+          0,
+          12,
+          105,
+          66
+        ],
+        "centroid": [
+          48.23,
+          45.45
+        ],
+        "contour": {
+          "num_vertices": 111,
+          "simplified_vertices": [
+            [
+              104,
+              48
+            ],
+            [
+              79,
+              16
+            ],
+            [
+              53,
+              12
+            ],
+            [
+              23,
+              19
+            ],
+            [
+              0,
+              38
+            ],
+            [
+              0,
+              76
+            ],
+            [
+              61,
+              76
+            ],
+            [
+              100,
+              57
+            ]
+          ],
+          "perimeter_px": 299.14
+        },
+        "relative_position": "top_left",
+        "mean_confidence": 0.874581,
+        "image_coverage_pct": 1.9753
+      },
+      {
+        "region_id": "REG_015",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 4662,
+        "bbox": [
+          236,
+          441,
+          82,
+          71
+        ],
+        "centroid": [
+          279.54,
+          480.48
+        ],
+        "contour": {
+          "num_vertices": 82,
+          "simplified_vertices": [
+            [
+              314,
+              452
+            ],
+            [
+              300,
+              441
+            ],
+            [
+              269,
+              454
+            ],
+            [
+              260,
+              451
+            ],
+            [
+              238,
+              487
+            ],
+            [
+              236,
+              511
+            ],
+            [
+              309,
+              511
+            ],
+            [
+              317,
+              486
+            ]
+          ],
+          "perimeter_px": 275.1
+        },
+        "relative_position": "bottom_center",
+        "mean_confidence": 0.905561,
+        "image_coverage_pct": 1.7784
+      },
+      {
+        "region_id": "REG_025",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 2062,
+        "bbox": [
+          82,
+          465,
+          66,
+          47
+        ],
+        "centroid": [
+          114.26,
+          488.27
+        ],
+        "contour": {
+          "num_vertices": 69,
+          "simplified_vertices": [
+            [
+              82,
+              466
+            ],
+            [
+              85,
+              482
+            ],
+            [
+              94,
+              492
+            ],
+            [
+              93,
+              501
+            ],
+            [
+              103,
+              503
+            ],
+            [
+              112,
+              511
+            ],
+            [
+              132,
+              511
+            ],
+            [
+              146,
+              503
+            ],
+            [
+              137,
+              482
+            ],
+            [
+              122,
+              469
+            ]
+          ],
+          "perimeter_px": 190.85
+        },
+        "relative_position": "bottom_left",
+        "mean_confidence": 0.665186,
+        "image_coverage_pct": 0.7866
+      },
+      {
+        "region_id": "REG_024",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 1912,
+        "bbox": [
+          462,
+          437,
+          50,
+          61
+        ],
+        "centroid": [
+          488.56,
+          463.49
+        ],
+        "contour": {
+          "num_vertices": 65,
+          "simplified_vertices": [
+            [
+              476,
+              437
+            ],
+            [
+              462,
+              450
+            ],
+            [
+              464,
+              465
+            ],
+            [
+              471,
+              476
+            ],
+            [
+              488,
+              480
+            ],
+            [
+              498,
+              497
+            ],
+            [
+              511,
+              483
+            ],
+            [
+              511,
+              457
+            ],
+            [
+              506,
+              449
+            ],
+            [
+              497,
+              447
+            ],
+            [
+              487,
+              438
+            ]
+          ],
+          "perimeter_px": 182.27
+        },
+        "relative_position": "bottom_right",
+        "mean_confidence": 0.617492,
+        "image_coverage_pct": 0.7294
+      },
+      {
+        "region_id": "REG_011",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 1760,
+        "bbox": [
+          332,
+          0,
+          68,
+          40
+        ],
+        "centroid": [
+          366.26,
+          14.06
+        ],
+        "contour": {
+          "num_vertices": 61,
+          "simplified_vertices": [
+            [
+              335,
+              13
+            ],
+            [
+              352,
+              25
+            ],
+            [
+              358,
+              39
+            ],
+            [
+              388,
+              23
+            ],
+            [
+              399,
+              10
+            ],
+            [
+              398,
+              0
+            ],
+            [
+              333,
+              0
+            ]
+          ],
+          "perimeter_px": 183.3
+        },
+        "relative_position": "top_right",
+        "mean_confidence": 0.758725,
+        "image_coverage_pct": 0.6714
+      },
+      {
+        "region_id": "REG_013",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 1523,
+        "bbox": [
+          446,
+          366,
+          43,
+          56
+        ],
+        "centroid": [
+          468.85,
+          391.68
+        ],
+        "contour": {
+          "num_vertices": 73,
+          "simplified_vertices": [
+            [
+              465,
+              366
+            ],
+            [
+              449,
+              375
+            ],
+            [
+              446,
+              384
+            ],
+            [
+              466,
+              415
+            ],
+            [
+              476,
+              421
+            ],
+            [
+              483,
+              412
+            ],
+            [
+              488,
+              385
+            ],
+            [
+              483,
+              377
+            ]
+          ],
+          "perimeter_px": 156.51
+        },
+        "relative_position": "bottom_right",
+        "mean_confidence": 0.551732,
+        "image_coverage_pct": 0.581
+      },
+      {
+        "region_id": "REG_020",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 1309,
+        "bbox": [
+          125,
+          101,
+          56,
+          35
+        ],
+        "centroid": [
+          149.69,
+          119.01
+        ],
+        "contour": {
+          "num_vertices": 73,
+          "simplified_vertices": [
+            [
+              125,
+              121
+            ],
+            [
+              127,
+              129
+            ],
+            [
+              137,
+              135
+            ],
+            [
+              157,
+              132
+            ],
+            [
+              180,
+              123
+            ],
+            [
+              168,
+              110
+            ],
+            [
+              147,
+              101
+            ],
+            [
+              138,
+              102
+            ]
+          ],
+          "perimeter_px": 147.54
+        },
+        "relative_position": "top_left",
+        "mean_confidence": 0.66625,
+        "image_coverage_pct": 0.4993
+      },
+      {
+        "region_id": "REG_016",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 1223,
+        "bbox": [
+          464,
+          477,
+          48,
+          35
+        ],
+        "centroid": [
+          486.38,
+          497.62
+        ],
+        "contour": {
+          "num_vertices": 42,
+          "simplified_vertices": [
+            [
+              472,
+              477
+            ],
+            [
+              464,
+              511
+            ],
+            [
+              511,
+              511
+            ],
+            [
+              511,
+              484
+            ],
+            [
+              497,
+              498
+            ],
+            [
+              488,
+              481
+            ]
+          ],
+          "perimeter_px": 170.67
+        },
+        "relative_position": "bottom_right",
+        "mean_confidence": 0.60518,
+        "image_coverage_pct": 0.4665
+      },
+      {
+        "region_id": "REG_006",
+        "class_id": 1,
+        "terrain_class": "bedrock",
+        "pixel_area": 964,
+        "bbox": [
+          31,
+          443,
+          51,
+          44
+        ],
+        "centroid": [
+          52.62,
+          467.67
+        ],
+        "contour": {
+          "num_vertices": 74,
+          "simplified_vertices": [
+            [
+              31,
+              444
+            ],
+            [
+              34,
+              486
+            ],
+            [
+              43,
+              475
+            ],
+            [
+              74,
+              481
+            ],
+            [
+              81,
+              473
+            ],
+            [
+              78,
+              465
+            ],
+            [
+              46,
+              460
+            ],
+            [
+              39,
+              446
+            ]
+          ],
+          "perimeter_px": 178.12
+        },
+        "relative_position": "bottom_left",
+        "mean_confidence": 0.562441,
+        "image_coverage_pct": 0.3677
+      },
+      {
+        "region_id": "REG_017",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 936,
+        "bbox": [
+          353,
+          481,
+          38,
+          31
+        ],
+        "centroid": [
+          369.51,
+          497.11
+        ],
+        "contour": {
+          "num_vertices": 43,
+          "simplified_vertices": [
+            [
+              355,
+              486
+            ],
+            [
+              354,
+              511
+            ],
+            [
+              387,
+              511
+            ],
+            [
+              390,
+              506
+            ],
+            [
+              380,
+              498
+            ],
+            [
+              385,
+              490
+            ],
+            [
+              382,
+              483
+            ],
+            [
+              362,
+              481
+            ]
+          ],
+          "perimeter_px": 128.43
+        },
+        "relative_position": "bottom_right",
+        "mean_confidence": 0.575209,
+        "image_coverage_pct": 0.3571
+      },
+      {
+        "region_id": "REG_001",
+        "class_id": 0,
+        "terrain_class": "soil",
+        "pixel_area": 587,
+        "bbox": [
+          215,
+          325,
+          48,
+          30
+        ],
+        "centroid": [
+          237.19,
+          341.75
+        ],
+        "contour": {
+          "num_vertices": 69,
+          "simplified_vertices": [
+            [
+              215,
+              342
+            ],
+            [
+              221,
+              346
+            ],
+            [
+              253,
+              354
+            ],
+            [
+              261,
+              350
+            ],
+            [
+              262,
+              345
+            ],
+            [
+              249,
+              337
+            ],
+            [
+              234,
+              348
+            ],
+            [
+              229,
+              339
+            ],
+            [
+              229,
+              325
+            ],
+            [
+              225,
+              326
+            ],
+            [
+              225,
+              330
+            ],
+            [
+              217,
+              329
+            ]
+          ],
+          "perimeter_px": 154.71
+        },
+        "relative_position": "bottom_center",
+        "mean_confidence": 0.395105,
+        "image_coverage_pct": 0.2239
+      },
+      {
+        "region_id": "REG_010",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 416,
+        "bbox": [
+          288,
+          0,
+          33,
+          16
+        ],
+        "centroid": [
+          303.79,
+          6.31
+        ],
+        "contour": {
+          "num_vertices": 26,
+          "simplified_vertices": [
+            [
+              288,
+              0
+            ],
+            [
+              290,
+              9
+            ],
+            [
+              299,
+              15
+            ],
+            [
+              311,
+              13
+            ],
+            [
+              320,
+              5
+            ],
+            [
+              319,
+              0
+            ]
+          ],
+          "perimeter_px": 83.46
+        },
+        "relative_position": "top_center",
+        "mean_confidence": 0.661819,
+        "image_coverage_pct": 0.1587
+      },
+      {
+        "region_id": "REG_022",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 386,
+        "bbox": [
+          451,
+          339,
+          27,
+          18
+        ],
+        "centroid": [
+          463.56,
+          347.1
+        ],
+        "contour": {
+          "num_vertices": 35,
+          "simplified_vertices": [
+            [
+              451,
+              346
+            ],
+            [
+              452,
+              352
+            ],
+            [
+              456,
+              356
+            ],
+            [
+              474,
+              353
+            ],
+            [
+              477,
+              351
+            ],
+            [
+              477,
+              345
+            ],
+            [
+              475,
+              342
+            ],
+            [
+              467,
+              339
+            ],
+            [
+              457,
+              339
+            ],
+            [
+              453,
+              341
+            ]
+          ],
+          "perimeter_px": 75.46
+        },
+        "relative_position": "bottom_right",
+        "mean_confidence": 0.491156,
+        "image_coverage_pct": 0.1472
+      },
+      {
+        "region_id": "REG_023",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 302,
+        "bbox": [
+          264,
+          435,
+          36,
+          19
+        ],
+        "centroid": [
+          278.35,
+          442.96
+        ],
+        "contour": {
+          "num_vertices": 36,
+          "simplified_vertices": [
+            [
+              299,
+              440
+            ],
+            [
+              291,
+              436
+            ],
+            [
+              277,
+              436
+            ],
+            [
+              264,
+              448
+            ],
+            [
+              265,
+              453
+            ],
+            [
+              269,
+              453
+            ],
+            [
+              287,
+              442
+            ]
+          ],
+          "perimeter_px": 87.25
+        },
+        "relative_position": "bottom_center",
+        "mean_confidence": 0.583202,
+        "image_coverage_pct": 0.1152
+      },
+      {
+        "region_id": "REG_003",
+        "class_id": 0,
+        "terrain_class": "soil",
+        "pixel_area": 282,
+        "bbox": [
+          45,
+          331,
+          26,
+          18
+        ],
+        "centroid": [
+          56.47,
+          339.33
+        ],
+        "contour": {
+          "num_vertices": 34,
+          "simplified_vertices": [
+            [
+              54,
+              331
+            ],
+            [
+              49,
+              334
+            ],
+            [
+              45,
+              342
+            ],
+            [
+              54,
+              348
+            ],
+            [
+              58,
+              348
+            ],
+            [
+              67,
+              339
+            ],
+            [
+              70,
+              338
+            ],
+            [
+              61,
+              332
+            ]
+          ],
+          "perimeter_px": 67.01
+        },
+        "relative_position": "middle_left",
+        "mean_confidence": 0.438598,
+        "image_coverage_pct": 0.1076
+      },
+      {
+        "region_id": "REG_021",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 277,
+        "bbox": [
+          126,
+          155,
+          32,
+          15
+        ],
+        "centroid": [
+          143.28,
+          160.68
+        ],
+        "contour": {
+          "num_vertices": 36,
+          "simplified_vertices": [
+            [
+              126,
+              155
+            ],
+            [
+              131,
+              161
+            ],
+            [
+              153,
+              169
+            ],
+            [
+              157,
+              165
+            ],
+            [
+              155,
+              159
+            ],
+            [
+              149,
+              156
+            ]
+          ],
+          "perimeter_px": 77.11
+        },
+        "relative_position": "top_left",
+        "mean_confidence": 0.418559,
+        "image_coverage_pct": 0.1057
+      },
+      {
+        "region_id": "REG_012",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 212,
+        "bbox": [
+          494,
+          304,
+          18,
+          15
+        ],
+        "centroid": [
+          502.59,
+          310.82
+        ],
+        "contour": {
+          "num_vertices": 26,
+          "simplified_vertices": [
+            [
+              494,
+              309
+            ],
+            [
+              495,
+              314
+            ],
+            [
+              497,
+              317
+            ],
+            [
+              502,
+              318
+            ],
+            [
+              511,
+              315
+            ],
+            [
+              511,
+              307
+            ],
+            [
+              507,
+              305
+            ],
+            [
+              498,
+              304
+            ]
+          ],
+          "perimeter_px": 53.8
+        },
+        "relative_position": "middle_right",
+        "mean_confidence": 0.574768,
+        "image_coverage_pct": 0.0809
+      },
+      {
+        "region_id": "REG_008",
+        "class_id": 1,
+        "terrain_class": "bedrock",
+        "pixel_area": 209,
+        "bbox": [
+          84,
+          502,
+          28,
+          10
+        ],
+        "centroid": [
+          96.1,
+          507.33
+        ],
+        "contour": {
+          "num_vertices": 20,
+          "simplified_vertices": [
+            [
+              84,
+              508
+            ],
+            [
+              84,
+              511
+            ],
+            [
+              111,
+              511
+            ],
+            [
+              110,
+              509
+            ],
+            [
+              99,
+              502
+            ],
+            [
+              91,
+              502
+            ],
+            [
+              87,
+              504
+            ]
+          ],
+          "perimeter_px": 64.38
+        },
+        "relative_position": "bottom_left",
+        "mean_confidence": 0.487333,
+        "image_coverage_pct": 0.0797
+      },
+      {
+        "region_id": "REG_007",
+        "class_id": 1,
+        "terrain_class": "bedrock",
+        "pixel_area": 206,
+        "bbox": [
+          33,
+          493,
+          17,
+          19
+        ],
+        "centroid": [
+          40.38,
+          504.48
+        ],
+        "contour": {
+          "num_vertices": 20,
+          "simplified_vertices": [
+            [
+              37,
+              493
+            ],
+            [
+              36,
+              502
+            ],
+            [
+              33,
+              506
+            ],
+            [
+              33,
+              511
+            ],
+            [
+              49,
+              511
+            ],
+            [
+              46,
+              502
+            ]
+          ],
+          "perimeter_px": 59.21
+        },
+        "relative_position": "bottom_left",
+        "mean_confidence": 0.489621,
+        "image_coverage_pct": 0.0786
+      },
+      {
+        "region_id": "REG_002",
+        "class_id": 0,
+        "terrain_class": "soil",
+        "pixel_area": 199,
+        "bbox": [
+          75,
+          326,
+          18,
+          17
+        ],
+        "centroid": [
+          84.33,
+          334.16
+        ],
+        "contour": {
+          "num_vertices": 25,
+          "simplified_vertices": [
+            [
+              84,
+              326
+            ],
+            [
+              77,
+              332
+            ],
+            [
+              75,
+              337
+            ],
+            [
+              80,
+              338
+            ],
+            [
+              83,
+              341
+            ],
+            [
+              87,
+              342
+            ],
+            [
+              92,
+              338
+            ],
+            [
+              92,
+              336
+            ],
+            [
+              90,
+              332
+            ],
+            [
+              90,
+              329
+            ],
+            [
+              87,
+              326
+            ]
+          ],
+          "perimeter_px": 53.11
+        },
+        "relative_position": "middle_left",
+        "mean_confidence": 0.373291,
+        "image_coverage_pct": 0.0759
+      },
+      {
+        "region_id": "REG_026",
+        "class_id": 3,
+        "terrain_class": "big_rock",
+        "pixel_area": 126,
+        "bbox": [
+          3,
+          495,
+          18,
+          11
+        ],
+        "centroid": [
+          10.84,
+          499.88
+        ],
+        "contour": {
+          "num_vertices": 18,
+          "simplified_vertices": [
+            [
+              3,
+              502
+            ],
+            [
+              5,
+              504
+            ],
+            [
+              8,
+              504
+            ],
+            [
+              9,
+              505
+            ],
+            [
+              20,
+              501
+            ],
+            [
+              14,
+              495
+            ],
+            [
+              9,
+              495
+            ],
+            [
+              4,
+              499
+            ]
+          ],
+          "perimeter_px": 43.46
+        },
+        "relative_position": "bottom_left",
+        "mean_confidence": 0.486031,
+        "image_coverage_pct": 0.0481
+      },
+      {
+        "region_id": "REG_014",
+        "class_id": 2,
+        "terrain_class": "sand",
+        "pixel_area": 122,
+        "bbox": [
+          87,
+          376,
+          12,
+          14
+        ],
+        "centroid": [
+          91.97,
+          382.29
+        ],
+        "contour": {
+          "num_vertices": 21,
+          "simplified_vertices": [
+            [
+              94,
+              376
+            ],
+            [
+              90,
+              376
+            ],
+            [
+              88,
+              378
+            ],
+            [
+              88,
+              382
+            ],
+            [
+              87,
+              383
+            ],
+            [
+              87,
+              387
+            ],
+            [
+              88,
+              389
+            ],
+            [
+              90,
+              389
+            ],
+            [
+              97,
+              385
+            ],
+            [
+              98,
+              381
+            ]
+          ],
+          "perimeter_px": 40.38
+        },
+        "relative_position": "bottom_left",
+        "mean_confidence": 0.42936,
+        "image_coverage_pct": 0.0465
+      }
+    ],
+    "region_filtering": {
+      "min_region_area_px": 120,
+      "retained_region_count": 26,
+      "filtered_small_component_count": 11
+    },
+    "obstacle_candidates": [
+      {
+        "candidate_id": "OBS_CAND_001",
+        "source_class": "big_rock",
+        "bbox": [
+          212,
+          0,
+          300,
+          182
+        ],
+        "pixel_area": 30254,
+        "image_coverage_pct": 11.541,
+        "confidence": 0.879758,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.879758,
+          "max_big_rock_probability": 0.998363,
+          "mean_softmax_confidence": 0.879758
+        },
+        "centroid": [
+          401.42,
+          69.3
+        ],
+        "shape": {
+          "perimeter_px": 1058.38,
+          "aspect_ratio_w_over_h": 1.6484,
+          "circularity": 0.3394,
+          "solidity": 0.8112,
+          "bbox_extent": 0.5541
+        },
+        "relative_position": "top_right",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_002",
+        "source_class": "big_rock",
+        "bbox": [
+          0,
+          12,
+          105,
+          66
+        ],
+        "pixel_area": 5178,
+        "image_coverage_pct": 1.9753,
+        "confidence": 0.874581,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.874581,
+          "max_big_rock_probability": 0.993178,
+          "mean_softmax_confidence": 0.874581
+        },
+        "centroid": [
+          48.23,
+          45.45
+        ],
+        "shape": {
+          "perimeter_px": 299.14,
+          "aspect_ratio_w_over_h": 1.5909,
+          "circularity": 0.7272,
+          "solidity": 0.9686,
+          "bbox_extent": 0.7472
+        },
+        "relative_position": "top_left",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_008",
+        "source_class": "big_rock",
+        "bbox": [
+          82,
+          465,
+          66,
+          47
+        ],
+        "pixel_area": 2062,
+        "image_coverage_pct": 0.7866,
+        "confidence": 0.665186,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.665186,
+          "max_big_rock_probability": 0.917538,
+          "mean_softmax_confidence": 0.665186
+        },
+        "centroid": [
+          114.26,
+          488.27
+        ],
+        "shape": {
+          "perimeter_px": 190.85,
+          "aspect_ratio_w_over_h": 1.4043,
+          "circularity": 0.7114,
+          "solidity": 0.9678,
+          "bbox_extent": 0.6647
+        },
+        "relative_position": "bottom_left",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_007",
+        "source_class": "big_rock",
+        "bbox": [
+          462,
+          437,
+          50,
+          61
+        ],
+        "pixel_area": 1912,
+        "image_coverage_pct": 0.7294,
+        "confidence": 0.617492,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.617492,
+          "max_big_rock_probability": 0.931439,
+          "mean_softmax_confidence": 0.617492
+        },
+        "centroid": [
+          488.56,
+          463.49
+        ],
+        "shape": {
+          "perimeter_px": 182.27,
+          "aspect_ratio_w_over_h": 0.8197,
+          "circularity": 0.7232,
+          "solidity": 0.9405,
+          "bbox_extent": 0.6269
+        },
+        "relative_position": "bottom_right",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_003",
+        "source_class": "big_rock",
+        "bbox": [
+          125,
+          101,
+          56,
+          35
+        ],
+        "pixel_area": 1309,
+        "image_coverage_pct": 0.4993,
+        "confidence": 0.66625,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.66625,
+          "max_big_rock_probability": 0.866706,
+          "mean_softmax_confidence": 0.66625
+        },
+        "centroid": [
+          149.69,
+          119.01
+        ],
+        "shape": {
+          "perimeter_px": 147.54,
+          "aspect_ratio_w_over_h": 1.6,
+          "circularity": 0.7557,
+          "solidity": 1.0175,
+          "bbox_extent": 0.6679
+        },
+        "relative_position": "top_left",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_005",
+        "source_class": "big_rock",
+        "bbox": [
+          451,
+          339,
+          27,
+          18
+        ],
+        "pixel_area": 386,
+        "image_coverage_pct": 0.1472,
+        "confidence": 0.491156,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.491156,
+          "max_big_rock_probability": 0.544978,
+          "mean_softmax_confidence": 0.491156
+        },
+        "centroid": [
+          463.56,
+          347.1
+        ],
+        "shape": {
+          "perimeter_px": 75.46,
+          "aspect_ratio_w_over_h": 1.5,
+          "circularity": 0.8519,
+          "solidity": 1.0461,
+          "bbox_extent": 0.7942
+        },
+        "relative_position": "bottom_right",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_006",
+        "source_class": "big_rock",
+        "bbox": [
+          264,
+          435,
+          36,
+          19
+        ],
+        "pixel_area": 302,
+        "image_coverage_pct": 0.1152,
+        "confidence": 0.583202,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.583202,
+          "max_big_rock_probability": 0.763051,
+          "mean_softmax_confidence": 0.583202
+        },
+        "centroid": [
+          278.35,
+          442.96
+        ],
+        "shape": {
+          "perimeter_px": 87.25,
+          "aspect_ratio_w_over_h": 1.8947,
+          "circularity": 0.4985,
+          "solidity": 0.9292,
+          "bbox_extent": 0.4415
+        },
+        "relative_position": "bottom_center",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_004",
+        "source_class": "big_rock",
+        "bbox": [
+          126,
+          155,
+          32,
+          15
+        ],
+        "pixel_area": 277,
+        "image_coverage_pct": 0.1057,
+        "confidence": 0.418559,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.418559,
+          "max_big_rock_probability": 0.465972,
+          "mean_softmax_confidence": 0.418559
+        },
+        "centroid": [
+          143.28,
+          160.68
+        ],
+        "shape": {
+          "perimeter_px": 77.11,
+          "aspect_ratio_w_over_h": 2.1333,
+          "circularity": 0.5854,
+          "solidity": 1.0552,
+          "bbox_extent": 0.5771
+        },
+        "relative_position": "top_left",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_010",
+        "source_class": "big_rock",
+        "bbox": [
+          3,
+          495,
+          18,
+          11
+        ],
+        "pixel_area": 126,
+        "image_coverage_pct": 0.0481,
+        "confidence": 0.486031,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.486031,
+          "max_big_rock_probability": 0.568266,
+          "mean_softmax_confidence": 0.486031
+        },
+        "centroid": [
+          10.84,
+          499.88
+        ],
+        "shape": {
+          "perimeter_px": 43.46,
+          "aspect_ratio_w_over_h": 1.6364,
+          "circularity": 0.8385,
+          "solidity": 1.1053,
+          "bbox_extent": 0.6364
+        },
+        "relative_position": "bottom_left",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      },
+      {
+        "candidate_id": "OBS_CAND_009",
+        "source_class": "big_rock",
+        "bbox": [
+          24,
+          492,
+          12,
+          14
+        ],
+        "pixel_area": 111,
+        "image_coverage_pct": 0.0423,
+        "confidence": 0.473295,
+        "confidence_details": {
+          "mean_big_rock_probability": 0.473295,
+          "max_big_rock_probability": 0.543232,
+          "mean_softmax_confidence": 0.473295
+        },
+        "centroid": [
+          30.34,
+          498.27
+        ],
+        "shape": {
+          "perimeter_px": 40.38,
+          "aspect_ratio_w_over_h": 0.8571,
+          "circularity": 0.8553,
+          "solidity": 1.0936,
+          "bbox_extent": 0.6607
+        },
+        "relative_position": "bottom_left",
+        "is_confirmed_physical_obstacle": false,
+        "scientific_note": "2D visual Big Rock candidate only; does not establish physical rock height, 3D volume, clearance, or collision risk without stereo range/elevation data."
+      }
+    ],
+    "confidence": {
+      "mean_confidence": 0.79567,
+      "median_confidence": 0.844883,
+      "min_confidence": 0.294526,
+      "max_confidence": 0.999999,
+      "std_confidence": 0.182262,
+      "low_confidence_pixel_percentage": 14.003,
+      "per_class_mean_confidence": {
+        "soil": 0.399618,
+        "bedrock": 0.753577,
+        "sand": 0.828919,
+        "big_rock": 0.838192
+      },
+      "confidence_categories_pct": {
+        "high": 57.3776,
+        "medium": 28.6194,
+        "low": 14.003
+      },
+      "thresholds": {
+        "high_min": 0.8,
+        "medium_min": 0.55
+      },
+      "confidence_histogram": {
+        "bin_edges": [
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1.0
+        ],
+        "pixel_counts": [
+          0,
+          0,
+          2,
+          5398,
+          18623,
+          25825,
+          26762,
+          35122,
+          47095,
+          103317
+        ]
+      },
+      "is_calibrated_probability": false,
+      "calibration_note": "Raw softmax probability reflects relative logit dominance under training priors and is not temperature-calibrated physical certainty."
+    },
+    "uncertainty": {
+      "entropy_formula": "H = -sum_c(p_c * ln(p_c))",
+      "max_theoretical_entropy_nats": 1.386294,
+      "mean_entropy": 0.554748,
+      "median_entropy": 0.55752,
+      "std_entropy": 0.376446,
+      "max_entropy": 1.363742,
+      "mean_normalized_entropy": 0.400166,
+      "high_uncertainty_pixel_percentage": 34.2113,
+      "high_uncertainty_normalized_threshold": 0.55,
+      "per_class_mean_entropy": {
+        "soil": 1.151275,
+        "bedrock": 0.69169,
+        "sand": 0.443071,
+        "big_rock": 0.444866
+      }
+    },
+    "traversability": {
+      "assessment": "higher_visual_concern",
+      "experimental_visual_concern_index": 0.631255,
+      "is_experimental": true,
+      "physical_safety_verified": false,
+      "insufficient_evidence_triggers": [],
+      "component_scores": {
+        "terrain_composition_score": 0.509526,
+        "big_rock_candidate_density_score": 1.0,
+        "sand_concentration_score": 0.667007,
+        "segmentation_uncertainty_score": 0.346118,
+        "region_fragmentation_score": 1.0
+      },
+      "terrain_class_indicators": {
+        "soil_pct": 0.4555,
+        "bedrock_pct": 43.5059,
+        "sand_pct": 40.0204,
+        "big_rock_pct": 16.0183,
+        "big_rock_candidate_count": 10,
+        "retained_region_count": 26
+      },
+      "missing_measurements": [
+        "3D depth / stereo range",
+        "terrain slope / elevation gradient",
+        "obstacle physical height & clearance",
+        "wheel-terrain slip & soil mechanics",
+        "rover kinematics & suspension geometry"
+      ],
+      "formula_summary": "0.45*terrain_composition + 0.20*big_rock_density + 0.15*sand_concentration + 0.15*segmentation_uncertainty + 0.05*region_fragmentation; overrides to insufficient_visual_evidence when valid pixels < 15% or mean_confidence < 0.50 or low_conf > 45%.",
+      "scientific_disclaimer": "Experimental 2D semantic indicator ONLY. Visual terrain segmentation cannot verify physical traversability or rover safety without 3D stereo depth, slope, rock height, and wheel-soil mechanics."
+    }
+  },
+  "artifacts": {
+    "original_image": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/01_original_image.png",
+    "segmentation_mask": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/02_segmentation_mask.png",
+    "terrain_overlay": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/03_terrain_overlay.png",
+    "region_boundaries": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/04_region_boundaries.png",
+    "big_rock_candidates": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/05_big_rock_candidates.png",
+    "confidence_heatmap": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/06_confidence_heatmap.png",
+    "uncertainty_heatmap": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/07_uncertainty_heatmap.png",
+    "terrain_distribution_chart": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/08_terrain_distribution.png",
+    "intelligence_summary_panel": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/09_intelligence_summary_panel.png",
+    "intelligence_report_json": "docs/validation/unseen_mars_imagery/predictions/deeplabv3plus/NRB_848386706EDR_F1260000CCAM05077M_/intelligence_report.json"
+  }
+}

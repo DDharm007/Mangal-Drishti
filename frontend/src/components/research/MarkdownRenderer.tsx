@@ -93,8 +93,20 @@ function renderInline(text: string, depth = 0): React.ReactNode[] {
 
     // 3. Single italic: *...* (must not start with **)
     if (text[i] === "*" && text[i + 1] !== "*") {
-      const end = text.indexOf("*", i + 1);
-      if (end !== -1 && text[end - 1] !== " " && text[i + 1] !== " ") {
+      let searchFrom = i + 1;
+      let end = -1;
+      while (searchFrom < text.length) {
+        const candidate = text.indexOf("*", searchFrom);
+        if (candidate === -1) break;
+        if (text[candidate + 1] === "*") {
+          // Skip past closing ** owned by outer bold span or nested bold
+          searchFrom = candidate + 2;
+          continue;
+        }
+        end = candidate;
+        break;
+      }
+      if (end !== -1 && text[i + 1] !== " " && text[end - 1] !== " ") {
         flushPlain(buf);
         buf = "";
         const inner = text.slice(i + 1, end);

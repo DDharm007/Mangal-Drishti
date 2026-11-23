@@ -1,0 +1,172 @@
+{
+  "audit_timestamp_utc": "2026-11-23T09:42:12.327182+00:00",
+  "counts": {
+    "total_playwright_cases": 16,
+    "passed": 16,
+    "failed": 0,
+    "blocked": 0,
+    "not_tested": 0
+  },
+  "bugs_fixed": [
+    {
+      "id": "DEF-001",
+      "title": "Markdown nested italic inside bold (e.g. **MSL (*Curiosity*)**)",
+      "status": "FIXED & RETESTED",
+      "detail": "Updated inline scanner in frontend/src/components/research/MarkdownRenderer.tsx to skip outer closing ** boundaries when pairing inner single-asterisk italic spans."
+    },
+    {
+      "id": "DEF-002",
+      "title": "API negative tests for nonexistent/invalid report IDs",
+      "status": "ADDED & VERIFIED",
+      "detail": "Added 404 nonexistent report, 400 invalid ID, and 4-model catalog assertions in tests/test_step6_api.py."
+    },
+    {
+      "id": "DEF-003",
+      "title": "Infinite /api/system/status fetch loop triggered on Overview & System Status mounts",
+      "status": "FIXED & RETESTED",
+      "detail": "Replaced unstable inline arrow callbacks passed to OverviewPage/SystemStatusPage in frontend/src/App.tsx with memoized useCallback handlers so mount effects execute once cleanly."
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "TC-OV-01",
+      "area": "Overview",
+      "name": "Mission dashboard telemetry, stored count, models, device & observation loaded",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "Stored=6, Models=4/4 rendered with real backend data"
+    },
+    {
+      "id": "TC-OV-02",
+      "area": "Overview",
+      "name": "Sidebar collapse/expand & observation view switches",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "expand_btn_visible=True"
+    },
+    {
+      "id": "TC-TA-01",
+      "area": "Terrain Analysis",
+      "name": "Existing report dropdown populated from backend",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "6 reports selectable"
+    },
+    {
+      "id": "TC-TA-02",
+      "area": "Terrain Analysis",
+      "name": "Invalid non-image file upload rejected with visible error",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "client_error_visible=True"
+    },
+    {
+      "id": "TC-TA-03",
+      "area": "Terrain Analysis",
+      "name": "Real image upload + DeepLabV3+ inference + report generation",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "HTTP 200, report_id=1n129697839eff0338p1931l0m1_20261123_094149, latency=188.108 ms"
+    },
+    {
+      "id": "TC-TA-04",
+      "area": "Terrain Analysis",
+      "name": "All 9 viewer visualization modes load valid non-broken images",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "all_naturalWidth_gt_0=True"
+    },
+    {
+      "id": "TC-TA-05",
+      "area": "Terrain Analysis",
+      "name": "Connected region table row click highlights image bbox",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "highlight_active=True"
+    },
+    {
+      "id": "TC-TA-06",
+      "area": "Terrain Analysis",
+      "name": "Download JSON report produces valid file",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "downloaded=1n129697839eff0338p1931l0m1_20261123_094149_intelligence_report.json"
+    },
+    {
+      "id": "TC-RP-01",
+      "area": "Intelligence Reports",
+      "name": "Search, Visual Concern filter, Inspect JSON modal & Download links",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "search_hits=1, insufficient_hits=1, json_modal_verified=True"
+    },
+    {
+      "id": "TC-MP-01",
+      "area": "Model Performance",
+      "name": "Combined, MSL, MER, Validation & Benchmarks match ground-truth JSONs",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "comb=True, msl=True, mer=True, bench=True"
+    },
+    {
+      "id": "TC-DR-01",
+      "area": "Dataset & Research",
+      "name": "AI4MARS metadata, class swatches & rendered Markdown free of raw syntax",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "clean_markdown_rendered=True"
+    },
+    {
+      "id": "TC-SS-01",
+      "area": "System Status",
+      "name": "Live Backend, Compute, Runtime & Checkpoints diagnostics",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "status_ok=True"
+    },
+    {
+      "id": "TC-SS-02",
+      "area": "System Status",
+      "name": "Backend 503 failure renders graceful Offline/error state",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "offline_state_shown=True"
+    },
+    {
+      "id": "TC-MB-01",
+      "area": "Responsive Mobile",
+      "name": "375x812 viewport zero horizontal overflow on Overview & Terrain Analysis",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "overview_no_overflow=True, analyze_no_overflow=True"
+    },
+    {
+      "id": "TC-ER-01",
+      "area": "Runtime Hygiene",
+      "name": "Zero uncaught browser console errors",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "console_errors=0"
+    },
+    {
+      "id": "TC-ER-02",
+      "area": "Network Integrity",
+      "name": "Zero unexpected HTTP >= 400 asset/API failures",
+      "method": "Automated Playwright E2E",
+      "status": "PASS",
+      "evidence": "failed_requests=0"
+    }
+  ],
+  "screenshots": [
+    "docs/media/screenshots/01_overview_dashboard.png",
+    "docs/media/screenshots/02_terrain_analysis.png",
+    "docs/media/screenshots/03_intelligence_reports.png",
+    "docs/media/screenshots/04_model_performance.png",
+    "docs/media/screenshots/05_dataset_research.png",
+    "docs/media/screenshots/06_system_diagnostics.png"
+  ],
+  "gifs": [
+    "docs/media/demos/mangal_drishti_analysis_workflow.gif",
+    "docs/media/demos/mangal_drishti_mission_tour.gif"
+  ]
+}

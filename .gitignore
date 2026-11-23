@@ -38,9 +38,10 @@ datasets/processed/
 !datasets/metadata/*.json
 !datasets/metadata/*.csv
 
-# Frontend build & dependencies
+# Frontend build, dependencies & launcher logs
 frontend/node_modules/
 frontend/dist/
+logs/
 
 # Model checkpoints excluded; experiment metrics, reports & prediction visualizations allowed
 experiments/**/*.pth
@@ -58,6 +59,15 @@ experiments/evaluation/**/*.pt
 !experiments/evaluation/**/*.md
 !experiments/intelligence/**/*.png
 !experiments/intelligence/**/*.json
+!docs/media/**/*.png
+!docs/media/**/*.gif
+!docs/validation/**/*.jpg
+!docs/validation/**/*.jpeg
+!docs/validation/**/*.png
+!docs/validation/**/*.json
+!docs/validation/**/*.md
+!docs/release/*.pdf
+!docs/release/*.json
 
 # OS & IDE files
 .DS_Store
