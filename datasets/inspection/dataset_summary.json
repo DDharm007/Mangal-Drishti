@@ -1,0 +1,1027 @@
+{
+  "project": "MANGAL DRISHTI",
+  "phase": "Step 01 - Dataset Collection, Research & Intelligence Foundation",
+  "dataset": {
+    "name": "NASA/JPL AI4MARS",
+    "version": "0.6",
+    "doi": "10.5281/zenodo.15995036",
+    "license": "CC-BY-4.0",
+    "official_sources": [
+      "https://data.nasa.gov/dataset/ai4mars-a-dataset-for-terrain-aware-autonomous-driving-on-mars",
+      "https://zenodo.org/records/15995036",
+      "https://github.com/AI4MARS/AI4MARS",
+      "https://openaccess.thecvf.com/content/CVPR2021W/AI4Space/html/Swan_AI4MARS_A_Dataset_for_Terrain-Aware_Autonomous_Driving_on_Mars_CVPRW_2021_paper.html"
+    ]
+  },
+  "missions_and_cameras": {
+    "missions": {
+      "MSL (Curiosity)": 2122,
+      "MER-1 (Opportunity)": 141,
+      "MER-2 (Spirit)": 63
+    },
+    "cameras": {
+      "NavCam Left-A": 1447,
+      "NavCam Left-B": 675,
+      "NavCam": 204
+    },
+    "sclk_ranges_by_split": {
+      "train": {
+        "min_sclk": 397586934,
+        "max_sclk": 597779450
+      },
+      "val": {
+        "min_sclk": 597857359,
+        "max_sclk": 605153623
+      },
+      "test_msl": {
+        "min_sclk": 409036068,
+        "max_sclk": 613584326
+      },
+      "test_mer": {
+        "min_sclk": 129697839,
+        "max_sclk": 538600066
+      }
+    }
+  },
+  "overall_terrain_distribution": {
+    "num_images": 2326,
+    "total_pixels": 2438987776,
+    "labeled_pixels": 1158986532,
+    "unlabeled_pixels": 1280001244,
+    "labeled_pct": 47.5192,
+    "unlabeled_pct": 52.4808,
+    "majority_labeled_class": "soil",
+    "minority_labeled_class": "big rock",
+    "max_to_min_class_imbalance_ratio": 70.65,
+    "classes": {
+      "0": {
+        "class_id": 0,
+        "class_name": "soil",
+        "pixel_count": 548583531,
+        "pct_of_all_pixels": 22.4923,
+        "pct_of_labeled_pixels": 47.333,
+        "images_with_class": 1320,
+        "pct_images_with_class": 56.75
+      },
+      "1": {
+        "class_id": 1,
+        "class_name": "bedrock",
+        "pixel_count": 500362927,
+        "pct_of_all_pixels": 20.5152,
+        "pct_of_labeled_pixels": 43.1725,
+        "images_with_class": 1245,
+        "pct_images_with_class": 53.53
+      },
+      "2": {
+        "class_id": 2,
+        "class_name": "sand",
+        "pixel_count": 102275761,
+        "pct_of_all_pixels": 4.1934,
+        "pct_of_labeled_pixels": 8.8246,
+        "images_with_class": 448,
+        "pct_images_with_class": 19.26
+      },
+      "3": {
+        "class_id": 3,
+        "class_name": "big rock",
+        "pixel_count": 7764313,
+        "pct_of_all_pixels": 0.3183,
+        "pct_of_labeled_pixels": 0.6699,
+        "images_with_class": 254,
+        "pct_images_with_class": 10.92
+      },
+      "255": {
+        "class_id": 255,
+        "class_name": "unlabeled_null",
+        "pixel_count": 1280001244,
+        "pct_of_all_pixels": 52.4808,
+        "pct_of_labeled_pixels": null,
+        "images_with_class": 2326,
+        "pct_images_with_class": 100.0
+      }
+    }
+  },
+  "split_terrain_distributions": {
+    "train": {
+      "num_images": 1500,
+      "total_pixels": 1572864000,
+      "labeled_pixels": 806469342,
+      "unlabeled_pixels": 766394658,
+      "labeled_pct": 51.2739,
+      "unlabeled_pct": 48.7261,
+      "majority_labeled_class": "bedrock",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 60.7,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 326814694,
+          "pct_of_all_pixels": 20.7783,
+          "pct_of_labeled_pixels": 40.5241,
+          "images_with_class": 814,
+          "pct_images_with_class": 54.27
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 422234583,
+          "pct_of_all_pixels": 26.845,
+          "pct_of_labeled_pixels": 52.3559,
+          "images_with_class": 912,
+          "pct_images_with_class": 60.8
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 50463740,
+          "pct_of_all_pixels": 3.2084,
+          "pct_of_labeled_pixels": 6.2574,
+          "images_with_class": 223,
+          "pct_images_with_class": 14.87
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 6956325,
+          "pct_of_all_pixels": 0.4423,
+          "pct_of_labeled_pixels": 0.8626,
+          "images_with_class": 229,
+          "pct_images_with_class": 15.27
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 766394658,
+          "pct_of_all_pixels": 48.7261,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 1500,
+          "pct_images_with_class": 100.0
+        }
+      },
+      "missions": {
+        "MSL (Curiosity)": 1500
+      }
+    },
+    "val": {
+      "num_images": 300,
+      "total_pixels": 314572800,
+      "labeled_pixels": 179830957,
+      "unlabeled_pixels": 134741843,
+      "labeled_pct": 57.1667,
+      "unlabeled_pct": 42.8333,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 958.29,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 138392847,
+          "pct_of_all_pixels": 43.9939,
+          "pct_of_labeled_pixels": 76.9572,
+          "images_with_class": 284,
+          "pct_images_with_class": 94.67
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 36696979,
+          "pct_of_all_pixels": 11.6657,
+          "pct_of_labeled_pixels": 20.4064,
+          "images_with_class": 128,
+          "pct_images_with_class": 42.67
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 4596714,
+          "pct_of_all_pixels": 1.4613,
+          "pct_of_labeled_pixels": 2.5561,
+          "images_with_class": 69,
+          "pct_images_with_class": 23.0
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 144417,
+          "pct_of_all_pixels": 0.0459,
+          "pct_of_labeled_pixels": 0.0803,
+          "images_with_class": 12,
+          "pct_images_with_class": 4.0
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 134741843,
+          "pct_of_all_pixels": 42.8333,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 300,
+          "pct_images_with_class": 100.0
+        }
+      },
+      "missions": {
+        "MSL (Curiosity)": 300
+      }
+    },
+    "test_msl": {
+      "num_images": 322,
+      "total_pixels": 337641472,
+      "labeled_pixels": 116979561,
+      "unlabeled_pixels": 220661911,
+      "labeled_pct": 34.6461,
+      "unlabeled_pct": 65.3539,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 773.11,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 60069019,
+          "pct_of_all_pixels": 17.7908,
+          "pct_of_labeled_pixels": 51.35,
+          "images_with_class": 150,
+          "pct_images_with_class": 46.58
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 26192939,
+          "pct_of_all_pixels": 7.7576,
+          "pct_of_labeled_pixels": 22.391,
+          "images_with_class": 142,
+          "pct_images_with_class": 44.1
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 30639905,
+          "pct_of_all_pixels": 9.0747,
+          "pct_of_labeled_pixels": 26.1925,
+          "images_with_class": 110,
+          "pct_images_with_class": 34.16
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 77698,
+          "pct_of_all_pixels": 0.023,
+          "pct_of_labeled_pixels": 0.0664,
+          "images_with_class": 5,
+          "pct_images_with_class": 1.55
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 220661911,
+          "pct_of_all_pixels": 65.3539,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 322,
+          "pct_images_with_class": 100.0
+        }
+      },
+      "missions": {
+        "MSL (Curiosity)": 322
+      }
+    },
+    "test_mer": {
+      "num_images": 204,
+      "total_pixels": 213909504,
+      "labeled_pixels": 55706672,
+      "unlabeled_pixels": 158202832,
+      "labeled_pct": 26.0422,
+      "unlabeled_pct": 73.9578,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 39.78,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 23306971,
+          "pct_of_all_pixels": 10.8957,
+          "pct_of_labeled_pixels": 41.8387,
+          "images_with_class": 72,
+          "pct_images_with_class": 35.29
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 15238426,
+          "pct_of_all_pixels": 7.1238,
+          "pct_of_labeled_pixels": 27.3548,
+          "images_with_class": 63,
+          "pct_images_with_class": 30.88
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 16575402,
+          "pct_of_all_pixels": 7.7488,
+          "pct_of_labeled_pixels": 29.7548,
+          "images_with_class": 46,
+          "pct_images_with_class": 22.55
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 585873,
+          "pct_of_all_pixels": 0.2739,
+          "pct_of_labeled_pixels": 1.0517,
+          "images_with_class": 8,
+          "pct_images_with_class": 3.92
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 158202832,
+          "pct_of_all_pixels": 73.9578,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 204,
+          "pct_images_with_class": 100.0
+        }
+      },
+      "missions": {
+        "MER-1 (Opportunity)": 141,
+        "MER-2 (Spirit)": 63
+      }
+    }
+  },
+  "expert_test_consensus_comparison": {
+    "test_msl_min1_100agree": {
+      "num_images": 322,
+      "total_pixels": 337641472,
+      "labeled_pixels": 194268687,
+      "unlabeled_pixels": 143372785,
+      "labeled_pct": 57.537,
+      "unlabeled_pct": 42.463,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 233.09,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 89096149,
+          "pct_of_all_pixels": 26.3878,
+          "pct_of_labeled_pixels": 45.8623,
+          "images_with_class": 233,
+          "pct_images_with_class": 72.36
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 60015953,
+          "pct_of_all_pixels": 17.7751,
+          "pct_of_labeled_pixels": 30.8933,
+          "images_with_class": 205,
+          "pct_images_with_class": 63.66
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 44774352,
+          "pct_of_all_pixels": 13.2609,
+          "pct_of_labeled_pixels": 23.0476,
+          "images_with_class": 170,
+          "pct_images_with_class": 52.8
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 382233,
+          "pct_of_all_pixels": 0.1132,
+          "pct_of_labeled_pixels": 0.1968,
+          "images_with_class": 53,
+          "pct_images_with_class": 16.46
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 143372785,
+          "pct_of_all_pixels": 42.463,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 322,
+          "pct_images_with_class": 100.0
+        }
+      }
+    },
+    "test_msl_min2_100agree": {
+      "num_images": 322,
+      "total_pixels": 337641472,
+      "labeled_pixels": 163429583,
+      "unlabeled_pixels": 174211889,
+      "labeled_pct": 48.4033,
+      "unlabeled_pct": 51.5967,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 618.9,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 80244892,
+          "pct_of_all_pixels": 23.7663,
+          "pct_of_labeled_pixels": 49.1006,
+          "images_with_class": 195,
+          "pct_images_with_class": 60.56
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 44722418,
+          "pct_of_all_pixels": 13.2455,
+          "pct_of_labeled_pixels": 27.3649,
+          "images_with_class": 185,
+          "pct_images_with_class": 57.45
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 38332616,
+          "pct_of_all_pixels": 11.3531,
+          "pct_of_labeled_pixels": 23.4551,
+          "images_with_class": 134,
+          "pct_images_with_class": 41.61
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 129657,
+          "pct_of_all_pixels": 0.0384,
+          "pct_of_labeled_pixels": 0.0793,
+          "images_with_class": 20,
+          "pct_images_with_class": 6.21
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 174211889,
+          "pct_of_all_pixels": 51.5967,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 322,
+          "pct_images_with_class": 100.0
+        }
+      }
+    },
+    "test_msl_min3_100agree": {
+      "num_images": 322,
+      "total_pixels": 337641472,
+      "labeled_pixels": 116979561,
+      "unlabeled_pixels": 220661911,
+      "labeled_pct": 34.6461,
+      "unlabeled_pct": 65.3539,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 773.11,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 60069019,
+          "pct_of_all_pixels": 17.7908,
+          "pct_of_labeled_pixels": 51.35,
+          "images_with_class": 150,
+          "pct_images_with_class": 46.58
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 26192939,
+          "pct_of_all_pixels": 7.7576,
+          "pct_of_labeled_pixels": 22.391,
+          "images_with_class": 142,
+          "pct_images_with_class": 44.1
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 30639905,
+          "pct_of_all_pixels": 9.0747,
+          "pct_of_labeled_pixels": 26.1925,
+          "images_with_class": 110,
+          "pct_images_with_class": 34.16
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 77698,
+          "pct_of_all_pixels": 0.023,
+          "pct_of_labeled_pixels": 0.0664,
+          "images_with_class": 5,
+          "pct_images_with_class": 1.55
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 220661911,
+          "pct_of_all_pixels": 65.3539,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 322,
+          "pct_images_with_class": 100.0
+        }
+      }
+    },
+    "test_mer_min1_100agree": {
+      "num_images": 204,
+      "total_pixels": 213909504,
+      "labeled_pixels": 128780296,
+      "unlabeled_pixels": 85129208,
+      "labeled_pct": 60.2032,
+      "unlabeled_pct": 39.7968,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 48.65,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 63185015,
+          "pct_of_all_pixels": 29.5382,
+          "pct_of_labeled_pixels": 49.0642,
+          "images_with_class": 165,
+          "pct_images_with_class": 80.88
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 29846069,
+          "pct_of_all_pixels": 13.9527,
+          "pct_of_labeled_pixels": 23.176,
+          "images_with_class": 106,
+          "pct_images_with_class": 51.96
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 34450378,
+          "pct_of_all_pixels": 16.1051,
+          "pct_of_labeled_pixels": 26.7513,
+          "images_with_class": 122,
+          "pct_images_with_class": 59.8
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 1298834,
+          "pct_of_all_pixels": 0.6072,
+          "pct_of_labeled_pixels": 1.0086,
+          "images_with_class": 37,
+          "pct_images_with_class": 18.14
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 85129208,
+          "pct_of_all_pixels": 39.7968,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 204,
+          "pct_images_with_class": 100.0
+        }
+      }
+    },
+    "test_mer_min2_100agree": {
+      "num_images": 204,
+      "total_pixels": 213909504,
+      "labeled_pixels": 102340536,
+      "unlabeled_pixels": 111568968,
+      "labeled_pct": 47.8429,
+      "unlabeled_pct": 52.1571,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 64.91,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 48954719,
+          "pct_of_all_pixels": 22.8857,
+          "pct_of_labeled_pixels": 47.8351,
+          "images_with_class": 134,
+          "pct_images_with_class": 65.69
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 23704944,
+          "pct_of_all_pixels": 11.0818,
+          "pct_of_labeled_pixels": 23.1628,
+          "images_with_class": 94,
+          "pct_images_with_class": 46.08
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 28926662,
+          "pct_of_all_pixels": 13.5229,
+          "pct_of_labeled_pixels": 28.2651,
+          "images_with_class": 80,
+          "pct_images_with_class": 39.22
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 754211,
+          "pct_of_all_pixels": 0.3526,
+          "pct_of_labeled_pixels": 0.737,
+          "images_with_class": 14,
+          "pct_images_with_class": 6.86
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 111568968,
+          "pct_of_all_pixels": 52.1571,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 204,
+          "pct_images_with_class": 100.0
+        }
+      }
+    },
+    "test_mer_min3_100agree": {
+      "num_images": 204,
+      "total_pixels": 213909504,
+      "labeled_pixels": 55706672,
+      "unlabeled_pixels": 158202832,
+      "labeled_pct": 26.0422,
+      "unlabeled_pct": 73.9578,
+      "majority_labeled_class": "soil",
+      "minority_labeled_class": "big rock",
+      "max_to_min_class_imbalance_ratio": 39.78,
+      "classes": {
+        "0": {
+          "class_id": 0,
+          "class_name": "soil",
+          "pixel_count": 23306971,
+          "pct_of_all_pixels": 10.8957,
+          "pct_of_labeled_pixels": 41.8387,
+          "images_with_class": 72,
+          "pct_images_with_class": 35.29
+        },
+        "1": {
+          "class_id": 1,
+          "class_name": "bedrock",
+          "pixel_count": 15238426,
+          "pct_of_all_pixels": 7.1238,
+          "pct_of_labeled_pixels": 27.3548,
+          "images_with_class": 63,
+          "pct_images_with_class": 30.88
+        },
+        "2": {
+          "class_id": 2,
+          "class_name": "sand",
+          "pixel_count": 16575402,
+          "pct_of_all_pixels": 7.7488,
+          "pct_of_labeled_pixels": 29.7548,
+          "images_with_class": 46,
+          "pct_images_with_class": 22.55
+        },
+        "3": {
+          "class_id": 3,
+          "class_name": "big rock",
+          "pixel_count": 585873,
+          "pct_of_all_pixels": 0.2739,
+          "pct_of_labeled_pixels": 1.0517,
+          "images_with_class": 8,
+          "pct_images_with_class": 3.92
+        },
+        "255": {
+          "class_id": 255,
+          "class_name": "unlabeled_null",
+          "pixel_count": 158202832,
+          "pct_of_all_pixels": 73.9578,
+          "pct_of_labeled_pixels": null,
+          "images_with_class": 204,
+          "pct_images_with_class": 100.0
+        }
+      }
+    }
+  },
+  "representative_samples": {
+    "multi_class_hero_msl": {
+      "id": "NLB_421445249EDR_F0060000NCAM12754M1",
+      "split": "train",
+      "mission": "MSL (Curiosity)",
+      "camera": "NavCam Left-B",
+      "sclk": 421445249,
+      "image_relpath": "msl/ncam/images/edr/NLB_421445249EDR_F0060000NCAM12754M1.JPG",
+      "mask_relpath": "msl/ncam/labels/train/NLB_421445249EDR_F0060000NCAM12754M1.png",
+      "mxy_relpath": "msl/ncam/images/mxy/NLB_421445249MXY_F0060000NCAM12754M1.png",
+      "rng_relpath": "msl/ncam/images/rng-30m/NLB_421445249RNG_F0060000NCAM12754M1.png",
+      "labeled_coverage_pct": 50.37,
+      "classes_present": 4,
+      "soil_share": 0.0203,
+      "bedrock_share": 0.7281,
+      "sand_share": 0.0472,
+      "big_rock_share": 0.2043
+    },
+    "big_rock_hazard_msl": {
+      "id": "NLA_409210762EDR_F0051662NCAM00207M1",
+      "split": "train",
+      "mission": "MSL (Curiosity)",
+      "camera": "NavCam Left-A",
+      "sclk": 409210762,
+      "image_relpath": "msl/ncam/images/edr/NLA_409210762EDR_F0051662NCAM00207M1.JPG",
+      "mask_relpath": "msl/ncam/labels/train/NLA_409210762EDR_F0051662NCAM00207M1.png",
+      "mxy_relpath": "msl/ncam/images/mxy/NLA_409210762MXY_F0051662NCAM00207M1.png",
+      "rng_relpath": "msl/ncam/images/rng-30m/NLA_409210762RNG_F0051662NCAM00207M1.png",
+      "labeled_coverage_pct": 9.76,
+      "classes_present": 2,
+      "soil_share": 0.0003,
+      "bedrock_share": 0.3259,
+      "sand_share": 0.0,
+      "big_rock_share": 0.6738
+    },
+    "sand_dune_msl": {
+      "id": "NLB_552676131EDR_F0642004NCAM00385M1",
+      "split": "test_msl",
+      "mission": "MSL (Curiosity)",
+      "camera": "NavCam Left-B",
+      "sclk": 552676131,
+      "image_relpath": "msl/ncam/images/edr/NLB_552676131EDR_F0642004NCAM00385M1.JPG",
+      "mask_relpath": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_552676131EDR_F0642004NCAM00385M1_merged.png",
+      "mxy_relpath": "msl/ncam/images/mxy/NLB_552676131MXY_F0642004NCAM00385M1.png",
+      "rng_relpath": "msl/ncam/images/rng-30m/NLB_552676131RNG_F0642004NCAM00385M1.png",
+      "labeled_coverage_pct": 92.29,
+      "classes_present": 1,
+      "soil_share": 0.0,
+      "bedrock_share": 0.0,
+      "sand_share": 1.0,
+      "big_rock_share": 0.0
+    },
+    "bedrock_outcrop_msl": {
+      "id": "NLA_409306005EDR_F0051812NCAM00349M1",
+      "split": "train",
+      "mission": "MSL (Curiosity)",
+      "camera": "NavCam Left-A",
+      "sclk": 409306005,
+      "image_relpath": "msl/ncam/images/edr/NLA_409306005EDR_F0051812NCAM00349M1.JPG",
+      "mask_relpath": "msl/ncam/labels/train/NLA_409306005EDR_F0051812NCAM00349M1.png",
+      "mxy_relpath": "msl/ncam/images/mxy/NLA_409306005MXY_F0051812NCAM00349M1.png",
+      "rng_relpath": "msl/ncam/images/rng-30m/NLA_409306005RNG_F0051812NCAM00349M1.png",
+      "labeled_coverage_pct": 98.13,
+      "classes_present": 1,
+      "soil_share": 0.0,
+      "bedrock_share": 1.0,
+      "sand_share": 0.0,
+      "big_rock_share": 0.0
+    },
+    "soil_regolith_msl": {
+      "id": "NLA_399622593EDR_F0030350NCAM00404M1",
+      "split": "train",
+      "mission": "MSL (Curiosity)",
+      "camera": "NavCam Left-A",
+      "sclk": 399622593,
+      "image_relpath": "msl/ncam/images/edr/NLA_399622593EDR_F0030350NCAM00404M1.JPG",
+      "mask_relpath": "msl/ncam/labels/train/NLA_399622593EDR_F0030350NCAM00404M1.png",
+      "mxy_relpath": "msl/ncam/images/mxy/NLA_399622593MXY_F0030350NCAM00404M1.png",
+      "rng_relpath": "msl/ncam/images/rng-30m/NLA_399622593RNG_F0030350NCAM00404M1.png",
+      "labeled_coverage_pct": 97.48,
+      "classes_present": 1,
+      "soil_share": 1.0,
+      "bedrock_share": 0.0,
+      "sand_share": 0.0,
+      "big_rock_share": 0.0
+    },
+    "mer_opportunity_test": {
+      "id": "1n271377483eff90dcp1935l0m1",
+      "split": "test_mer",
+      "mission": "MER-1 (Opportunity)",
+      "camera": "NavCam",
+      "sclk": 271377483,
+      "image_relpath": "mer/images/test/1n271377483eff90dcp1935l0m1.JPG",
+      "mask_relpath": "mer/labels/test/masked-gold-min3-100agree/1n271377483eff90dcp1935l0m1_16165_T0_merged.png",
+      "mxy_relpath": "",
+      "rng_relpath": "",
+      "labeled_coverage_pct": 73.46,
+      "classes_present": 2,
+      "soil_share": 0.5663,
+      "bedrock_share": 0.0,
+      "sand_share": 0.0,
+      "big_rock_share": 0.4337
+    },
+    "mer_spirit_test": {
+      "id": "2n130900315eff1100p1901l0m1",
+      "split": "test_mer",
+      "mission": "MER-2 (Spirit)",
+      "camera": "NavCam",
+      "sclk": 130900315,
+      "image_relpath": "mer/images/test/2n130900315eff1100p1901l0m1.JPG",
+      "mask_relpath": "mer/labels/test/masked-gold-min3-100agree/2n130900315eff1100p1901l0m1_16165_T0_merged.png",
+      "mxy_relpath": "",
+      "rng_relpath": "",
+      "labeled_coverage_pct": 48.56,
+      "classes_present": 3,
+      "soil_share": 0.7813,
+      "bedrock_share": 0.0,
+      "sand_share": 0.1892,
+      "big_rock_share": 0.0295
+    }
+  },
+  "inventory": {
+    "ai4mars_root": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars",
+    "total_files_on_disk": 9961,
+    "total_size_bytes": 779498488,
+    "total_size_mb": 743.39,
+    "total_size_gb": 0.726,
+    "totals": {
+      "raw_rover_images": 2326,
+      "primary_segmentation_masks": 2326,
+      "all_segmentation_mask_variants": 3378,
+      "auxiliary_masks_mxy_and_rng30m": 4244,
+      "verified_manifest_pairs": 2326
+    },
+    "verified_pairs_by_split": {
+      "train": 1500,
+      "val": 300,
+      "test_msl": 322,
+      "test_mer": 204
+    },
+    "formats": {
+      ".jpg": 2326,
+      ".png": 7622
+    },
+    "categories": {
+      "msl_ncam_edr_images": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\images\\edr",
+        "file_count": 2122,
+        "size_bytes": 686084386,
+        "size_mb": 654.3011,
+        "extensions": {
+          ".jpg": 2122
+        },
+        "dimensions": {
+          "1024x1024": 2122
+        },
+        "header_unreadable_count": 0
+      },
+      "msl_ncam_mxy_rover_masks": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\images\\mxy",
+        "file_count": 2122,
+        "size_bytes": 7574677,
+        "size_mb": 7.2238,
+        "extensions": {
+          ".png": 2122
+        },
+        "dimensions": {
+          "1024x1024": 2122
+        },
+        "header_unreadable_count": 0
+      },
+      "msl_ncam_rng30m_masks": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\images\\rng-30m",
+        "file_count": 2122,
+        "size_bytes": 2779519,
+        "size_mb": 2.6508,
+        "extensions": {
+          ".png": 2122
+        },
+        "dimensions": {
+          "1024x1024": 2122
+        },
+        "header_unreadable_count": 0
+      },
+      "msl_ncam_train_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\labels\\train",
+        "file_count": 1800,
+        "size_bytes": 10680728,
+        "size_mb": 10.1859,
+        "extensions": {
+          ".png": 1800
+        },
+        "dimensions": {
+          "1024x1024": 1800
+        },
+        "header_unreadable_count": 0
+      },
+      "msl_ncam_test_min1_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\labels\\test\\masked-gold-min1-100agree",
+        "file_count": 322,
+        "size_bytes": 2631024,
+        "size_mb": 2.5091,
+        "extensions": {
+          ".png": 322
+        },
+        "dimensions": {
+          "1024x1024": 322
+        },
+        "header_unreadable_count": 0
+      },
+      "msl_ncam_test_min2_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\labels\\test\\masked-gold-min2-100agree",
+        "file_count": 322,
+        "size_bytes": 2469806,
+        "size_mb": 2.3554,
+        "extensions": {
+          ".png": 322
+        },
+        "dimensions": {
+          "1024x1024": 322
+        },
+        "header_unreadable_count": 0
+      },
+      "msl_ncam_test_min3_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\msl\\ncam\\labels\\test\\masked-gold-min3-100agree",
+        "file_count": 322,
+        "size_bytes": 2190473,
+        "size_mb": 2.089,
+        "extensions": {
+          ".png": 322
+        },
+        "dimensions": {
+          "1024x1024": 322
+        },
+        "header_unreadable_count": 0
+      },
+      "mer_test_images": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\mer\\images\\test",
+        "file_count": 204,
+        "size_bytes": 60151066,
+        "size_mb": 57.3645,
+        "extensions": {
+          ".jpg": 204
+        },
+        "dimensions": {
+          "1024x1024": 204
+        },
+        "header_unreadable_count": 0
+      },
+      "mer_test_min1_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\mer\\labels\\test\\masked-gold-min1-100agree",
+        "file_count": 204,
+        "size_bytes": 1365687,
+        "size_mb": 1.3024,
+        "extensions": {
+          ".png": 204
+        },
+        "dimensions": {
+          "1024x1024": 204
+        },
+        "header_unreadable_count": 0
+      },
+      "mer_test_min2_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\mer\\labels\\test\\masked-gold-min2-100agree",
+        "file_count": 204,
+        "size_bytes": 1235440,
+        "size_mb": 1.1782,
+        "extensions": {
+          ".png": 204
+        },
+        "dimensions": {
+          "1024x1024": 204
+        },
+        "header_unreadable_count": 0
+      },
+      "mer_test_min3_labels": {
+        "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\raw\\ai4mars\\mer\\labels\\test\\masked-gold-min3-100agree",
+        "file_count": 204,
+        "size_bytes": 1034441,
+        "size_mb": 0.9865,
+        "extensions": {
+          ".png": 204
+        },
+        "dimensions": {
+          "1024x1024": 204
+        },
+        "header_unreadable_count": 0
+      }
+    },
+    "duplicates": {
+      "exact_duplicate_image_groups": 0,
+      "exact_duplicate_image_details": {},
+      "exact_duplicate_mask_groups": 1,
+      "note": "Exact mask SHA-256 duplicates across min1/min2/min3 variants of the same image are expected when all pixels match across consensus thresholds; duplicate masks within the same split or empty masks are flagged separately."
+    },
+    "correspondence_checks": {
+      "missing_manifest_pairs": 0,
+      "missing_manifest_details": [],
+      "unmatched_msl_images": 0,
+      "unmatched_msl_train_masks": 0,
+      "unmatched_msl_test_masks": 0,
+      "unmatched_mer_images": 0,
+      "unmatched_mer_masks": 0,
+      "train_test_id_leakage_count": 0
+    },
+    "external_nasa_samples": {
+      "path": "D:\\Personal Projects\\MANGAL DRISHTI\\datasets\\samples\\external_nasa",
+      "count": 8,
+      "size_bytes": 694723,
+      "size_mb": 0.6625,
+      "files": [
+        "m2020_sol2024_ZL0_2024_0846622583_145EBY_N0930000ZCAM10058_1100LMJ.jpg",
+        "m2020_sol2024_ZL0_2024_0846622583_145ECM_N0930000ZCAM10058_1100LMJ.jpg",
+        "m2020_sol2024_ZR0_2024_0846622583_145EBY_N0930000ZCAM10058_1100LMJ.jpg",
+        "m2020_sol2024_ZR0_2024_0846622583_145ECM_N0930000ZCAM10058_1100LMJ.jpg",
+        "msl_sol5082_NLB_848646787EDR_D1260054TRAV01533M_.JPG",
+        "msl_sol5082_NLB_848646867EDR_D1260060TRAV01533M_.JPG",
+        "msl_sol5082_NLB_848646951EDR_D1260066TRAV01533M_.JPG",
+        "msl_sol5082_NLB_848647104EDR_D1260072TRAV01533M_.JPG"
+      ]
+    }
+  },
+  "split_strategy": {
+    "train_val": "Chronological Spacecraft Clock (SCLK) split of 1,800 MSL NavCam labeled pairs (first 1,500 earliest SCLK -> train; latest 300 SCLK -> val) to prevent temporal scene leakage.",
+    "test": "Official JPL Expert Gold-Standard Test Sets (322 MSL NavCam + 204 MER NavCam, 100% consensus labels min1/min2/min3), strictly held out."
+  }
+}

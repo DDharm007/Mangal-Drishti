@@ -1,0 +1,739 @@
+{
+  "status": "PASS",
+  "validated_image_mask_pairs": 2326,
+  "image_validation": {
+    "corrupted_image_count": 0,
+    "corrupted_images": [],
+    "unexpected_channel_count": 0,
+    "unexpected_channels": [],
+    "image_formats": {
+      "JPEG": 2326
+    },
+    "image_color_modes": {
+      "L": 2326
+    },
+    "image_dimensions": {
+      "1024x1024": 2326
+    },
+    "pixel_intensity_summary": {
+      "global_min": 0,
+      "global_max": 255,
+      "mean_of_image_means": 62.155,
+      "mean_of_image_stds": 22.634
+    }
+  },
+  "mask_validation": {
+    "official_label_key_source": "datasets/raw/ai4mars/label_keys.json (NAV)",
+    "verified_label_mapping": {
+      "0": "soil",
+      "1": "bedrock",
+      "2": "sand",
+      "3": "big rock",
+      "255": "unlabeled_null"
+    },
+    "observed_unique_pixel_values": [
+      0,
+      1,
+      2,
+      3,
+      255
+    ],
+    "corrupted_mask_count": 0,
+    "corrupted_masks": [],
+    "dimension_mismatch_count": 0,
+    "dimension_mismatches": [],
+    "invalid_pixel_value_mask_count": 0,
+    "invalid_mask_values": [],
+    "empty_all_255_mask_count": 130,
+    "empty_masks": [
+      {
+        "split": "train",
+        "id": "NLA_397586934EDR_F0010008AUT_04096M1",
+        "path": "msl/ncam/labels/train/NLA_397586934EDR_F0010008AUT_04096M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_397681703EDR_F0020000AUT_04096M1",
+        "path": "msl/ncam/labels/train/NLA_397681703EDR_F0020000AUT_04096M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_397682347EDR_F0020000AUT_04096M1",
+        "path": "msl/ncam/labels/train/NLA_397682347EDR_F0020000AUT_04096M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_397682428EDR_F0020000AUT_04096M1",
+        "path": "msl/ncam/labels/train/NLA_397682428EDR_F0020000AUT_04096M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_399455961EDR_F0030260NCAM00410M1",
+        "path": "msl/ncam/labels/train/NLA_399455961EDR_F0030260NCAM00410M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_400066545EDR_F0030872NCAM00302M1",
+        "path": "msl/ncam/labels/train/NLA_400066545EDR_F0030872NCAM00302M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_401848397EDR_F0042778NCAM00409M1",
+        "path": "msl/ncam/labels/train/NLA_401848397EDR_F0042778NCAM00409M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_401855443EDR_F0042778NCAM00434M1",
+        "path": "msl/ncam/labels/train/NLA_401855443EDR_F0042778NCAM00434M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_402388758EDR_F0043416NCAM00442M1",
+        "path": "msl/ncam/labels/train/NLA_402388758EDR_F0043416NCAM00442M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_405847642EDR_F0050104NCAM00335M1",
+        "path": "msl/ncam/labels/train/NLA_405847642EDR_F0050104NCAM00335M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_406558596EDR_F0050388NCAM00409M1",
+        "path": "msl/ncam/labels/train/NLA_406558596EDR_F0050388NCAM00409M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_406728907EDR_F0050388NCAM00309M1",
+        "path": "msl/ncam/labels/train/NLA_406728907EDR_F0050388NCAM00309M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_407536940EDR_F0050432NCAM07753M1",
+        "path": "msl/ncam/labels/train/NLA_407536940EDR_F0050432NCAM07753M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_412507281EDR_F0060000NCAM05794M1",
+        "path": "msl/ncam/labels/train/NLA_412507281EDR_F0060000NCAM05794M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_412507414EDR_F0060000NCAM05794M1",
+        "path": "msl/ncam/labels/train/NLA_412507414EDR_F0060000NCAM05794M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_417301463EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_417301463EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_417301596EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_417301596EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_417301629EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_417301629EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_417301678EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_417301678EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421372324EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421372324EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421372472EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421372472EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421378810EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421378810EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421378957EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421378957EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421446234EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421446234EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421450734EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421450734EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421450849EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421450849EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLB_421450885EDR_F0060000NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLB_421450885EDR_F0060000NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_593685402EDR_F0722464NCAM00101M1",
+        "path": "msl/ncam/labels/train/NLA_593685402EDR_F0722464NCAM00101M1.png"
+      },
+      {
+        "split": "train",
+        "id": "NLA_596190384EDR_F0730550NCAM00565M1",
+        "path": "msl/ncam/labels/train/NLA_596190384EDR_F0730550NCAM00565M1.png"
+      },
+      {
+        "split": "val",
+        "id": "NLA_600717919EDR_F0731206NCAM00565M1",
+        "path": "msl/ncam/labels/train/NLA_600717919EDR_F0731206NCAM00565M1.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLA_409036068EDR_F0051606NCAM00348M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLA_409036068EDR_F0051606NCAM00348M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLA_601414440EDR_F0731482NCAM00375M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLA_601414440EDR_F0731482NCAM00375M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_428304547EDR_F0100508NCAM05114M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_428304547EDR_F0100508NCAM05114M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_431511807EDR_F0150000NCAM00291M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_431511807EDR_F0150000NCAM00291M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_436384140EDR_F0211362NCAM00279M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_436384140EDR_F0211362NCAM00279M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_439225105EDR_F0240000NCAM00346M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_439225105EDR_F0240000NCAM00346M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_448279363EDR_F0300484NCAM00299M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_448279363EDR_F0300484NCAM00299M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_453781583EDR_F0320478NCAM00282M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_453781583EDR_F0320478NCAM00282M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_455642279EDR_F0340774NCAM00354M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_455642279EDR_F0340774NCAM00354M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_457064954EDR_F0371542NCAM00354M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_457064954EDR_F0371542NCAM00354M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_459278092EDR_F0391396NCAM00207M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_459278092EDR_F0391396NCAM00207M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_459291038EDR_F0391552NCAM00252M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_459291038EDR_F0391552NCAM00252M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_462744768EDR_F0410322NCAM00354M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_462744768EDR_F0410322NCAM00354M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_462744927EDR_F0410322NCAM00272M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_462744927EDR_F0410322NCAM00272M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_463107249EDR_F0410748NCAM00274M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_463107249EDR_F0410748NCAM00274M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_463107836EDR_F0410748NCAM07753M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_463107836EDR_F0410748NCAM07753M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_463814438EDR_F0420000NCAM00278M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_463814438EDR_F0420000NCAM00278M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_492664724EDR_F0490294NCAM00296M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_492664724EDR_F0490294NCAM00296M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_492665102EDR_F0490294NCAM00295M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_492665102EDR_F0490294NCAM00295M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_504390285EDR_F0520004NCAM00353M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_504390285EDR_F0520004NCAM00353M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_505898562EDR_F0521162NCAM12753M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_505898562EDR_F0521162NCAM12753M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_512555804EDR_F0532644NCAM07753M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_512555804EDR_F0532644NCAM07753M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_525148881EDR_F0570774NCAM00353M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_525148881EDR_F0570774NCAM00353M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_525149600EDR_F0570774NCAM07753M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_525149600EDR_F0570774NCAM07753M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_528893540EDR_F0581248NCAM00654M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_528893540EDR_F0581248NCAM00654M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_542730580EDR_F0612232NCAM00282M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_542730580EDR_F0612232NCAM00282M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_543351716EDR_F0613076NCAM00286M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_543351716EDR_F0613076NCAM00286M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_543357548EDR_F0613076NCAM00287M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_543357548EDR_F0613076NCAM00287M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_558364090EDR_F0660000NCAM00252M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_558364090EDR_F0660000NCAM00252M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_565373904EDR_F0670650CCAM15903M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_565373904EDR_F0670650CCAM15903M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_565811189EDR_F0671016NCAM00353M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_565811189EDR_F0671016NCAM00353M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_570072657EDR_F0672848NCAM00385M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_570072657EDR_F0672848NCAM00385M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_574072088EDR_F0681616NCAM00257M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_574072088EDR_F0681616NCAM00257M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_574078028EDR_F0681626NCAM00256M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_574078028EDR_F0681626NCAM00256M1_merged.png"
+      },
+      {
+        "split": "test_msl",
+        "id": "NLB_577089308EDR_F0691828NCAM00379M1",
+        "path": "msl/ncam/labels/test/masked-gold-min3-100agree/NLB_577089308EDR_F0691828NCAM00379M1_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n156861613eff4000p0605l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n156861613eff4000p0605l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n156861839eff4000p0605l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n156861839eff4000p0605l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n167782036eff55dip1893l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n167782036eff55dip1893l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n176576486eff5847p0693l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n176576486eff5847p0693l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n179677936eff6000p0705l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n179677936eff6000p0705l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n179678039eff6000p0705l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n179678039eff6000p0705l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n179678217eff6000p0705l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n179678217eff6000p0705l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n179679147eff6000p1920l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n179679147eff6000p1920l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n207287630eff74v1p1825l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n207287630eff74v1p1825l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n207289064eff74v1p1824l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n207289064eff74v1p1824l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n220424228eff77y2p1911l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n220424228eff77y2p1911l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n220424868eff77y2p1911l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n220424868eff77y2p1911l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n228234996eff8100p1962l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n228234996eff8100p1962l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n228235621eff8100p1963l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n228235621eff8100p1963l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n228236085eff8100p1963l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n228236085eff8100p1963l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n265963814eff89bap0783l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n265963814eff89bap0783l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n271377574eff90dcp1935l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n271377574eff90dcp1935l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n271377627eff90dcp1935l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n271377627eff90dcp1935l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n271381983eff90dxp0753l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n271381983eff90dxp0753l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n277867512eff9200p1981l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n277867512eff9200p1981l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n277867565eff9200p1981l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n277867565eff9200p1981l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n277867874eff9200p0733l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n277867874eff9200p0733l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n277869052eff9200p1691l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n277869052eff9200p1691l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n422477305effbzcup0723l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n422477305effbzcup0723l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n422477480effbzcup1627l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n422477480effbzcup1627l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n428423226effc6e2p0762l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n428423226effc6e2p0762l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n430028183effc7cbp0693l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n430028183effc7cbp0693l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n430028234effc7cbp0693l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n430028234effc7cbp0693l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n448847797effcbh9p0743l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n448847797effcbh9p0743l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n448847900effcbh9p0743l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n448847900effcbh9p0743l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n455242123effcdibp0723l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n455242123effcdibp0723l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n455242837effcdibp1964l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n455242837effcdibp1964l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n464200283effchqnp0735l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n464200283effchqnp0735l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n464200626effchqnp0735l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n464200626effchqnp0735l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n464201329effchqnp1635l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n464201329effchqnp1635l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n465089901effchvop0665l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n465089901effchvop0665l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n465090010effchvop0665l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n465090010effchvop0665l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n465090097effchvop0665l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n465090097effchvop0665l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n507355050effcp70p1984l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n507355050effcp70p1984l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n507355406effcp70p1984l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n507355406effcp70p1984l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n533089636effctnup1984l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n533089636effctnup1984l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n533089995effctnup1984l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n533089995effctnup1984l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "1n533090464effctnup1980l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/1n533090464effctnup1980l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n130887058eff10agp1868l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n130887058eff10agp1868l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n130887245eff10agp1888l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n130887245eff10agp1888l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n130897724eff1100p1900l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n130897724eff1100p1900l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n130897774eff1100p1900l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n130897774eff1100p1900l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n132312350eff17b8p1944l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n132312350eff17b8p1944l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n132320048eff1800p1816l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n132320048eff1800p1816l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n132759393eff2000p1951l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n132759393eff2000p1951l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n132759430eff2000p1951l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n132759430eff2000p1951l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n132759504eff2000p1951l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n132759504eff2000p1951l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137019806eff40d0p1979l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137019806eff40d0p1979l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137019893eff40d0p1979l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137019893eff40d0p1979l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137019929eff40d0p1979l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137019929eff40d0p1979l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137020341eff40d0p1979l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137020341eff40d0p1979l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137020663eff40d0p1979l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137020663eff40d0p1979l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137027211eff40e6p1950l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137027211eff40e6p1950l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n137028119eff4100p1827l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n137028119eff4100p1827l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n140212918eff6800p0665l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n140212918eff6800p0665l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n153890893eff9100p0645l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n153890893eff9100p0645l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n153891039eff9100p0645l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n153891039eff9100p0645l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n153891677eff9100p1745l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n153891677eff9100p1745l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n189670349effalhqp0695l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n189670349effalhqp0695l0m1_16165_T0_merged.png"
+      },
+      {
+        "split": "test_mer",
+        "id": "2n190199130effamenp0705l0m1",
+        "path": "mer/labels/test/masked-gold-min3-100agree/2n190199130effamenp0705l0m1_16165_T0_merged.png"
+      }
+    ],
+    "mask_color_modes": {
+      "L": 2326
+    },
+    "mask_dimensions": {
+      "1024x1024": 2326
+    }
+  },
+  "auxiliary_mask_validation": {
+    "mxy_rover_masks_checked": 2122,
+    "mxy_corrupted": 0,
+    "mxy_dim_mismatch": 0,
+    "mxy_unique_pixel_values": [
+      0,
+      1
+    ],
+    "rng30m_masks_checked": 2122,
+    "rng30m_corrupted": 0,
+    "rng30m_dim_mismatch": 0,
+    "rng30m_unique_pixel_values": [
+      0,
+      1
+    ]
+  },
+  "correspondence_checks": {
+    "missing_manifest_pairs": 0,
+    "missing_manifest_details": [],
+    "unmatched_msl_images": 0,
+    "unmatched_msl_train_masks": 0,
+    "unmatched_msl_test_masks": 0,
+    "unmatched_mer_images": 0,
+    "unmatched_mer_masks": 0,
+    "train_test_id_leakage_count": 0
+  },
+  "duplicate_checks": {
+    "exact_duplicate_image_groups": 0,
+    "exact_duplicate_image_details": {},
+    "exact_duplicate_mask_groups": 1,
+    "note": "Exact mask SHA-256 duplicates across min1/min2/min3 variants of the same image are expected when all pixels match across consensus thresholds; duplicate masks within the same split or empty masks are flagged separately."
+  }
+}
