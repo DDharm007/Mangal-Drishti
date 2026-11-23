@@ -1,0 +1,127 @@
+{
+  "model": "deeplabv3plus",
+  "device": "cuda",
+  "num_reports": 6,
+  "reports": [
+    {
+      "image_id": "NLA_398380694EDR_F0030000NCAM15000M1",
+      "mission": "MSL (Curiosity)",
+      "dominant_terrain": "soil",
+      "terrain_summary": {
+        "soil": 100.0,
+        "bedrock": 0.0,
+        "sand": 0.0,
+        "big_rock": 0.0
+      },
+      "valid_pixel_percentage": 1.3332,
+      "retained_regions": 1,
+      "obstacle_candidates": 0,
+      "mean_confidence": 0.867293,
+      "mean_entropy": 0.46373,
+      "traversability_assessment": "insufficient_visual_evidence",
+      "physical_safety_verified": false,
+      "report_path": "experiments/intelligence/NLA_398380694EDR_F0030000NCAM15000M1/intelligence_report.json",
+      "summary_panel_path": "experiments/intelligence/NLA_398380694EDR_F0030000NCAM15000M1/09_intelligence_summary_panel.png"
+    },
+    {
+      "image_id": "NLB_421449585EDR_F0060000NCAM00364M1",
+      "mission": "MSL (Curiosity)",
+      "dominant_terrain": "bedrock",
+      "terrain_summary": {
+        "soil": 4.7678,
+        "bedrock": 95.2322,
+        "sand": 0.0,
+        "big_rock": 0.0
+      },
+      "valid_pixel_percentage": 23.267,
+      "retained_regions": 4,
+      "obstacle_candidates": 0,
+      "mean_confidence": 0.93362,
+      "mean_entropy": 0.184898,
+      "traversability_assessment": "lower_visual_concern",
+      "physical_safety_verified": false,
+      "report_path": "experiments/intelligence/NLB_421449585EDR_F0060000NCAM00364M1/intelligence_report.json",
+      "summary_panel_path": "experiments/intelligence/NLB_421449585EDR_F0060000NCAM00364M1/09_intelligence_summary_panel.png"
+    },
+    {
+      "image_id": "NLA_603107705EDR_F0740210CCAM05315M1",
+      "mission": "MSL (Curiosity)",
+      "dominant_terrain": "bedrock",
+      "terrain_summary": {
+        "soil": 8.2914,
+        "bedrock": 91.4687,
+        "sand": 0.2399,
+        "big_rock": 0.0
+      },
+      "valid_pixel_percentage": 69.6377,
+      "retained_regions": 9,
+      "obstacle_candidates": 0,
+      "mean_confidence": 0.931126,
+      "mean_entropy": 0.217504,
+      "traversability_assessment": "lower_visual_concern",
+      "physical_safety_verified": false,
+      "report_path": "experiments/intelligence/NLA_603107705EDR_F0740210CCAM05315M1/intelligence_report.json",
+      "summary_panel_path": "experiments/intelligence/NLA_603107705EDR_F0740210CCAM05315M1/09_intelligence_summary_panel.png"
+    },
+    {
+      "image_id": "NLB_428304547EDR_F0100508NCAM05114M1",
+      "mission": "MSL (Curiosity)",
+      "dominant_terrain": "soil",
+      "terrain_summary": {
+        "soil": 100.0,
+        "bedrock": 0.0,
+        "sand": 0.0,
+        "big_rock": 0.0
+      },
+      "valid_pixel_percentage": 57.0797,
+      "retained_regions": 12,
+      "obstacle_candidates": 0,
+      "mean_confidence": 0.995933,
+      "mean_entropy": 0.024082,
+      "traversability_assessment": "lower_visual_concern",
+      "physical_safety_verified": false,
+      "report_path": "experiments/intelligence/NLB_428304547EDR_F0100508NCAM05114M1/intelligence_report.json",
+      "summary_panel_path": "experiments/intelligence/NLB_428304547EDR_F0100508NCAM05114M1/09_intelligence_summary_panel.png"
+    },
+    {
+      "image_id": "1n145332766eff3500p1817l0m1",
+      "mission": "MER-1 (Opportunity)",
+      "dominant_terrain": "sand",
+      "terrain_summary": {
+        "soil": 12.8653,
+        "bedrock": 0.0,
+        "sand": 87.1347,
+        "big_rock": 0.0
+      },
+      "valid_pixel_percentage": 55.0411,
+      "retained_regions": 10,
+      "obstacle_candidates": 0,
+      "mean_confidence": 0.877108,
+      "mean_entropy": 0.287505,
+      "traversability_assessment": "moderate_visual_concern",
+      "physical_safety_verified": false,
+      "report_path": "experiments/intelligence/1n145332766eff3500p1817l0m1/intelligence_report.json",
+      "summary_panel_path": "experiments/intelligence/1n145332766eff3500p1817l0m1/09_intelligence_summary_panel.png"
+    },
+    {
+      "image_id": "2n130887021eff10agp1863l0m1",
+      "mission": "MER-2 (Spirit)",
+      "dominant_terrain": "soil",
+      "terrain_summary": {
+        "soil": 99.5198,
+        "bedrock": 0.0458,
+        "sand": 0.0,
+        "big_rock": 0.4344
+      },
+      "valid_pixel_percentage": 55.7663,
+      "retained_regions": 4,
+      "obstacle_candidates": 1,
+      "mean_confidence": 0.947215,
+      "mean_entropy": 0.1994,
+      "traversability_assessment": "lower_visual_concern",
+      "physical_safety_verified": false,
+      "report_path": "experiments/intelligence/2n130887021eff10agp1863l0m1/intelligence_report.json",
+      "summary_panel_path": "experiments/intelligence/2n130887021eff10agp1863l0m1/09_intelligence_summary_panel.png"
+    }
+  ]
+}
