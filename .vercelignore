@@ -1,0 +1,13 @@
+.venv/
+logs/
+frontend/node_modules/
+frontend/dist/
+datasets/raw/
+datasets/processed/
+docs/release/
+docs/media/
+docs/validation/
+scripts/
+tests/
+*.pth
+*.pt

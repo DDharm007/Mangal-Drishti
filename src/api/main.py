@@ -10,15 +10,26 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import psutil
-import torch
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from src.data.config_utils import get_project_root
-from src.intelligence.engine import DEFAULT_CHECKPOINTS, TerrainIntelligenceEngine
 from src.intelligence.schemas import validate_intelligence_report
+
+try:
+    import torch
+    from src.intelligence.engine import DEFAULT_CHECKPOINTS, TerrainIntelligenceEngine
+except ImportError:  # Serverless / lightweight runtime without PyTorch
+    torch = None  # type: ignore[assignment]
+    TerrainIntelligenceEngine = None  # type: ignore[assignment,misc]
+    DEFAULT_CHECKPOINTS = {
+        "deeplabv3plus": "experiments/deeplabv3plus/best_model.pth",
+        "unet": "experiments/unet/best_model.pth",
+        "deeplabv3plus_optimized": "experiments/evaluation/optimization/deeplabv3plus_ce_dice_balanced/best_model.pth",
+        "unet_optimized": "experiments/evaluation/optimization/unet_ce_dice_balanced/best_model.pth",
+    }
 
 APP_VERSION = "1.0.0"
 ALLOWED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
@@ -118,7 +129,12 @@ def _resolve_mission(report_id: str, report: Dict[str, Any]) -> Optional[str]:
     return None
 
 
-def _get_engine(model_name: str) -> TerrainIntelligenceEngine:
+def _get_engine(model_name: str) -> Any:
+    if TerrainIntelligenceEngine is None:
+        raise HTTPException(
+            status_code=503,
+            detail="Live PyTorch inference is unavailable in this serverless deployment. Run locally with GPU/CPU checkpoints.",
+        )
     if model_name not in DEFAULT_CHECKPOINTS:
         raise HTTPException(
             status_code=400,
@@ -173,11 +189,13 @@ def get_health() -> Dict[str, Any]:
 
 @app.get("/api/system/status")
 def get_system_status() -> Dict[str, Any]:
-    has_cuda = torch.cuda.is_available()
+    has_cuda = bool(torch is not None and torch.cuda.is_available())
     active_device = "cuda" if has_cuda else "cpu"
-    gpu_name = torch.cuda.get_device_name(0) if has_cuda else None
+    gpu_name = torch.cuda.get_device_name(0) if has_cuda and torch is not None else None
     gpu_vram_gb = (
-        round(torch.cuda.get_device_properties(0).total_memory / (1024**3), 2) if has_cuda else None
+        round(torch.cuda.get_device_properties(0).total_memory / (1024**3), 2)
+        if has_cuda and torch is not None
+        else None
     )
 
     checkpoints = []
@@ -203,7 +221,7 @@ def get_system_status() -> Dict[str, Any]:
     return {
         "status": "online",
         "version": APP_VERSION,
-        "pytorch_version": str(torch.__version__),
+        "pytorch_version": str(torch.__version__) if torch is not None else "unavailable (serverless)",
         "cuda_available": has_cuda,
         "active_device": active_device,
         "gpu_name": gpu_name,

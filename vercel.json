@@ -4,7 +4,8 @@
     "app": {
       "root": ".",
       "runtime": "python",
-      "entrypoint": "src/api/main.py"
+      "entrypoint": "src/api/main.py",
+      "installCommand": "pip install -r requirements-vercel.txt"
     },
     "frontend": {
       "root": "frontend",
