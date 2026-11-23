@@ -1,0 +1,205 @@
+{
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python_version": "3.12.10",
+    "pytorch_version": "2.11.0+cu128",
+    "cpu_threads_used": 8,
+    "ram_gb": 15.64,
+    "cuda_available": true,
+    "gpu_name": "NVIDIA GeForce RTX 3050 A Laptop GPU",
+    "gpu_vram_gb": 4.0,
+    "input_resolution": "512x512 RGB"
+  },
+  "models": {
+    "unet": {
+      "architecture": "U-Net + ResNet34",
+      "parameter_count": 24521796,
+      "trainable_parameters": 24521796,
+      "weights_only_size_mb": 93.62,
+      "checkpoint_path": "experiments/unet/best_model.pth",
+      "checkpoint_size_bytes": 294551947,
+      "checkpoint_size_mb": 280.91,
+      "profiles": {
+        "gpu_fp16_bs1": {
+          "device": "cuda",
+          "precision": "fp16_amp",
+          "batch_size": 1,
+          "input_shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 20,
+          "measured_iterations": 100,
+          "avg_latency_ms": 22.882,
+          "median_latency_ms": 22.878,
+          "p95_latency_ms": 26.889,
+          "std_latency_ms": 2.285,
+          "avg_ms_per_image": 22.882,
+          "throughput_images_per_sec": 43.703,
+          "peak_gpu_memory_allocated_mb": 327.97,
+          "peak_gpu_memory_reserved_mb": 370.0
+        },
+        "gpu_fp16_bs4": {
+          "device": "cuda",
+          "precision": "fp16_amp",
+          "batch_size": 4,
+          "input_shape": [
+            4,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 15,
+          "measured_iterations": 60,
+          "avg_latency_ms": 68.048,
+          "median_latency_ms": 67.887,
+          "p95_latency_ms": 69.233,
+          "std_latency_ms": 0.619,
+          "avg_ms_per_image": 17.012,
+          "throughput_images_per_sec": 58.782,
+          "peak_gpu_memory_allocated_mb": 881.59,
+          "peak_gpu_memory_reserved_mb": 1128.0
+        },
+        "gpu_fp32_bs1": {
+          "device": "cuda",
+          "precision": "fp32",
+          "batch_size": 1,
+          "input_shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 15,
+          "measured_iterations": 60,
+          "avg_latency_ms": 23.092,
+          "median_latency_ms": 22.929,
+          "p95_latency_ms": 24.433,
+          "std_latency_ms": 0.642,
+          "avg_ms_per_image": 23.092,
+          "throughput_images_per_sec": 43.306,
+          "peak_gpu_memory_allocated_mb": 265.44,
+          "peak_gpu_memory_reserved_mb": 326.0
+        },
+        "cpu_fp32_bs1": {
+          "device": "cpu",
+          "precision": "fp32",
+          "batch_size": 1,
+          "input_shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 5,
+          "measured_iterations": 20,
+          "avg_latency_ms": 447.258,
+          "median_latency_ms": 439.999,
+          "p95_latency_ms": 472.871,
+          "std_latency_ms": 16.664,
+          "avg_ms_per_image": 447.258,
+          "throughput_images_per_sec": 2.236,
+          "peak_gpu_memory_allocated_mb": null,
+          "peak_gpu_memory_reserved_mb": null
+        }
+      }
+    },
+    "deeplabv3plus": {
+      "architecture": "DeepLabV3+ + ResNet50",
+      "parameter_count": 40347812,
+      "trainable_parameters": 40347812,
+      "weights_only_size_mb": 154.13,
+      "checkpoint_path": "experiments/deeplabv3plus/best_model.pth",
+      "checkpoint_size_bytes": 484690299,
+      "checkpoint_size_mb": 462.24,
+      "profiles": {
+        "gpu_fp16_bs1": {
+          "device": "cuda",
+          "precision": "fp16_amp",
+          "batch_size": 1,
+          "input_shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 20,
+          "measured_iterations": 100,
+          "avg_latency_ms": 23.968,
+          "median_latency_ms": 24.208,
+          "p95_latency_ms": 27.469,
+          "std_latency_ms": 2.159,
+          "avg_ms_per_image": 23.968,
+          "throughput_images_per_sec": 41.722,
+          "peak_gpu_memory_allocated_mb": 323.47,
+          "peak_gpu_memory_reserved_mb": 346.0
+        },
+        "gpu_fp16_bs4": {
+          "device": "cuda",
+          "precision": "fp16_amp",
+          "batch_size": 4,
+          "input_shape": [
+            4,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 15,
+          "measured_iterations": 60,
+          "avg_latency_ms": 75.457,
+          "median_latency_ms": 75.615,
+          "p95_latency_ms": 76.32,
+          "std_latency_ms": 0.795,
+          "avg_ms_per_image": 18.864,
+          "throughput_images_per_sec": 53.011,
+          "peak_gpu_memory_allocated_mb": 579.64,
+          "peak_gpu_memory_reserved_mb": 684.0
+        },
+        "gpu_fp32_bs1": {
+          "device": "cuda",
+          "precision": "fp32",
+          "batch_size": 1,
+          "input_shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 15,
+          "measured_iterations": 60,
+          "avg_latency_ms": 32.311,
+          "median_latency_ms": 32.475,
+          "p95_latency_ms": 32.929,
+          "std_latency_ms": 0.654,
+          "avg_ms_per_image": 32.311,
+          "throughput_images_per_sec": 30.949,
+          "peak_gpu_memory_allocated_mb": 269.25,
+          "peak_gpu_memory_reserved_mb": 314.0
+        },
+        "cpu_fp32_bs1": {
+          "device": "cpu",
+          "precision": "fp32",
+          "batch_size": 1,
+          "input_shape": [
+            1,
+            3,
+            512,
+            512
+          ],
+          "warmup_iterations": 5,
+          "measured_iterations": 20,
+          "avg_latency_ms": 672.681,
+          "median_latency_ms": 669.667,
+          "p95_latency_ms": 715.744,
+          "std_latency_ms": 19.414,
+          "avg_ms_per_image": 672.681,
+          "throughput_images_per_sec": 1.487,
+          "peak_gpu_memory_allocated_mb": null,
+          "peak_gpu_memory_reserved_mb": null
+        }
+      }
+    }
+  }
+}

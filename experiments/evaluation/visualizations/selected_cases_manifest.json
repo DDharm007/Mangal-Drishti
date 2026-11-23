@@ -1,0 +1,388 @@
+{
+  "cases": [
+    {
+      "category": "correct_prediction",
+      "index": 6,
+      "id": "NLA_601414568EDR_F0731482NCAM00253M1",
+      "mission": "MSL (Curiosity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/correct_prediction_NLA_601414568EDR_F0731482NCAM00253M1.png",
+          "diagnostics": {
+            "id": "NLA_601414568EDR_F0731482NCAM00253M1",
+            "mission": "MSL (Curiosity)",
+            "valid_pixels": 124196,
+            "valid_pct": 47.38,
+            "pixel_accuracy": 1.0,
+            "image_miou": 1.0,
+            "mean_confidence": 0.797347,
+            "mean_confidence_valid": 0.876053,
+            "low_conf_pixel_ratio": 8e-06,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/correct_prediction_NLA_601414568EDR_F0731482NCAM00253M1.png",
+          "diagnostics": {
+            "id": "NLA_601414568EDR_F0731482NCAM00253M1",
+            "mission": "MSL (Curiosity)",
+            "valid_pixels": 124196,
+            "valid_pct": 47.38,
+            "pixel_accuracy": 1.0,
+            "image_miou": 1.0,
+            "mean_confidence": 0.943642,
+            "mean_confidence_valid": 0.98832,
+            "low_conf_pixel_ratio": 0.0,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        }
+      }
+    },
+    {
+      "category": "correct_prediction",
+      "index": 322,
+      "id": "1n129697839eff0338p1931l0m1",
+      "mission": "MER-1 (Opportunity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/correct_prediction_1n129697839eff0338p1931l0m1.png",
+          "diagnostics": {
+            "id": "1n129697839eff0338p1931l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 113173,
+            "valid_pct": 43.17,
+            "pixel_accuracy": 1.0,
+            "image_miou": 1.0,
+            "mean_confidence": 0.733411,
+            "mean_confidence_valid": 0.867554,
+            "low_conf_pixel_ratio": 0.001555,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/correct_prediction_1n129697839eff0338p1931l0m1.png",
+          "diagnostics": {
+            "id": "1n129697839eff0338p1931l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 113173,
+            "valid_pct": 43.17,
+            "pixel_accuracy": 1.0,
+            "image_miou": 1.0,
+            "mean_confidence": 0.876424,
+            "mean_confidence_valid": 0.985677,
+            "low_conf_pixel_ratio": 0.0,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        }
+      }
+    },
+    {
+      "category": "big_rock_false_negative",
+      "index": 23,
+      "id": "NLB_428304547EDR_F0100508NCAM05114M1",
+      "mission": "MSL (Curiosity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/big_rock_false_negative_NLB_428304547EDR_F0100508NCAM05114M1.png",
+          "diagnostics": {
+            "id": "NLB_428304547EDR_F0100508NCAM05114M1",
+            "mission": "MSL (Curiosity)",
+            "valid_pixels": 149631,
+            "valid_pct": 57.08,
+            "pixel_accuracy": 0.995021,
+            "image_miou": 0.843684,
+            "mean_confidence": 0.754803,
+            "mean_confidence_valid": 0.81315,
+            "low_conf_pixel_ratio": 0.017169,
+            "big_rock_gt_pixels": 2422,
+            "big_rock_pred_pixels": 1677,
+            "big_rock_tp_pixels": 1677,
+            "big_rock_fn_pixels": 745,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/big_rock_false_negative_NLB_428304547EDR_F0100508NCAM05114M1.png",
+          "diagnostics": {
+            "id": "NLB_428304547EDR_F0100508NCAM05114M1",
+            "mission": "MSL (Curiosity)",
+            "valid_pixels": 149631,
+            "valid_pct": 57.08,
+            "pixel_accuracy": 0.983814,
+            "image_miou": 0.491907,
+            "mean_confidence": 0.965412,
+            "mean_confidence_valid": 0.995935,
+            "low_conf_pixel_ratio": 0.0,
+            "big_rock_gt_pixels": 2422,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 2422,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        }
+      }
+    },
+    {
+      "category": "big_rock_false_negative",
+      "index": 377,
+      "id": "1n271377483eff90dcp1935l0m1",
+      "mission": "MER-1 (Opportunity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/big_rock_false_negative_1n271377483eff90dcp1935l0m1.png",
+          "diagnostics": {
+            "id": "1n271377483eff90dcp1935l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 192592,
+            "valid_pct": 73.47,
+            "pixel_accuracy": 0.486349,
+            "image_miou": 0.222225,
+            "mean_confidence": 0.648379,
+            "mean_confidence_valid": 0.661857,
+            "low_conf_pixel_ratio": 0.313045,
+            "big_rock_gt_pixels": 83513,
+            "big_rock_pred_pixels": 10758,
+            "big_rock_tp_pixels": 10758,
+            "big_rock_fn_pixels": 72755,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/big_rock_false_negative_1n271377483eff90dcp1935l0m1.png",
+          "diagnostics": {
+            "id": "1n271377483eff90dcp1935l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 192592,
+            "valid_pct": 73.47,
+            "pixel_accuracy": 0.053367,
+            "image_miou": 0.029183,
+            "mean_confidence": 0.827899,
+            "mean_confidence_valid": 0.833695,
+            "low_conf_pixel_ratio": 0.061441,
+            "big_rock_gt_pixels": 83513,
+            "big_rock_pred_pixels": 8020,
+            "big_rock_tp_pixels": 8020,
+            "big_rock_fn_pixels": 75493,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        }
+      }
+    },
+    {
+      "category": "big_rock_false_positive",
+      "index": 392,
+      "id": "1n288519342eff98j5p1994l0m1",
+      "mission": "MER-1 (Opportunity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/big_rock_false_positive_1n288519342eff98j5p1994l0m1.png",
+          "diagnostics": {
+            "id": "1n288519342eff98j5p1994l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 93358,
+            "valid_pct": 35.61,
+            "pixel_accuracy": 0.76122,
+            "image_miou": 0.346033,
+            "mean_confidence": 0.682014,
+            "mean_confidence_valid": 0.718821,
+            "low_conf_pixel_ratio": 0.250894,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 18187,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 18187,
+            "sand_bedrock_confusion_pixels": 3981
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/big_rock_false_positive_1n288519342eff98j5p1994l0m1.png",
+          "diagnostics": {
+            "id": "1n288519342eff98j5p1994l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 93358,
+            "valid_pct": 35.61,
+            "pixel_accuracy": 0.870509,
+            "image_miou": 0.545874,
+            "mean_confidence": 0.871102,
+            "mean_confidence_valid": 0.876785,
+            "low_conf_pixel_ratio": 0.081568,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 9451,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 9451,
+            "sand_bedrock_confusion_pixels": 2638
+          }
+        }
+      }
+    },
+    {
+      "category": "sand_bedrock_confusion",
+      "index": 172,
+      "id": "NLB_505900047EDR_F0521162NCAM00352M1",
+      "mission": "MSL (Curiosity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/sand_bedrock_confusion_NLB_505900047EDR_F0521162NCAM00352M1.png",
+          "diagnostics": {
+            "id": "NLB_505900047EDR_F0521162NCAM00352M1",
+            "mission": "MSL (Curiosity)",
+            "valid_pixels": 228276,
+            "valid_pct": 87.08,
+            "pixel_accuracy": 0.845849,
+            "image_miou": 0.211462,
+            "mean_confidence": 0.628026,
+            "mean_confidence_valid": 0.667819,
+            "low_conf_pixel_ratio": 0.352915,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 1829,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 1829,
+            "sand_bedrock_confusion_pixels": 31644
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/sand_bedrock_confusion_NLB_505900047EDR_F0521162NCAM00352M1.png",
+          "diagnostics": {
+            "id": "NLB_505900047EDR_F0521162NCAM00352M1",
+            "mission": "MSL (Curiosity)",
+            "valid_pixels": 228276,
+            "valid_pct": 87.08,
+            "pixel_accuracy": 0.732342,
+            "image_miou": 0.366171,
+            "mean_confidence": 0.823264,
+            "mean_confidence_valid": 0.80956,
+            "low_conf_pixel_ratio": 0.07172,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 61100
+          }
+        }
+      }
+    },
+    {
+      "category": "sand_bedrock_confusion",
+      "index": 331,
+      "id": "1n138404731eff2800p1986l0m1",
+      "mission": "MER-1 (Opportunity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/sand_bedrock_confusion_1n138404731eff2800p1986l0m1.png",
+          "diagnostics": {
+            "id": "1n138404731eff2800p1986l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 125836,
+            "valid_pct": 48.0,
+            "pixel_accuracy": 0.652794,
+            "image_miou": 0.163199,
+            "mean_confidence": 0.524882,
+            "mean_confidence_valid": 0.588798,
+            "low_conf_pixel_ratio": 0.359055,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 1268,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 1268,
+            "sand_bedrock_confusion_pixels": 37757
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/sand_bedrock_confusion_1n138404731eff2800p1986l0m1.png",
+          "diagnostics": {
+            "id": "1n138404731eff2800p1986l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 125836,
+            "valid_pct": 48.0,
+            "pixel_accuracy": 0.183572,
+            "image_miou": 0.061191,
+            "mean_confidence": 0.805541,
+            "mean_confidence_valid": 0.758942,
+            "low_conf_pixel_ratio": 0.176452,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 13127,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 13127,
+            "sand_bedrock_confusion_pixels": 89609
+          }
+        }
+      }
+    },
+    {
+      "category": "low_confidence_prediction",
+      "index": 325,
+      "id": "1n136619282eff2000p1985l0m1",
+      "mission": "MER-1 (Opportunity)",
+      "outputs": {
+        "unet": {
+          "panel_path": "experiments/evaluation/visualizations/unet/low_confidence_prediction_1n136619282eff2000p1985l0m1.png",
+          "diagnostics": {
+            "id": "1n136619282eff2000p1985l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 90386,
+            "valid_pct": 34.48,
+            "pixel_accuracy": 0.027593,
+            "image_miou": 0.028007,
+            "mean_confidence": 0.571255,
+            "mean_confidence_valid": 0.674037,
+            "low_conf_pixel_ratio": 0.207344,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        },
+        "deeplabv3plus": {
+          "panel_path": "experiments/evaluation/visualizations/deeplabv3plus/low_confidence_prediction_1n136619282eff2000p1985l0m1.png",
+          "diagnostics": {
+            "id": "1n136619282eff2000p1985l0m1",
+            "mission": "MER-1 (Opportunity)",
+            "valid_pixels": 90386,
+            "valid_pct": 34.48,
+            "pixel_accuracy": 0.202,
+            "image_miou": 0.091837,
+            "mean_confidence": 0.733973,
+            "mean_confidence_valid": 0.641785,
+            "low_conf_pixel_ratio": 0.346226,
+            "big_rock_gt_pixels": 0,
+            "big_rock_pred_pixels": 0,
+            "big_rock_tp_pixels": 0,
+            "big_rock_fn_pixels": 0,
+            "big_rock_fp_pixels": 0,
+            "sand_bedrock_confusion_pixels": 0
+          }
+        }
+      }
+    }
+  ]
+}

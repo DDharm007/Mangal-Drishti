@@ -1,0 +1,545 @@
+{
+  "experiment_name": "deeplabv3plus_ce_dice_balanced",
+  "model_name": "deeplabv3plus",
+  "epochs_completed": 4,
+  "duration_seconds": 632.7,
+  "baseline_validation_metrics": {
+    "mIoU": 0.765901,
+    "mean_dice": 0.856757,
+    "pixel_accuracy": 0.94359,
+    "per_class_iou": {
+      "soil": 0.899863,
+      "bedrock": 0.927705,
+      "sand": 0.723744,
+      "big rock": 0.512293
+    },
+    "per_class_dice": {
+      "soil": 0.947292,
+      "bedrock": 0.962497,
+      "sand": 0.839735,
+      "big rock": 0.677505
+    },
+    "per_class_recall": {
+      "soil": 0.914613,
+      "bedrock": 0.970526,
+      "sand": 0.962586,
+      "big rock": 0.884978
+    },
+    "per_class_precision": {
+      "soil": 0.982394,
+      "bedrock": 0.954599,
+      "sand": 0.744692,
+      "big rock": 0.548836
+    },
+    "sand_iou": 0.723744,
+    "sand_recall": 0.962586,
+    "big_rock_iou": 0.512293,
+    "big_rock_recall": 0.884978,
+    "valid_pixels_evaluated": 48555875
+  },
+  "best_validation_metrics": {
+    "best_epoch": 4,
+    "best_val_loss_at_best_miou": 0.306592,
+    "mIoU": 0.805068,
+    "mean_dice": 0.883811,
+    "pixel_accuracy": 0.957087,
+    "per_class_iou": {
+      "soil": 0.924966,
+      "bedrock": 0.93869,
+      "sand": 0.791037,
+      "big rock": 0.565579
+    },
+    "per_class_dice": {
+      "soil": 0.96102,
+      "bedrock": 0.968376,
+      "sand": 0.883329,
+      "big rock": 0.722517
+    },
+    "per_class_recall": {
+      "soil": 0.944711,
+      "bedrock": 0.976376,
+      "sand": 0.938161,
+      "big rock": 0.741648
+    },
+    "per_class_precision": {
+      "soil": 0.977903,
+      "bedrock": 0.960505,
+      "sand": 0.834552,
+      "big rock": 0.704348
+    },
+    "sand_iou": 0.791037,
+    "sand_recall": 0.938161,
+    "big_rock_iou": 0.565579,
+    "big_rock_recall": 0.741648,
+    "valid_pixels_evaluated": 48555875
+  },
+  "expert_test_metrics": {
+    "combined": {
+      "mIoU": 0.689748,
+      "mean_dice": 0.760548,
+      "pixel_accuracy": 0.934367,
+      "per_class_iou": {
+        "soil": 0.901663,
+        "bedrock": 0.838727,
+        "sand": 0.877961,
+        "big rock": 0.140639
+      },
+      "per_class_dice": {
+        "soil": 0.948289,
+        "bedrock": 0.912291,
+        "sand": 0.935015,
+        "big rock": 0.246597
+      },
+      "per_class_recall": {
+        "soil": 0.946998,
+        "bedrock": 0.918218,
+        "sand": 0.936251,
+        "big rock": 0.169975
+      },
+      "per_class_precision": {
+        "soil": 0.949583,
+        "bedrock": 0.90644,
+        "sand": 0.933783,
+        "big rock": 0.449
+      },
+      "sand_iou": 0.877961,
+      "sand_recall": 0.936251,
+      "big_rock_iou": 0.140639,
+      "big_rock_recall": 0.169975,
+      "valid_pixels_evaluated": 53104279,
+      "num_images": 526,
+      "confusion_matrix_labels": [
+        "soil",
+        "bedrock",
+        "sand",
+        "big rock"
+      ],
+      "confusion_matrix": [
+        [
+          24467267,
+          702041,
+          664851,
+          2495
+        ],
+        [
+          681662,
+          11218736,
+          278774,
+          38777
+        ],
+        [
+          599584,
+          345155,
+          13897971,
+          1571
+        ],
+        [
+          17805,
+          110762,
+          41916,
+          34912
+        ]
+      ],
+      "confusion_matrix_row_normalized": [
+        [
+          0.946998,
+          0.027172,
+          0.025733,
+          9.7e-05
+        ],
+        [
+          0.055792,
+          0.918218,
+          0.022817,
+          0.003174
+        ],
+        [
+          0.040392,
+          0.023252,
+          0.936251,
+          0.000106
+        ],
+        [
+          0.086687,
+          0.539263,
+          0.204075,
+          0.169975
+        ]
+      ]
+    },
+    "msl": {
+      "mIoU": 0.781126,
+      "mean_dice": 0.848082,
+      "pixel_accuracy": 0.967833,
+      "per_class_iou": {
+        "soil": 0.962774,
+        "bedrock": 0.896905,
+        "sand": 0.929593,
+        "big rock": 0.335232
+      },
+      "per_class_dice": {
+        "soil": 0.981034,
+        "bedrock": 0.945651,
+        "sand": 0.963512,
+        "big rock": 0.502133
+      },
+      "per_class_recall": {
+        "soil": 0.975726,
+        "bedrock": 0.953258,
+        "sand": 0.965654,
+        "big rock": 0.765822
+      },
+      "per_class_precision": {
+        "soil": 0.9864,
+        "bedrock": 0.938165,
+        "sand": 0.961379,
+        "big rock": 0.373522
+      },
+      "sand_iou": 0.929593,
+      "sand_recall": 0.965654,
+      "big_rock_iou": 0.335232,
+      "big_rock_recall": 0.765822,
+      "valid_pixels_evaluated": 32239572,
+      "num_images": 322,
+      "confusion_matrix_labels": [
+        "soil",
+        "bedrock",
+        "sand",
+        "big rock"
+      ],
+      "confusion_matrix": [
+        [
+          16161607,
+          209112,
+          192798,
+          164
+        ],
+        [
+          195291,
+          7088244,
+          125182,
+          27093
+        ],
+        [
+          23650,
+          257634,
+          7935844,
+          974
+        ],
+        [
+          3880,
+          446,
+          821,
+          16832
+        ]
+      ],
+      "confusion_matrix_row_normalized": [
+        [
+          0.975726,
+          0.012625,
+          0.01164,
+          1e-05
+        ],
+        [
+          0.026264,
+          0.953258,
+          0.016835,
+          0.003644
+        ],
+        [
+          0.002878,
+          0.03135,
+          0.965654,
+          0.000119
+        ],
+        [
+          0.176532,
+          0.020292,
+          0.037354,
+          0.765822
+        ]
+      ]
+    },
+    "mer": {
+      "mIoU": 0.61652,
+      "mean_dice": 0.704399,
+      "pixel_accuracy": 0.882656,
+      "per_class_iou": {
+        "soil": 0.802541,
+        "bedrock": 0.754717,
+        "sand": 0.817523,
+        "big rock": 0.0913
+      },
+      "per_class_dice": {
+        "soil": 0.890455,
+        "bedrock": 0.860215,
+        "sand": 0.899601,
+        "big rock": 0.167324
+      },
+      "per_class_recall": {
+        "soil": 0.895685,
+        "bedrock": 0.863733,
+        "sand": 0.899784,
+        "big rock": 0.098574
+      },
+      "per_class_precision": {
+        "soil": 0.885286,
+        "bedrock": 0.856725,
+        "sand": 0.899419,
+        "big rock": 0.55304
+      },
+      "sand_iou": 0.817523,
+      "sand_recall": 0.899784,
+      "big_rock_iou": 0.0913,
+      "big_rock_recall": 0.098574,
+      "valid_pixels_evaluated": 20864707,
+      "num_images": 204,
+      "confusion_matrix_labels": [
+        "soil",
+        "bedrock",
+        "sand",
+        "big rock"
+      ],
+      "confusion_matrix": [
+        [
+          8305660,
+          492929,
+          472053,
+          2331
+        ],
+        [
+          486371,
+          4130492,
+          153592,
+          11684
+        ],
+        [
+          575934,
+          87521,
+          5962127,
+          597
+        ],
+        [
+          13925,
+          110316,
+          41095,
+          18080
+        ]
+      ],
+      "confusion_matrix_row_normalized": [
+        [
+          0.895685,
+          0.053158,
+          0.050906,
+          0.000251
+        ],
+        [
+          0.101706,
+          0.863733,
+          0.032118,
+          0.002443
+        ],
+        [
+          0.086918,
+          0.013208,
+          0.899784,
+          9e-05
+        ],
+        [
+          0.07592,
+          0.601452,
+          0.224054,
+          0.098574
+        ]
+      ]
+    },
+    "mer_submissions": {
+      "MER-1 (Opportunity)": {
+        "mIoU": 0.622149,
+        "mean_dice": 0.700433,
+        "pixel_accuracy": 0.887668,
+        "per_class_iou": {
+          "soil": 0.787485,
+          "bedrock": 0.787321,
+          "sand": 0.849347,
+          "big rock": 0.064441
+        },
+        "per_class_dice": {
+          "soil": 0.88111,
+          "bedrock": 0.881007,
+          "sand": 0.918537,
+          "big rock": 0.121079
+        },
+        "per_class_recall": {
+          "soil": 0.874592,
+          "bedrock": 0.874046,
+          "sand": 0.949878,
+          "big rock": 0.06887
+        },
+        "per_class_precision": {
+          "soil": 0.887725,
+          "bedrock": 0.888079,
+          "sand": 0.889198,
+          "big rock": 0.500513
+        },
+        "sand_iou": 0.849347,
+        "sand_recall": 0.949878,
+        "big_rock_iou": 0.064441,
+        "big_rock_recall": 0.06887,
+        "valid_pixels_evaluated": 14511382,
+        "num_images": 141,
+        "confusion_matrix_labels": [
+          "soil",
+          "bedrock",
+          "sand",
+          "big rock"
+        ],
+        "confusion_matrix": [
+          [
+            4607417,
+            310883,
+            349774,
+            0
+          ],
+          [
+            434015,
+            4036280,
+            136063,
+            11569
+          ],
+          [
+            134885,
+            87477,
+            4225407,
+            597
+          ],
+          [
+            13823,
+            110316,
+            40685,
+            12191
+          ]
+        ],
+        "confusion_matrix_row_normalized": [
+          [
+            0.874592,
+            0.059013,
+            0.066395,
+            0.0
+          ],
+          [
+            0.093985,
+            0.874046,
+            0.029464,
+            0.002505
+          ],
+          [
+            0.030322,
+            0.019665,
+            0.949878,
+            0.000134
+          ],
+          [
+            0.078089,
+            0.623201,
+            0.229839,
+            0.06887
+          ]
+        ]
+      },
+      "MER-2 (Spirit)": {
+        "mIoU": 0.627262,
+        "mean_dice": 0.746504,
+        "pixel_accuracy": 0.871207,
+        "per_class_iou": {
+          "soil": 0.822123,
+          "bedrock": 0.272052,
+          "sand": 0.749222,
+          "big rock": 0.665649
+        },
+        "per_class_dice": {
+          "soil": 0.902379,
+          "bedrock": 0.427737,
+          "sand": 0.856635,
+          "big rock": 0.799267
+        },
+        "per_class_recall": {
+          "soil": 0.92343,
+          "bedrock": 0.573722,
+          "sand": 0.797461,
+          "big rock": 0.920012
+        },
+        "per_class_precision": {
+          "soil": 0.882267,
+          "bedrock": 0.340975,
+          "sand": 0.925294,
+          "big rock": 0.706539
+        },
+        "sand_iou": 0.749222,
+        "sand_recall": 0.797461,
+        "big_rock_iou": 0.665649,
+        "big_rock_recall": 0.920012,
+        "valid_pixels_evaluated": 6353325,
+        "num_images": 63,
+        "confusion_matrix_labels": [
+          "soil",
+          "bedrock",
+          "sand",
+          "big rock"
+        ],
+        "confusion_matrix": [
+          [
+            3698243,
+            182046,
+            122279,
+            2331
+          ],
+          [
+            52356,
+            94212,
+            17529,
+            115
+          ],
+          [
+            441049,
+            44,
+            1736720,
+            0
+          ],
+          [
+            102,
+            0,
+            410,
+            5889
+          ]
+        ],
+        "confusion_matrix_row_normalized": [
+          [
+            0.92343,
+            0.045456,
+            0.030532,
+            0.000582
+          ],
+          [
+            0.318832,
+            0.573722,
+            0.106746,
+            0.0007
+          ],
+          [
+            0.202519,
+            2e-05,
+            0.797461,
+            0.0
+          ],
+          [
+            0.015935,
+            0.0,
+            0.064052,
+            0.920012
+          ]
+        ]
+      }
+    }
+  }
+}
