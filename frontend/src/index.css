@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  --bg-main: #0d0e0e;
+  --bg-secondary: #121414;
+  --bg-surface: #181a19;
+  --bg-elevated: #202321;
+
+  --text-primary: #eae9e4;
+  --text-secondary: #9b9e98;
+  --text-muted: #696e68;
+
+  --accent-mars: #c87951;
+  --accent-mars-deep: #a65e40;
+  --border-hairline: #303431;
+  --border-strong: #414642;
+
+  --status-success: #829b79;
+  --status-warning: #d0a064;
+  --status-error: #c76e64;
+
+  /* Exact Step 2 terrain palette from datasets/metadata/class_mapping.json */
+  --terrain-soil: #a6611a;
+  --terrain-bedrock: #377eb8;
+  --terrain-sand: #f5c242;
+  --terrain-big-rock: #e41a1c;
+  --terrain-ignore: #282c34;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  accent-color: var(--accent-mars);
+  scrollbar-color: #424743 #121414;
+}
+
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #424743;
+  }
+  ::-webkit-scrollbar-track {
+    background: #121414;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.font-serif-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Scientific hairline containers: restrained sharp geometry, zero neon glow */
+.mission-panel {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: 3px;
+}
+
+.mission-panel-elevated {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-hairline);
+  border-radius: 3px;
+}
+
+/* Native accessible modal scrolling protection (modern-web-guidance: dialog) */
+dialog:modal {
+  overscroll-behavior: contain;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  padding: 0;
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+}
+
+dialog::backdrop {
+  background: rgba(8, 9, 9, 0.82);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+/* Responsive table container (modern-web-guidance: responsive-table) */
+.table-wrapper {
+  overflow-x: auto;
+  max-inline-size: 100%;
+  container-type: inline-size;
+}
+
+/* Spotlight hairline cursor effect */
+.spotlight-surface {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--spot-opacity, 0);
+  transition: opacity 220ms ease;
+  background: radial-gradient(
+    420px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(200, 121, 81, 0.08),
+    transparent 65%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

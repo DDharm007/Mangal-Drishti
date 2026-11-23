@@ -38,6 +38,10 @@ datasets/processed/
 !datasets/metadata/*.json
 !datasets/metadata/*.csv
 
+# Frontend build & dependencies
+frontend/node_modules/
+frontend/dist/
+
 # Model checkpoints excluded; experiment metrics, reports & prediction visualizations allowed
 experiments/**/*.pth
 experiments/**/*.pt
